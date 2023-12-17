@@ -11,7 +11,6 @@ Tea Time is a mock e-commerce site built in React, incorporating core concepts o
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -63,6 +62,11 @@ Follow these steps to set up and run the Tea Time project:
    ```bash
    npm start
    ```
+## License
+
+- This project is licensed under the [MIT License](LICENSE).
+- React is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+- Tailwind CSS is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Acknowledgments
 
