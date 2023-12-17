@@ -9,12 +9,13 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import Logo from "../assets/images/herbs.png";
 
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
-      name: "Women",
+      name: "Tea",
       featured: [
         {
           name: "New Arrivals",
@@ -51,7 +52,7 @@ const navigation = {
       ],
     },
     {
-      name: "Men",
+      name: "Merchandise",
       featured: [
         {
           name: "New Arrivals",
@@ -88,10 +89,8 @@ const navigation = {
     },
   ],
   pages: [
-
-    { name: "Tester", href: "https://www.google.com/" },
-
-    { name: "Stores", href: "#" },
+    { name: "About", href: "#" },
+    { name: "Home", href: "#" },
   ],
 };
 const collections = [
@@ -418,7 +417,8 @@ const Navbar = () => {
                     <span className="sr-only">Your Company</span>
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src={Logo}
+                      // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt=""
                     />
                   </a>
