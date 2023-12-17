@@ -88,7 +88,9 @@ const navigation = {
     },
   ],
   pages: [
-    { name: "Company", href: "#" },
+
+    { name: "Tester", href: "https://www.google.com/" },
+
     { name: "Stores", href: "#" },
   ],
 };
