@@ -1,5 +1,6 @@
 import React from "react";
 
+
 // import { Fragment, useState } from "react";
 // import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 // import {
@@ -10,6 +11,9 @@ import React from "react";
 //   XMarkIcon,
 // } from "@heroicons/react/24/outline";
 // import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
