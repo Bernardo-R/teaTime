@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
