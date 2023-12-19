@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import heroImage from "../assets/imgs/heroSection.jpg";
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["USD"];
 const navigation = {
   categories: [
     {
