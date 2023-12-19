@@ -3,6 +3,18 @@ import { useState } from "react";
 import heroImage from "../assets/imgs/heroSection.jpg";
 
 const currencies = ["USD"];
+
+// import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+// import {
+//   Bars3Icon,
+//   MagnifyingGlassIcon,
+//   QuestionMarkCircleIcon,
+//   ShoppingBagIcon,
+//   XMarkIcon,
+// } from "@heroicons/react/24/outline";
+// import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
