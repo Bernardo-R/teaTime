@@ -1,18 +1,10 @@
 import React from "react";
 import { useState } from "react";
-
-// import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
-// import {
-//   Bars3Icon,
-//   MagnifyingGlassIcon,
-//   QuestionMarkCircleIcon,
-//   ShoppingBagIcon,
-//   XMarkIcon,
-// } from "@heroicons/react/24/outline";
-// import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import heroImage from "../assets/imgs/heroSection.jpg";
 
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["USD"];
+
 const navigation = {
   categories: [
     {
@@ -99,21 +91,21 @@ const collections = [
     name: "Women's",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg",
+      "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Woman wearing a comfortable cotton t-shirt.",
   },
   {
     name: "Men's",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg",
+      "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Man wearing a comfortable and casual cotton t-shirt.",
   },
   {
     name: "Desk Accessories",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg",
+      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt:
       "Person sitting at a wooden desk with paper note organizer, pencil and tablet.",
   },
@@ -204,10 +196,11 @@ const StoreFront = () => {
           aria-hidden="true"
           className="absolute inset-0 hidden sm:flex sm:flex-col"
         >
+          {/* hero img for large screens */}
           <div className="relative w-full flex-1 bg-gray-800">
             <div className="absolute inset-0 overflow-hidden">
               <img
-                src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+                src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className="h-full w-full object-cover object-center"
               />
@@ -223,10 +216,11 @@ const StoreFront = () => {
             aria-hidden="true"
             className="absolute inset-0 flex flex-col sm:hidden"
           >
+            {/* hero img for small screens */}
             <div className="relative w-full flex-1 bg-gray-800">
               <div className="absolute inset-0 overflow-hidden">
                 <img
-                  src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
+                  src={heroImage}
                   alt=""
                   className="h-full w-full object-cover object-center"
                 />
@@ -237,7 +231,7 @@ const StoreFront = () => {
           </div>
           <div className="relative py-32">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-              Mid-Season Sale
+              Mid-Season Harvest
             </h1>
             <div className="mt-4 sm:mt-6">
               <a
