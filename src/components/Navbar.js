@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -167,7 +166,7 @@ const Navbar = () => {
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Create an account
@@ -175,7 +174,7 @@ const Navbar = () => {
                   </div>
                   <div className="flow-root">
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Sign in
@@ -249,13 +248,13 @@ const Navbar = () => {
 
               <div className="flex items-center space-x-6">
                 <a
-                  href="#"
+                  href="https://www.google.com/"
                   className="text-sm font-medium text-white hover:text-gray-100"
                 >
                   Sign in
                 </a>
                 <a
-                  href="#"
+                  href="https://www.google.com/"
                   className="text-sm font-medium text-white hover:text-gray-100"
                 >
                   Create an account
@@ -270,9 +269,9 @@ const Navbar = () => {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
+                  <a href="https://www.google.com/">
                     <span className="sr-only">Tea Time</span>
-                    <a href="#">
+                    <a href="https://www.google.com/">
                       <img className="h-8 w-auto" src={Logo} alt="" />
                     </a>
                   </a>
@@ -403,7 +402,7 @@ const Navbar = () => {
 
                   {/* Search */}
                   <a
-                    href="#"
+                    href="https://www.google.com/"
                     className="ml-2 p-2 text-gray-400 hover:text-gray-500"
                   >
                     <span className="sr-only">Search</span>
@@ -423,7 +422,7 @@ const Navbar = () => {
 
                 <div className="flex flex-1 items-center justify-end">
                   <a
-                    href="#"
+                    href="https://www.google.com/"
                     className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
                   >
                     Search
@@ -432,7 +431,7 @@ const Navbar = () => {
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
                     >
                       <span className="sr-only">Help</span>
@@ -442,7 +441,7 @@ const Navbar = () => {
                       />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
                     >
                       Help
@@ -450,7 +449,7 @@ const Navbar = () => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a href="#" className="group -m-2 flex items-center p-2">
+                      <a href="https://www.google.com/" className="group -m-2 flex items-center p-2">
                         <ShoppingBagIcon
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
