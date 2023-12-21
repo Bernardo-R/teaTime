@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -19,7 +20,7 @@ const navigation = {
       featured: [
         {
           name: "New Arrivals",
-          href: "#",
+          href: "/",
           imageSrc:
             "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
           imageAlt:
@@ -33,157 +34,13 @@ const navigation = {
           imageAlt:
             "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
-          imageAlt:
-            "Model wearing minimalist watch with black wristband and white watch face.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
-          imageAlt:
-            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
-        },
-      ],
-    },
-    {
-      name: "Merchandise",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg",
-          imageAlt:
-            "Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg",
-          imageAlt: "Model wearing light heather gray t-shirt.",
-        },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg",
-          imageAlt:
-            "Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg",
-          imageAlt:
-            "Model putting folded cash into slim card holder olive leather wallet with hand stitching.",
-        },
       ],
     },
   ],
   pages: [
-    { name: "About", href: "#" },
-    { name: "Home", href: "#" },
-  ],
-};
-const collections = [
-  {
-    name: "Women's",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg",
-    imageAlt: "Woman wearing a comfortable cotton t-shirt.",
-  },
-  {
-    name: "Men's",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg",
-    imageAlt: "Man wearing a comfortable and casual cotton t-shirt.",
-  },
-  {
-    name: "Desk Accessories",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg",
-    imageAlt:
-      "Person sitting at a wooden desk with paper note organizer, pencil and tablet.",
-  },
-];
-const trendingProducts = [
-  {
-    id: 1,
-    name: "Leather Long Wallet",
-    color: "Natural",
-    price: "$75",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
-    imageAlt: "Hand stitched, orange leather long wallet.",
-  },
-  // More products...
-];
-const perks = [
-  {
-    name: "Free returns",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
-    description:
-      "Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.",
-  },
-  {
-    name: "Same day delivery",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg",
-    description:
-      "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
-  },
-  {
-    name: "All year discount",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
-    description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
-  },
-  {
-    name: "For the planet",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg",
-    description:
-      "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
-  },
-];
-const footerNavigation = {
-  products: [
-    { name: "Bags", href: "#" },
-    { name: "Tees", href: "#" },
-    { name: "Objects", href: "#" },
-    { name: "Home Goods", href: "#" },
-    { name: "Accessories", href: "#" },
-  ],
-  company: [
-    { name: "Who we are", href: "#" },
-    { name: "Sustainability", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Privacy", href: "#" },
-  ],
-  customerService: [
-    { name: "Contact", href: "#" },
-    { name: "Shipping", href: "#" },
-    { name: "Returns", href: "#" },
-    { name: "Warranty", href: "#" },
-    { name: "Secure Payments", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Find a store", href: "#" },
+    { name: "Store", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Home", href: "/home" },
   ],
 };
 
@@ -293,20 +150,20 @@ const Navbar = () => {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
+                {/* PAGES */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
-                    </div>
+                    // <div key={page.name} className="flow-root">
+                    <a
+                      href={page.href}
+                      className=" flow-root -m-2 block p-2 font-medium text-gray-900"
+                    >
+                      {page.name}
+                    </a>
+                    // </div>
                   ))}
                 </div>
-
+                {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
                     <a
@@ -362,7 +219,7 @@ const Navbar = () => {
       <header className="relative">
         <nav aria-label="Top">
           {/* Top navigation */}
-          <div className="bg-gray-900">
+          <div className="bg-lime-800">
             <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
               {/* Currency selector */}
               <form>
@@ -414,13 +271,10 @@ const Navbar = () => {
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="#">
-                    <span className="sr-only">Your Company</span>
-                    <img
-                      className="h-8 w-auto"
-                      src={Logo}
-                      // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt=""
-                    />
+                    <span className="sr-only">Tea Time</span>
+                    <a href="#">
+                      <img className="h-8 w-auto" src={Logo} alt="" />
+                    </a>
                   </a>
                 </div>
 
@@ -561,13 +415,10 @@ const Navbar = () => {
                 </div>
 
                 {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
+
+                <span className="sr-only">Tea Time</span>
+                <a href="/" className="lg:hidden">
+                  <img src={Logo} alt="" className="h-8 w-auto" />
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
