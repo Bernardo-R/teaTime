@@ -129,7 +129,7 @@ const perks = [
     imageUrl:
       "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
     description:
-      "Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.",
+      "Not what you expected? Contact us to return your unused product.",
   },
   {
     name: "Same day delivery",
@@ -139,11 +139,11 @@ const perks = [
       "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
   },
   {
-    name: "All year discount",
+    name: "First Purchase Discount",
     imageUrl:
       "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
     description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
+      'Looking for a deal? You can use the code "TIME4TEA for 40% off your first order!.',
   },
   {
     name: "For the planet",

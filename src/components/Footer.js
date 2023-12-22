@@ -1,5 +1,5 @@
 import React from "react";
-
+import Logo from "../assets/imgs/herbs.png"
 
 // import { Fragment, useState } from "react";
 // import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
@@ -11,9 +11,6 @@ import React from "react";
 //   XMarkIcon,
 // } from "@heroicons/react/24/outline";
 // import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
-
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -134,60 +131,24 @@ const trendingProducts = [
   },
   // More products...
 ];
-const perks = [
-  {
-    name: "Free returns",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
-    description:
-      "Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.",
-  },
-  {
-    name: "Same day delivery",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg",
-    description:
-      "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
-  },
-  {
-    name: "All year discount",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
-    description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
-  },
-  {
-    name: "For the planet",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg",
-    description:
-      "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
-  },
-];
+
 const footerNavigation = {
   products: [
+    { name: "Tea", href: "#" },
     { name: "Bags", href: "#" },
-    { name: "Tees", href: "#" },
-    { name: "Objects", href: "#" },
-    { name: "Home Goods", href: "#" },
-    { name: "Accessories", href: "#" },
+
   ],
   company: [
-    { name: "Who we are", href: "#" },
-    { name: "Sustainability", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Privacy", href: "#" },
+    { name: "About Us", href: "/about" },
+    { name: "Terms & Conditions", href: "/terms" },
+    { name: "Privacy", href: "/privacy" },
   ],
   customerService: [
-    { name: "Contact", href: "#" },
-    { name: "Shipping", href: "#" },
-    { name: "Returns", href: "#" },
-    { name: "Warranty", href: "#" },
-    { name: "Secure Payments", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Find a store", href: "#" },
+    { name: "Contact", href: "/contact" },
+    { name: "Shipping", href: "/shipping" },
+    { name: "Returns", href: "/returns" },
+    { name: "Warranty", href: "/warranty" },
+    { name: "FAQ", href: "/faq" }
   ],
 };
 
@@ -203,8 +164,8 @@ const Footer = () => {
             {/* Image section */}
             <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:row-start-1">
               <img
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
+                src={Logo}
+                alt="Tea Time"
                 className="h-8 w-auto"
               />
             </div>
@@ -270,7 +231,7 @@ const Footer = () => {
                 Sign up for our newsletter
               </h3>
               <p className="mt-6 text-sm text-gray-500">
-                The latest deals and savings, sent to your inbox weekly.
+                Stay up to date on our steep discounts and new products!
               </p>
               <form className="mt-2 flex sm:max-w-md">
                 <label htmlFor="email-address" className="sr-only">
