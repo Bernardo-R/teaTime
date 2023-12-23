@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import heroImage from "../assets/imgs/heroSection.jpg";
 
-
 const currencies = ["USD"];
 
 const navigation = {
