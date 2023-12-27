@@ -10,36 +10,52 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Logo from "../assets/imgs/herbs.png";
+import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unsplash.jpg";
+import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
+import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
+import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
       name: "Tea",
       featured: [
         {
-          name: "New Arrivals",
+          name: "Black Tea",
           href: "/",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+          imageSrc: BlackImg,
           imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
+            "Photo by Jocelyn Morales on Unsplash",
         },
         {
-          name: "Basic Tees",
+          name: "Purple Tea",
           href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+          imageSrc: PurpleImg,
           imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+            "Photo by freestocks on Unsplash",
+        },
+        {
+          name: "Puerh Tea",
+          href: "#",
+          imageSrc: PuerhImg,
+          imageAlt:
+            "Photo by Nathan Dumlao on Unsplash",
+        },
+        {
+          name: "Herbal Tea",
+          href: "#",
+          imageSrc: HerbalImg,
+          imageAlt:
+            "Photo by Nia Ramirez on Unsplash",
         },
       ],
     },
   ],
   pages: [
-    { name: "Store", href: "/" },
+    { name: "Home", href: "/" },
+    { name: "Store", href: "/store" },
     { name: "About", href: "/about" },
-    { name: "Home", href: "/home" },
   ],
 };
 
@@ -87,6 +103,19 @@ const Navbar = () => {
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
+                </div>
+                {/* PAGES */}
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                  {navigation.pages.map((page) => (
+                    // <div key={page.name} className="flow-root">
+                    <a
+                      href={page.href}
+                      className=" flow-root -m-2 block p-2 font-medium text-gray-900"
+                    >
+                      {page.name}
+                    </a>
+                    // </div>
+                  ))}
                 </div>
 
                 {/* Links */}
@@ -149,19 +178,7 @@ const Navbar = () => {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-                {/* PAGES */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.pages.map((page) => (
-                    // <div key={page.name} className="flow-root">
-                    <a
-                      href={page.href}
-                      className=" flow-root -m-2 block p-2 font-medium text-gray-900"
-                    >
-                      {page.name}
-                    </a>
-                    // </div>
-                  ))}
-                </div>
+
                 {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
@@ -230,7 +247,7 @@ const Navbar = () => {
                     <select
                       id="desktop-currency"
                       name="currency"
-                      className="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
+                      className="flex items-center rounded-md border-transparent bg-lime-950 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
                     >
                       {currencies.map((currency) => (
                         <option key={currency}>{currency}</option>
@@ -269,9 +286,9 @@ const Navbar = () => {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="https://www.google.com/">
+                  <a href="/">
                     <span className="sr-only">Tea Time</span>
-                    <a href="https://www.google.com/">
+                    <a href="/">
                       <img className="h-8 w-auto" src={Logo} alt="" />
                     </a>
                   </a>
@@ -280,7 +297,17 @@ const Navbar = () => {
                 <div className="hidden h-full lg:flex">
                   {/* Flyout menus */}
                   <Popover.Group className="inset-x-0 bottom-0 px-4">
+                    
                     <div className="flex h-full justify-center space-x-8">
+                    {navigation.pages.map((page) => (
+                      <a
+                        key={page.name}
+                        href={page.href}
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        {page.name}
+                      </a>
+                    ))}
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
                           {({ open }) => (
@@ -375,16 +402,6 @@ const Navbar = () => {
                           )}
                         </Popover>
                       ))}
-
-                      {navigation.pages.map((page) => (
-                        <a
-                          key={page.name}
-                          href={page.href}
-                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                        >
-                          {page.name}
-                        </a>
-                      ))}
                     </div>
                   </Popover.Group>
                 </div>
@@ -449,7 +466,10 @@ const Navbar = () => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a href="https://www.google.com/" className="group -m-2 flex items-center p-2">
+                      <a
+                        href="https://www.google.com/"
+                        className="group -m-2 flex items-center p-2"
+                      >
                         <ShoppingBagIcon
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
