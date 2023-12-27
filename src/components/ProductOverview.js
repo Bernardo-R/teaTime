@@ -3,58 +3,71 @@ import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      alt: "Angled front view with bag zipped and handles upright.",
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: "Washed Black",
-      bgColor: "bg-gray-700",
-      selectedColor: "ring-gray-700",
-    },
-    { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-    {
-      name: "Washed Gray",
-      bgColor: "bg-gray-500",
-      selectedColor: "ring-gray-500",
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-  details: [
-    {
-      name: "Features",
-      items: [
-        "Multiple strap configurations",
-        "Spacious interior with top zip",
-        "Leather handle and tabs",
-        "Interior dividers",
-        "Stainless strap loops",
-        "Double stitched construction",
-        "Water-resistant",
+
+
+export default function Example(
+   {
+      teaName,
+      slug,
+      altNames,
+      origin,
+      caffeine,
+      caffeineLevel,
+      colorDescription,
+      teaImage,
+      teaDescription,
+      sources, 
+      tasteDescription,
+      types,
+      _id
+
+   }
+) {
+
+   const tasteDescList = tasteDescription.map(descriptor => `${descriptor}`)
+
+   const product = {
+      name: {teaName},
+      price: "$3.99",
+      rating: 4,
+      origin: {origin},
+      images: [
+        {
+          id: {_id},
+          name: {teaName},
+          src: {teaImage},
+          alt: {teaName},
+        }
       ],
-    },
-    // More sections...
-  ],
-};
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function Example() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+      description: {teaDescription},
+      details: [
+        {
+          name: "Taste Description",
+          items: [
+          {tasteDescription}],
+        },
+        {
+          name: "Caffeine",
+          items: [
+            {caffeine},
+            {caffeineLevel}
+          ],
+        },
+        // More sections...
+        {
+          name: "Taste Description",
+          items: {tasteDescList}
+        },
+        {
+          name: "Taste Description",
+          items: {tasteDescList}
+        },
+      ],
+    };
+    
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(" ");
+    }
 
   return (
     <div className="bg-white">
@@ -153,7 +166,7 @@ export default function Example() {
 
             <form className="mt-6">
               {/* Colors */}
-              <div>
+              {/* <div>
                 <h3 className="text-sm text-gray-600">Color</h3>
 
                 <RadioGroup
@@ -192,17 +205,17 @@ export default function Example() {
                     ))}
                   </span>
                 </RadioGroup>
-              </div>
+              </div> */}
 
               <div className="mt-10 flex">
                 <button
                   type="submit"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
-                  Add to bag
+                  Add to Cart
                 </button>
 
-                <button
+                {/* <button
                   type="button"
                   className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
                 >
@@ -211,7 +224,7 @@ export default function Example() {
                     aria-hidden="true"
                   />
                   <span className="sr-only">Add to favorites</span>
-                </button>
+                </button> */}
               </div>
             </form>
 

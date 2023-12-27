@@ -12,7 +12,7 @@ import Logo from "../assets/imgs/herbs.png"
 // } from "@heroicons/react/24/outline";
 // import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["USD"];
 const navigation = {
   categories: [
     {
@@ -139,6 +139,8 @@ const footerNavigation = {
 
   ],
   company: [
+    { name: "Home", href: "/home" },
+    { name: "About Us", href: "/about" },
     { name: "About Us", href: "/about" },
     { name: "Terms & Conditions", href: "/terms" },
     { name: "Privacy", href: "/privacy" },
