@@ -122,6 +122,22 @@ const trendingProducts = [
   },
   // More products...
 ];
+
+// ** CM made this to pull the first item from the API. It worked for about 4 minutes then threw errors until I removed it. **
+
+// const trendingProducts = [
+//    {
+//       id: teaList[0]._id,
+//       name: teaList[0].name,
+//       color: "Natural",
+//       price: "$3.99",
+//       href: "#",
+//       imageSrc:teaList[0].image,
+//       imageAlt: teaList[0].name,
+//     },
+// ];
+
+
 const perks = [
   {
     name: "Free returns",
