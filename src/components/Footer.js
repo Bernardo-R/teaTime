@@ -134,13 +134,12 @@ const trendingProducts = [
 
 const footerNavigation = {
   products: [
-    { name: "Tea", href: "#" },
+    { name: "Store", href: "/store" },
     { name: "Bags", href: "#" },
 
   ],
   company: [
     { name: "Home", href: "/home" },
-    { name: "About Us", href: "/about" },
     { name: "About Us", href: "/about" },
     { name: "Terms & Conditions", href: "/terms" },
     { name: "Privacy", href: "/privacy" },
