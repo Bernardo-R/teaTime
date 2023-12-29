@@ -87,21 +87,21 @@ const navigation = {
 };
 const collections = [
   {
-    name: "Women's",
+    name: "Green & White",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Woman wearing a comfortable cotton t-shirt.",
   },
   {
-    name: "Men's",
+    name: "Black & Pu-erh",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Man wearing a comfortable and casual cotton t-shirt.",
   },
   {
-    name: "Desk Accessories",
+    name: "Rooibos & Herbal",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -251,7 +251,7 @@ const StoreFront = () => {
             <div className="mt-4 sm:mt-6">
               <a
                 href="#"
-                className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700"
+                className="inline-block rounded-md border border-transparent bg-yellow-800 px-8 py-3 font-medium text-white hover:bg-yellow-900"
               >
                 Shop Collection
               </a>
