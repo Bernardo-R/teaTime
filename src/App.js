@@ -23,7 +23,7 @@ import ProductOverview from "./components/ProductOverview"
 
 function App() {
 
-   const API_URL = "https://boonakitea.cyclic.app/api/teas"
+   const API_URL = "https://boonakitea.cyclic.app/api/all"
 
    const [teaList, setTeaList] = useState([])
    
