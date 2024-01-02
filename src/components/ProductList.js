@@ -41,7 +41,7 @@ const FetchData = () => {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={product.sources}>
+                    <a href={product.sources} rel="noopener noreferrer" target="_blank">
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
                     </a>

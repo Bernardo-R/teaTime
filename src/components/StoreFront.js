@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom"
 import heroImage from "../assets/imgs/heroSection.jpg";
 
 const currencies = ["USD"];
@@ -235,12 +236,11 @@ const StoreFront = () => {
               Mid-Season Harvest
             </h1>
             <div className="mt-4 sm:mt-6">
-              <a
-                href="#"
+               <Link to="/store"
                 className="inline-block rounded-md border border-transparent bg-yellow-800 px-8 py-3 font-medium text-white hover:bg-yellow-900"
               >
                 Shop Collection
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -301,13 +301,12 @@ const StoreFront = () => {
             >
               Trending Products
             </h2>
-            <a
-              href="#"
-              className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block"
+            <Link to="/store"
+              className="hidden text-sm font-medium text-yellow-700 hover:text-yellow-900 md:block"
             >
               Shop the collection
               <span aria-hidden="true"> &rarr;</span>
-            </a>
+            </Link>
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
@@ -335,7 +334,7 @@ const StoreFront = () => {
           </div>
 
           <div className="mt-8 text-sm md:hidden">
-            <a
+          <a
               href="#"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
