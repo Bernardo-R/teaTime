@@ -137,7 +137,6 @@ const trendingProducts = [
 //     },
 // ];
 
-
 const perks = [
   {
     name: "Free returns",
@@ -373,12 +372,12 @@ const StoreFront = () => {
             {perks.map((perk) => (
               <div
                 key={perk.name}
-                className="text-center md:flex md:items-start md:text-left lg:block lg:text-center"
+                className="text-center md:flex md:items-start md:text-left lg:block lg:text-center "
               >
                 <div className="md:flex-shrink-0">
                   <div className="flow-root">
                     <img
-                      className="-my-1 mx-auto h-24 w-auto"
+                      className="-my-1 mx-auto h-24 w-auto "
                       src={perk.imageUrl}
                       alt=""
                     />
