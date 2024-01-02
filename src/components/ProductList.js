@@ -2,7 +2,7 @@ import React from "react";
 import useApi from "../composable/useApi";
 
 const FetchData = () => {
-  const apiUrl = "https://boonakitea.cyclic.app/api/all";
+  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   const { data, loading, error } = useApi(apiUrl);
 
   if (loading) return <p>Loading...</p>;
@@ -46,7 +46,7 @@ const FetchData = () => {
                       {product.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.type}</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.price}</p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   {product.caffeine}
