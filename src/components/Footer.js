@@ -139,7 +139,7 @@ const footerNavigation = {
 
   ],
   company: [
-    { name: "Home", href: "/home" },
+    { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "Terms & Conditions", href: "/terms" },
     { name: "Privacy", href: "/privacy" },
@@ -248,7 +248,7 @@ const Footer = () => {
                 <div className="ml-4 flex-shrink-0">
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-yellow-800 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Sign up
                   </button>
