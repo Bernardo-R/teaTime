@@ -129,16 +129,16 @@ const perks = [
   {
     name: "Free returns",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
+      "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
     description:
       "Not what you expected? Contact us to return your unused product.",
   },
   {
-    name: "Same day delivery",
+    name: "We're available 24/7",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg",
+      "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
     description:
-      "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
+      "We're always here for when you want to share the good, the bad, or the ugly.",
   },
   {
     name: "First Purchase Discount",
