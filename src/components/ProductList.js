@@ -1,26 +1,15 @@
 import React from "react";
 import useApi from "../composable/useApi";
+import teaherbs from "../assets/imgs/teaherbs.jpg";
+import { Link } from "react-router-dom";
 
-const FetchData = () => {
+const ProductList = () => {
   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   const { data, loading, error } = useApi(apiUrl);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong: {error.message}</p>;
 
-  // const products = [
-  //   {
-  //     id: 1,
-  //     name: "Basic Tee",
-  //     href: "#",
-  //     imageSrc:
-  //       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-  //     imageAlt: "Front of men's Basic Tee in black.",
-  //     price: "$35",
-  //     color: "Black",
-  //   },
-  //   // More products...
-  // ];
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -33,15 +22,19 @@ const FetchData = () => {
             <div key={product._id} className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
-                  src={product.image}
-                  alt={product.altnames}
+                  src={product.image || teaherbs}
+                  alt={product.name}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={product.sources} rel="noopener noreferrer" target="_blank">
+                    <a
+                      href={`/productOverview/${product._id}`}
+                      rel="noopener noreferrer"
+                      target=""
+                    >
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
                     </a>
@@ -60,4 +53,4 @@ const FetchData = () => {
   );
 };
 
-export default FetchData;
+export default ProductList;
