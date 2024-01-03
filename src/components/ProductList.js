@@ -1,9 +1,10 @@
 import React from "react";
 import useApi from "../composable/useApi";
 import teaherbs from "../assets/imgs/teaherbs.jpg";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
-  const apiUrl = "https://boonakitea.cyclic.app/api/all";
+  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   const { data, loading, error } = useApi(apiUrl);
 
   if (loading) return <p>Loading...</p>;
@@ -29,12 +30,16 @@ const ProductList = () => {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={product.sources}>
+                    <a
+                      href={`/productOverview/${product._id}`}
+                      rel="noopener noreferrer"
+                      target=""
+                    >
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.type}</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.price}</p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   {product.caffeine}

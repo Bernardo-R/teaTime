@@ -1,6 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
+import useApi from "../composable/useApi";
 
 const currencies = ["USD"];
 
@@ -110,32 +112,18 @@ const collections = [
   },
 ];
 const trendingProducts = [
-  {
-    id: 1,
-    name: "Leather Long Wallet",
-    color: "Natural",
-    price: "$75",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
-    imageAlt: "Hand stitched, orange leather long wallet.",
-  },
+  // {
+  //   _id: "63092102a643c85c74b00e6e",
+  //   name: "Black Tea",
+  //   color: "Natural",
+  //   price: "$75",
+  //   href: "#",
+  //   imageSrc:
+  //     "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
+  //   imageAlt: "Hand stitched, orange leather long wallet.",
+  // },
   // More products...
 ];
-
-// ** CM made this to pull the first item from the API. It worked for about 4 minutes then threw errors until I removed it. **
-
-// const trendingProducts = [
-//    {
-//       id: teaList[0]._id,
-//       name: teaList[0].name,
-//       color: "Natural",
-//       price: "$3.99",
-//       href: "#",
-//       imageSrc:teaList[0].image,
-//       imageAlt: teaList[0].name,
-//     },
-// ];
 
 const perks = [
   {
@@ -199,7 +187,21 @@ const perks = [
 // }
 
 const StoreFront = () => {
-  const [open, setOpen] = useState(false);
+  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+  const { data, loading, error } = useApi(apiUrl);
+  const [trendingProducts, setTrendingProducts] = useState([]);
+  // const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setTrendingProducts(data.slice(0, 4));
+    }
+  }, [data]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong: {error.message}</p>;
+
+  console.log(data);
 
   return (
     <main>
@@ -248,12 +250,12 @@ const StoreFront = () => {
               Mid-Season Harvest
             </h1>
             <div className="mt-4 sm:mt-6">
-              <a
-                href="#"
+              <Link
+                to="/store"
                 className="inline-block rounded-md border border-transparent bg-yellow-800 px-8 py-3 font-medium text-white hover:bg-yellow-900"
               >
                 Shop Collection
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -314,21 +316,21 @@ const StoreFront = () => {
             >
               Trending Products
             </h2>
-            <a
-              href="#"
-              className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block"
+            <Link
+              to="/store"
+              className="hidden text-sm font-medium text-yellow-700 hover:text-yellow-900 md:block"
             >
               Shop the collection
               <span aria-hidden="true"> &rarr;</span>
-            </a>
+            </Link>
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
             {trendingProducts.map((product) => (
-              <div key={product.id} className="group relative">
+              <div key={product._id} className="group relative">
                 <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
-                    src={product.imageSrc}
+                    src={product.image}
                     alt={product.imageAlt}
                     className="h-full w-full object-cover object-center"
                   />
@@ -339,7 +341,9 @@ const StoreFront = () => {
                     {product.name}
                   </a>
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                <p className="mt-1 text-sm text-gray-500">
+                  {product.colorDescription}
+                </p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
                   {product.price}
                 </p>
@@ -377,9 +381,10 @@ const StoreFront = () => {
                 <div className="md:flex-shrink-0">
                   <div className="flow-root">
                     <img
-                      className="-my-1 mx-auto h-24 w-auto "
+                      className={`-my-1 mx-auto h-24 w-auto icon-color`}
                       src={perk.imageUrl}
                       alt=""
+                      // style={{ fill: "#854d0e" }}
                     />
                   </div>
                 </div>
