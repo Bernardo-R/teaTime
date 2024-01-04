@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import useApi from "../composable/useApi";
 
 const product = {
   name: "Zip Tote Basket",
@@ -54,13 +53,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductOverview() {
+export default function Example() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  const { data, loading, error } = useApi(apiUrl);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error.message}</p>;
 
   return (
     <div className="bg-white">
@@ -71,17 +65,17 @@ export default function ProductOverview() {
             {/* Image selector */}
             <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
-                {data.map((item) => (
+                {product.images.map((image) => (
                   <Tab
-                    key={item._id}
+                    key={image.id}
                     className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                   >
                     {({ selected }) => (
                       <>
-                        <span className="sr-only">{item.name}</span>
+                        <span className="sr-only">{image.name}</span>
                         <span className="absolute inset-0 overflow-hidden rounded-md">
                           <img
-                            src={item.image}
+                            src={image.src}
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
@@ -101,11 +95,11 @@ export default function ProductOverview() {
             </div>
 
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-              {data.map((image) => (
-                <Tab.Panel key={image._id}>
+              {product.images.map((image) => (
+                <Tab.Panel key={image.id}>
                   <img
-                    src={image.image}
-                    alt={image.imageAlt}
+                    src={image.src}
+                    alt={image.alt}
                     className="h-full w-full object-cover object-center sm:rounded-lg"
                   />
                 </Tab.Panel>
@@ -116,18 +110,18 @@ export default function ProductOverview() {
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {data.name}
+              {product.name}
             </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {data.price}
+                {product.price}
               </p>
             </div>
 
             {/* Reviews */}
-            {/* <div className="mt-3">
+            <div className="mt-3">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
@@ -146,20 +140,20 @@ export default function ProductOverview() {
                 </div>
                 <p className="sr-only">{product.rating} out of 5 stars</p>
               </div>
-            </div> */}
+            </div>
 
             <div className="mt-6">
               <h3 className="sr-only">Description</h3>
 
               <div
                 className="space-y-6 text-base text-gray-700"
-                dangerouslySetInnerHTML={{ __html: data.description }}
+                dangerouslySetInnerHTML={{ __html: product.description }}
               />
             </div>
 
             <form className="mt-6">
               {/* Colors */}
-              {/* <div>
+              <div>
                 <h3 className="text-sm text-gray-600">Color</h3>
 
                 <RadioGroup
@@ -198,7 +192,7 @@ export default function ProductOverview() {
                     ))}
                   </span>
                 </RadioGroup>
-              </div> */}
+              </div>
 
               <div className="mt-10 flex">
                 <button
@@ -226,7 +220,7 @@ export default function ProductOverview() {
                 Additional details
               </h2>
 
-              {/* <div className="divide-y divide-gray-200 border-t">
+              <div className="divide-y divide-gray-200 border-t">
                 {product.details.map((detail) => (
                   <Disclosure as="div" key={detail.name}>
                     {({ open }) => (
@@ -270,7 +264,7 @@ export default function ProductOverview() {
                     )}
                   </Disclosure>
                 ))}
-              </div> */}
+              </div>
             </section>
           </div>
         </div>

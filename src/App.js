@@ -18,6 +18,11 @@ import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
 
 function App() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleProductClick = (productId) => {
+    setSelectedProduct(productId);
+  };
   //  const API_URL = "https://boonakitea.cyclic.app/api/all"
 
   //  const [teaList, setTeaList] = useState([])
@@ -55,8 +60,16 @@ function App() {
           <Route path="/shipping" element={<Shipping />}></Route>
           <Route path="/terms" element={<Terms />}></Route>
           <Route path="/warranty" element={<Warranty />}></Route>
-          <Route path="/store" element={<ProductList />}></Route>
-          <Route path="/productOverview" element={<ProductOverview />}></Route>
+          <Route
+            path="/store"
+            element={<ProductList onProductClick={handleProductClick} />}
+          />
+          <Route
+            path="/productOverview"
+            element={<ProductOverview selectedProduct={selectedProduct} />}
+          />
+
+          <Route path="/productOverview/:id" element={<ProductOverview />} />
         </Routes>
         {/* </div> */}
       </Router>
