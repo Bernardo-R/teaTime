@@ -23,31 +23,27 @@ const navigation = {
       featured: [
         {
           name: "Black Tea",
-          href: "/",
+          href: "/store",
           imageSrc: BlackImg,
-          imageAlt:
-            "Photo by Jocelyn Morales on Unsplash",
+          imageAlt: "Photo by Jocelyn Morales on Unsplash",
         },
         {
           name: "Purple Tea",
-          href: "#",
+          href: "/store",
           imageSrc: PurpleImg,
-          imageAlt:
-            "Photo by freestocks on Unsplash",
+          imageAlt: "Photo by freestocks on Unsplash",
         },
         {
-          name: "Puerh Tea",
-          href: "#",
+          name: "Pu-erh Tea",
+          href: "/store",
           imageSrc: PuerhImg,
-          imageAlt:
-            "Photo by Nathan Dumlao on Unsplash",
+          imageAlt: "Photo by Nathan Dumlao on Unsplash",
         },
         {
           name: "Herbal Tea",
-          href: "#",
+          href: "/store",
           imageSrc: HerbalImg,
-          imageAlt:
-            "Photo by Nia Ramirez on Unsplash",
+          imageAlt: "Photo by Nia Ramirez on Unsplash",
         },
       ],
     },
@@ -67,7 +63,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white border-b border-gray-200">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -105,16 +101,16 @@ const Navbar = () => {
                   </button>
                 </div>
                 {/* PAGES */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-violet-600">
                   {navigation.pages.map((page) => (
-                    // <div key={page.name} className="flow-root">
-                    <a
-                      href={page.href}
-                      className=" flow-root -m-2 block p-2 font-medium text-gray-900"
-                    >
-                      {page.name}
-                    </a>
-                    // </div>
+                    <div key={page.name} className="flow-root">
+                      <a
+                        href={page.href}
+                        className=" flow-root -m-2 block p-2 font-medium text-gray-900 "
+                      >
+                        {page.name}
+                      </a>
+                    </div>
                   ))}
                 </div>
 
@@ -128,8 +124,8 @@ const Navbar = () => {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? "border-indigo-600 text-indigo-600"
-                                : "border-transparent text-gray-900",
+                                ? " text-indigo-600 focus:ring-0"
+                                : "border-transparent text-gray-900 focus:ring-0",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
                           }
@@ -266,13 +262,13 @@ const Navbar = () => {
               <div className="flex items-center space-x-6">
                 <a
                   href="https://www.google.com/"
-                  className="text-sm font-medium text-white hover:text-gray-100"
+                  className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Sign in
                 </a>
                 <a
                   href="https://www.google.com/"
-                  className="text-sm font-medium text-white hover:text-gray-100"
+                  className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Create an account
                 </a>
@@ -297,17 +293,16 @@ const Navbar = () => {
                 <div className="hidden h-full lg:flex">
                   {/* Flyout menus */}
                   <Popover.Group className="inset-x-0 bottom-0 px-4">
-                    
                     <div className="flex h-full justify-center space-x-8">
-                    {navigation.pages.map((page) => (
-                      <a
-                        key={page.name}
-                        href={page.href}
-                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >
-                        {page.name}
-                      </a>
-                    ))}
+                      {navigation.pages.map((page) => (
+                        <a
+                          key={page.name}
+                          href={page.href}
+                          className="hover:text-lime-600 flex items-center text-sm font-medium text-gray-700 "
+                        >
+                          {page.name}
+                        </a>
+                      ))}
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
                           {({ open }) => (
@@ -317,7 +312,7 @@ const Navbar = () => {
                                   className={classNames(
                                     open
                                       ? "text-indigo-600"
-                                      : "text-gray-700 hover:text-gray-800",
+                                      : "text-gray-700 hover:text-lime-600",
                                     "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out"
                                   )}
                                 >
@@ -440,7 +435,7 @@ const Navbar = () => {
                 <div className="flex flex-1 items-center justify-end">
                   <a
                     href="https://www.google.com/"
-                    className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
                   >
                     Search
                   </a>
@@ -459,7 +454,7 @@ const Navbar = () => {
                     </a>
                     <a
                       href="https://www.google.com/"
-                      className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                      className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
                     >
                       Help
                     </a>
@@ -471,7 +466,7 @@ const Navbar = () => {
                         className="group -m-2 flex items-center p-2"
                       >
                         <ShoppingBagIcon
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
                           aria-hidden="true"
                         />
                         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
