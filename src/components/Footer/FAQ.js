@@ -173,28 +173,6 @@ export default function FAQ() {
       </div>
     </div>
 
-    //       <div>
-    //
-    //          <h2>Q: Can I invoke the warranty if my teapot refuses to brew anything other than disco-themed teas?</h2>
-    //          <p>
-    //             A: Ah, the rebellious teapot phase! While we celebrate its zest for life, our warranty specifically covers defects
-    //             in materials and workmanship. If your teapot's taste in music exceeds its brewing capabilities, unfortunately, we can't
-    //             guarantee a replacement. However, our Tea-surance Wizards are always up for a chat and might have some playlist
-    //             recommendations to soothe both you and your teapot's wild side.
-    //          </p>
-    //          <h2>Q: What happens if my cat knocks over my tea set, and chaos ensues?</h2>
-    //          <p>
-    //             A: Cats and tea – a classic tale of unpredictable mayhem! In the event of a feline-fueled tea catastrophe,
-    //             take a deep breath, rescue any teacups caught in the crossfire, and reach out to our Tea-surance Wizards.
-    //             While we can't teach your cat the art of balance, we can assist with replacements, ensuring your tea sanctuary
-    //             is restored to its former tranquili-tea.
-    //          </p>
-    //          <h2>Q: Can I use Tea Time products for non-tea-related activities, like soup or coffee?</h2>
-    //          <p>
-    //             A: While we appreciate your creativity, our products are crafted with tea in mind. Attempting to repurpose them for
-    //             soup or coffee may result in unexpected flavor combinations and, in extreme cases, a teapot with an identity crisis.
-    //             Stick to tea for the best experience, and your taste buds will thank you for staying true to the steeped path!
-    //          </p>
-    //       </div>
+
   );
 }

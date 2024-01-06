@@ -261,7 +261,7 @@ const Footer = () => {
         <div className="border-t border-gray-100 py-10 text-center">
           <p className="text-sm text-gray-500">
 
-            &copy; 2023 Okagbue, Rosario, Mendence
+          &copy; { new Date().getFullYear() } Okagbue, Rosario, Mendence
 
           </p>
         </div>
