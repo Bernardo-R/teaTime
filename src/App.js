@@ -23,26 +23,6 @@ function App() {
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
   };
-  //  const API_URL = "https://boonakitea.cyclic.app/api/all"
-
-  //  const [teaList, setTeaList] = useState([])
-
-  //  const getTeaList = async () => {
-  //     try {
-  //       const resp = await fetch(API_URL); // response from the api
-  //       const data = await resp.json(); //extracting json from response object
-
-  //       setTeaList(data);
-  //     } catch (error) {
-  //       console.error("Something went wrong", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getTeaList();
-  //   }, []);
-
-  //   console.log(teaList)
 
   return (
     <>

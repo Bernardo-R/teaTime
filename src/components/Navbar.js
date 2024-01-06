@@ -311,15 +311,15 @@ const Navbar = () => {
                                 <Popover.Button
                                   className={classNames(
                                     open
-                                      ? "text-indigo-600"
+                                      ? "text-lime-600"
                                       : "text-gray-700 hover:text-lime-600",
-                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out"
+                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out focus:outline-none"
                                   )}
                                 >
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "bg-indigo-600" : "",
+                                      open ? "text-indigo-600" : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
