@@ -1,14 +1,25 @@
-import React from "react";
-import useApi from "../composable/useApi";
+import { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
 import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 
-const ProductList = ({ onProductClick }) => {
-  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  const { data, loading, error } = useApi(apiUrl);
+const ProductList = ({ products }) => {
+  // const Url = "https://teatimeapi-production.up.railway.app/api/data";
+  // const [products, setProducts] = useState([]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error.message}</p>;
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await fetch(Url);
+  //       const data = await response.json();
+  //       setProducts(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchProducts();
+  //   console.log(products);
+  // }, []);
 
   return (
     <div className="bg-white">
@@ -18,24 +29,20 @@ const ProductList = ({ onProductClick }) => {
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {data.map((product) => (
-            <div
-              key={product._id}
-              onClick={() => onProductClick(product)}
-              className="group relative"
-            >
+          {products.map((product) => (
+            <div key={product._id} className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
                   src={product.image || teaherbs}
                   alt={product.name}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                />
+                />{" "}
               </div>
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
                     <Link
-                      to={`/productOverview/${product._id}`}
+                      to={`/product/${product._id}`}
                       rel="noopener noreferrer"
                     >
                       <span aria-hidden="true" className="absolute inset-0" />

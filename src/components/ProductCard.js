@@ -1,60 +1,79 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useParams } from "react-router-dom";
 
-const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      alt: "Angled front view with bag zipped and handles upright.",
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: "Washed Black",
-      bgColor: "bg-gray-700",
-      selectedColor: "ring-gray-700",
-    },
-    { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-    {
-      name: "Washed Gray",
-      bgColor: "bg-gray-500",
-      selectedColor: "ring-gray-500",
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-  details: [
-    {
-      name: "Features",
-      items: [
-        "Multiple strap configurations",
-        "Spacious interior with top zip",
-        "Leather handle and tabs",
-        "Interior dividers",
-        "Stainless strap loops",
-        "Double stitched construction",
-        "Water-resistant",
-      ],
-    },
-    // More sections...
-  ],
-};
+// const product = {
+//   name: "Zip Tote Basket",
+//   price: "$140",
+//   rating: 4,
+//   images: [
+//     {
+//       id: 1,
+//       name: "Angled view",
+//       src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
+//       alt: "Angled front view with bag zipped and handles upright.",
+//     },
+//     // More images...
+//   ],
+//   colors: [
+//     {
+//       name: "Washed Black",
+//       bgColor: "bg-gray-700",
+//       selectedColor: "ring-gray-700",
+//     },
+//     { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
+//     {
+//       name: "Washed Gray",
+//       bgColor: "bg-gray-500",
+//       selectedColor: "ring-gray-500",
+//     },
+//   ],
+//   description: `
+//     <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
+//   `,
+//   details: [
+//     {
+//       name: "Features",
+//       items: [
+//         "Multiple strap configurations",
+//         "Spacious interior with top zip",
+//         "Leather handle and tabs",
+//         "Interior dividers",
+//         "Stainless strap loops",
+//         "Double stitched construction",
+//         "Water-resistant",
+//       ],
+//     },
+//     // More sections...
+//   ],
+// };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
-export default function Example() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+export default function ProductCard({ productDetails }) {
+  // const apiUrl = `https://boonakitea.cyclic.app/api/all`;
+  // const { id } = useParams();
+  // const [product, setProduct] = useState([null]);
+
+  // useEffect(() => {
+  //   const fetchProductDetails = async () => {
+  //     try {
+  //       const response = await fetch(`/api/teas/${id}`);
+  //       const data = await response.json();
+  //       setProduct(data);
+  //     } catch (error) {
+  //       console.error("Error fetching product details:", error);
+  //     }
+  //   };
+
+  //   fetchProductDetails();
+  // }, [id]);
+
+  // if (!product) return <p>Loading...</p>;
 
   return (
     <div className="bg-white">
@@ -65,9 +84,9 @@ export default function Example() {
             {/* Image selector */}
             <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
-                {product.images.map((image) => (
+                {productDetails.map((image) => (
                   <Tab
-                    key={image.id}
+                    key={image.name}
                     className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                   >
                     {({ selected }) => (
@@ -80,13 +99,13 @@ export default function Example() {
                             className="h-full w-full object-cover object-center"
                           />
                         </span>
-                        <span
+                        {/* <span
                           className={classNames(
                             selected ? "ring-indigo-500" : "ring-transparent",
                             "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
                           )}
                           aria-hidden="true"
-                        />
+                        /> */}
                       </>
                     )}
                   </Tab>
@@ -95,8 +114,8 @@ export default function Example() {
             </div>
 
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-              {product.images.map((image) => (
-                <Tab.Panel key={image.id}>
+              {productDetails.map((image) => (
+                <Tab.Panel key={image._id}>
                   <img
                     src={image.src}
                     alt={image.alt}
@@ -110,18 +129,18 @@ export default function Example() {
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {product.name}
+              {productDetails.name}
             </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {product.price}
+                {productDetails.price}
               </p>
             </div>
 
             {/* Reviews */}
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
@@ -129,7 +148,7 @@ export default function Example() {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        product.rating > rating
+                        productId.rating > rating
                           ? "text-indigo-500"
                           : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
@@ -140,20 +159,20 @@ export default function Example() {
                 </div>
                 <p className="sr-only">{product.rating} out of 5 stars</p>
               </div>
-            </div>
+            </div> */}
 
             <div className="mt-6">
               <h3 className="sr-only">Description</h3>
 
               <div
                 className="space-y-6 text-base text-gray-700"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: productDetails.description }}
               />
             </div>
 
             <form className="mt-6">
               {/* Colors */}
-              <div>
+              {/* <div>
                 <h3 className="text-sm text-gray-600">Color</h3>
 
                 <RadioGroup
@@ -165,7 +184,7 @@ export default function Example() {
                     Choose a color
                   </RadioGroup.Label>
                   <span className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
+                    {productId.colors.map((color) => (
                       <RadioGroup.Option
                         key={color.name}
                         value={color}
@@ -192,7 +211,7 @@ export default function Example() {
                     ))}
                   </span>
                 </RadioGroup>
-              </div>
+              </div> */}
 
               <div className="mt-10 flex">
                 <button
@@ -221,20 +240,20 @@ export default function Example() {
               </h2>
 
               <div className="divide-y divide-gray-200 border-t">
-                {product.details.map((detail) => (
+                {productDetails.details.map((detail) => (
                   <Disclosure as="div" key={detail.name}>
                     {({ open }) => (
                       <>
                         <h3>
                           <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
-                            <span
+                            {/* <span
                               className={classNames(
                                 open ? "text-indigo-600" : "text-gray-900",
                                 "text-sm font-medium"
                               )}
                             >
                               {detail.name}
-                            </span>
+                            </span> */}
                             <span className="ml-6 flex items-center">
                               {open ? (
                                 <MinusIcon

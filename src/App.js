@@ -15,14 +15,35 @@ import Shipping from "./components/Footer/Shipping";
 import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
-import ProductOverview from "./components/ProductOverview";
+import ProductCard from "./components/ProductCard";
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+  const [products, setProducts] = useState([]);
 
-  const handleProductClick = (productId) => {
-    setSelectedProduct(productId);
-  };
+  useEffect(() => {
+    const getProductList = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+        setProducts(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProductList();
+  }, []);
+  // const { data, loading, error } = useApi(apiUrl);
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Something went wrong: {error.message}</p>;
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // const handleProductClick = (productId) => {
+  //   console.log(`Product clicked with ID: ${productId}`);
+  // };
+
+  console.log(products);
 
   return (
     <>
@@ -42,14 +63,18 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} />}
-          />
+            element={<ProductList products={products} />}
+          ></Route>
           <Route
-            path="/productOverview"
-            element={<ProductOverview selectedProduct={selectedProduct} />}
+            path="/productCard/:id"
+            render={({ match }) => {
+              const productId = match.params.id;
+              const productDetails = products.find(
+                (product) => product.id === parseInt(productId, 10)
+              );
+              return <ProductCard productDetails={productDetails} />;
+            }}
           />
-
-          <Route path="/productOverview/:id" element={<ProductOverview />} />
         </Routes>
         {/* </div> */}
       </Router>
