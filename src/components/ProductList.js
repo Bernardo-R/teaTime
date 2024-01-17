@@ -10,6 +10,9 @@ const ProductList = ({ onProductClick, products }) => {
 //   if (loading) return <p>Loading...</p>;
 //   if (error) return <p>Something went wrong: {error.message}</p>;
 
+// const navigate = useNavigate;
+// const [scrollPosition, setScrollPosition] = useState(0)
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">

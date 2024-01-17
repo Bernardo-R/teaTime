@@ -1,7 +1,8 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Zip Tote Basket",
@@ -53,8 +54,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+export default function ProductOverview({selectedProduct, scrollposition, setSearchQuery}) {
+//   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+
+const navigate = useNavigate();
+
+// Function to handle going back to the previous page
+const goBack = () => {
+  navigate("/store");
+  window.scrollTo(0,scrollposition)
+  setSearchQuery("")
+};
 
   return (
     <div className="bg-white">
@@ -63,7 +73,7 @@ export default function Example() {
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
-            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
+            {/* <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
                 {product.images.map((image) => (
                   <Tab
@@ -92,31 +102,30 @@ export default function Example() {
                   </Tab>
                 ))}
               </Tab.List>
-            </div>
+            </div> */}
 
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-              {product.images.map((image) => (
-                <Tab.Panel key={image.id}>
+             
                   <img
-                    src={image.src}
-                    alt={image.alt}
+                    src={selectedProduct.image}
+                    alt=""
                     className="h-full w-full object-cover object-center sm:rounded-lg"
                   />
-                </Tab.Panel>
-              ))}
+              
+              
             </Tab.Panels>
           </Tab.Group>
 
           {/* Product info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {product.name}
+              {selectedProduct.name}
             </h1>
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {product.price}
+                {selectedProduct.price}
               </p>
             </div>
 
@@ -147,13 +156,13 @@ export default function Example() {
 
               <div
                 className="space-y-6 text-base text-gray-700"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: selectedProduct.description }}
               />
             </div>
 
             <form className="mt-6">
               {/* Colors */}
-              <div>
+              {/* <div>
                 <h3 className="text-sm text-gray-600">Color</h3>
 
                 <RadioGroup
@@ -192,17 +201,27 @@ export default function Example() {
                     ))}
                   </span>
                 </RadioGroup>
-              </div>
+              </div> */}
 
               <div className="mt-10 flex">
                 <button
                   type="submit"
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  className="flex max-w-xs flex-1 items-center justify-center rounded-md bg-lime-700 px-6 py-2 text-base font-medium text-white active:ring-0 active:bg-lime-500 hover:bg-lime-800 focus:outline-none sm:w-full"
                 >
                   Add to bag
                 </button>
 
-                <button
+                      {/* Add the back button */}
+                      <div className="mt-10 flex absolute top-24 left-12">
+  <button
+    onClick={goBack}
+    className="flex items-center justify-center rounded-md bg-lime-700 px-6 py-2 text-base font-medium text-white active:ring-0 active:bg-lime-500 hover:bg-lime-800 focus:outline-none sm:w-full"
+  >
+    Back to Products
+  </button>
+</div>
+
+                {/* <button
                   type="button"
                   className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
                 >
@@ -211,7 +230,7 @@ export default function Example() {
                     aria-hidden="true"
                   />
                   <span className="sr-only">Add to favorites</span>
-                </button>
+                </button> */}
               </div>
             </form>
 

@@ -16,17 +16,13 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
-import SearchResult from "./components/SearchResult"
+import SearchResult from './components/SearchResult'
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
 
-  const handleProductClick = (productId) => {
-    setSelectedProduct(productId);
-  };
-  
   useEffect(() => {
    const fetchData = async () => {
      try {
@@ -46,13 +42,20 @@ function App() {
    fetchData();
  }, []);
 
+  const handleProductClick = (productId) => {
+    setSelectedProduct(productId);
+    window.scrollTo(0, 0);
+  
+  };
+
+
+
   return (
     <>
       <Router>
-      <Navbar
+      <Navbar 
          searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery} 
-      />
+         setSearchQuery={setSearchQuery} />
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
@@ -67,15 +70,20 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} products={products} />}
+            element={<ProductList onProductClick={handleProductClick} products={products}/>}
           />
           <Route
-            path="/productOverview"
-            element={<ProductOverview selectedProduct={selectedProduct} />}
+            path="/productOverview/:id"
+            element={<ProductOverview selectedProduct={selectedProduct} products={products} setSearchQuery={setSearchQuery} />}
           />
 
-          <Route path="/productOverview/:id" element={<ProductOverview />} />
-          <Route path="/searchResult/:query" element={<SearchResult products={products} searchQuery={searchQuery}/>} />
+          {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
+          <Route path="/searchResult/:query" element={
+            <SearchResult 
+               products={products} 
+               searchQuery={searchQuery} 
+               onProductClick={handleProductClick}/>} 
+            />
         </Routes>
         {/* </div> */}
       </Router>
