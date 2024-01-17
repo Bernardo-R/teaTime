@@ -1,14 +1,14 @@
 import React from "react";
-import useApi from "../composable/useApi";
+// import useApi from "../composable/useApi";
 import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 
-const ProductList = ({ onProductClick }) => {
-  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  const { data, loading, error } = useApi(apiUrl);
+const ProductList = ({ onProductClick, products }) => {
+//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+//   const { data, loading, error } = useApi(apiUrl);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error.message}</p>;
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Something went wrong: {error.message}</p>;
 
   return (
     <div className="bg-white">
@@ -18,7 +18,7 @@ const ProductList = ({ onProductClick }) => {
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {data.map((product) => (
+          {products.map((product) => (
             <div
               key={product._id}
               onClick={() => onProductClick(product)}

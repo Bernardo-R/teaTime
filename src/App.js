@@ -16,22 +16,47 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
+import SearchResult from "./components/SearchResult"
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([])
+  const [searchQuery, setSearchQuery] = useState("")
 
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
   };
+  
+  useEffect(() => {
+   const fetchData = async () => {
+     try {
+       const response = await fetch('https://teatimeapi-production.up.railway.app/api/data');
+       
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+
+       const data = await response.json();
+       setProducts(data);
+     } catch (error) {
+       console.error('Error fetching data:', error);
+     }
+   };
+
+   fetchData();
+ }, []);
 
   return (
     <>
-      <Navbar />
       <Router>
+      <Navbar
+         searchQuery={searchQuery}
+         setSearchQuery={setSearchQuery} 
+      />
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/" element={<StoreFront />}></Route>
+          <Route path="/" element={<StoreFront products={products} />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -42,7 +67,7 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} />}
+            element={<ProductList onProductClick={handleProductClick} products={products} />}
           />
           <Route
             path="/productOverview"
@@ -50,6 +75,7 @@ function App() {
           />
 
           <Route path="/productOverview/:id" element={<ProductOverview />} />
+          <Route path="/searchResult/:query" element={<SearchResult products={products} searchQuery={searchQuery}/>} />
         </Routes>
         {/* </div> */}
       </Router>

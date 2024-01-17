@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
-import useApi from "../composable/useApi";
+// import useApi from "../composable/useApi";
 
 const currencies = ["USD"];
 
@@ -185,22 +185,22 @@ const perks = [
 //   return classes.filter(Boolean).join(" ");
 // }
 
-const StoreFront = () => {
-  const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  const { data, loading, error } = useApi(apiUrl);
+const StoreFront = ({products}) => {
+//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+//   const { data, loading, error } = useApi(apiUrl);
   const [trendingProducts, setTrendingProducts] = useState([]);
   // const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      setTrendingProducts(data.slice(0, 4));
+    if (products) {
+      setTrendingProducts(products.slice(0, 4));
     }
-  }, [data]);
+  }, [products]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error.message}</p>;
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Something went wrong: {error.message}</p>;
 
-  console.log(data);
+//   console.log(data);
 
   return (
     <main>
