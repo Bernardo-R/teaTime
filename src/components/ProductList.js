@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,22 @@ const ProductList = ({ products }) => {
   //   fetchProducts();
   //   console.log(products);
   // }, []);
+=======
+import React from "react";
+// import useApi from "../composable/useApi";
+import teaherbs from "../assets/imgs/teaherbs.jpg";
+import { Link } from "react-router-dom";
+
+const ProductList = ({ onProductClick, products }) => {
+//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+//   const { data, loading, error } = useApi(apiUrl);
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Something went wrong: {error.message}</p>;
+
+// const navigate = useNavigate;
+// const [scrollPosition, setScrollPosition] = useState(0)
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
 
   return (
     <div className="bg-white">
@@ -28,7 +45,15 @@ const ProductList = ({ products }) => {
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
+<<<<<<< HEAD
             <div key={product._id} className="group relative">
+=======
+            <div
+              key={product._id}
+              onClick={() => onProductClick(product)}
+              className="group relative"
+            >
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
                   src={product.image || teaherbs}

@@ -7,6 +7,9 @@ import ImgFive from "../../assets/imgs/aboutImages/nathan-dumlao-pMW4jzELQCw-uns
 import BlogOne from "../../assets/imgs/aboutImages/rick-govic-8V4txxBqMJQ-unsplash.jpg";
 import BlogTwo from "../../assets/imgs/aboutImages/dale-gray-HDi8KXLm6kg-unsplash.jpg";
 import BlogThree from "../../assets/imgs/aboutImages/mukul-wadhwa-xpo5BggQo3E-unsplash.jpg";
+import Bernardo from "../../assets/imgs/aboutImages/OurPics/BernardoPic.jpg";
+import Chris from "../../assets/imgs/aboutImages/OurPics/ChrisPic.jpg";
+import Michelle from "../../assets/imgs/aboutImages/OurPics/MichPic.jpg";
 
 
 const stats = [
@@ -45,21 +48,15 @@ const team = [
   {
     name: "Bernardo Rosario",
     role: "Co-Founder / CTO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  },
+    imageUrl: Bernardo  },
   {
     name: "Christopher Mendence",
     role: "Co-Founder / CTO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  },
+    imageUrl: Chris  },
   {
     name: "Michelle Okagbue",
     role: "Co-Founder / CTO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  },
+    imageUrl: Michelle  },
   // More people...
 ];
 const blogPosts = [

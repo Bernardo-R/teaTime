@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -59,8 +60,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = () => {
+const Navbar = ({searchQuery, setSearchQuery}) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Navigate to the SearchResult page with the search query as a parameter
+    navigate(`/searchResult/${searchQuery}`);
+    
+  };
+
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -433,12 +442,27 @@ const Navbar = () => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                  <a
-                    href="https://www.google.com/"
-                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
+                <input 
+                     type="text" 
+                     placeholder="Search Our Selection" 
+                     className="p-1 border border-gray-300 rounded-lg text-sm m-2
+                    focus:border-lime-700 focus:border-2 focus:ring-0 font-semibold text-gray-600"
+                     name="search"
+                     value={searchQuery}
+                     onChange={e => setSearchQuery(e.target.value)}
+                     onKeyPress={e => {
+                        if (e.key === 'Enter') {
+                          handleSearch();
+                        }
+                      }}
+                  />
+                  <button
+                     onClick={handleSearch}
+                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block border-lime-700"
+                    type="button"
                   >
                     Search
-                  </a>
+                  </button>
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}

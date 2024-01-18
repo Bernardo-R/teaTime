@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
-import useApi from "../composable/useApi";
+// import useApi from "../composable/useApi";
 
 const currencies = ["USD"];
 
@@ -142,21 +142,38 @@ const perks = [
   },
 ];
 
+<<<<<<< HEAD
 const StoreFront = (props) => {
   const data = props.products;
   // const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   // const { data, loading, error } = useApi(apiUrl);
+=======
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
+
+const StoreFront = ({products}) => {
+//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+//   const { data, loading, error } = useApi(apiUrl);
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
   const [trendingProducts, setTrendingProducts] = useState([]);
   // const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      setTrendingProducts(data.slice(0, 4));
+    if (products) {
+      setTrendingProducts(products.slice(0, 4));
     }
-  }, [data]);
+  }, [products]);
 
+<<<<<<< HEAD
   // if (loading) return <p>Loading...</p>;
   // if (error) return <p>Something went wrong: {error.message}</p>;
+=======
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Something went wrong: {error.message}</p>;
+
+//   console.log(data);
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
 
   return (
     <main>

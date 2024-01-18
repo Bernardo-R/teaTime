@@ -15,6 +15,7 @@ import Shipping from "./components/Footer/Shipping";
 import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
+<<<<<<< HEAD
 import ProductCard from "./components/ProductCard";
 
 function App() {
@@ -42,11 +43,49 @@ function App() {
   // const handleProductClick = (productId) => {
   //   console.log(`Product clicked with ID: ${productId}`);
   // };
+=======
+import ProductOverview from "./components/ProductOverview";
+import SearchResult from './components/SearchResult'
+
+function App() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([])
+  const [searchQuery, setSearchQuery] = useState("")
+
+  useEffect(() => {
+   const fetchData = async () => {
+     try {
+       const response = await fetch('https://teatimeapi-production.up.railway.app/api/data');
+       
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+
+       const data = await response.json();
+       setProducts(data);
+     } catch (error) {
+       console.error('Error fetching data:', error);
+     }
+   };
+
+   fetchData();
+ }, []);
+
+  const handleProductClick = (productId) => {
+    setSelectedProduct(productId);
+    window.scrollTo(0, 0);
+  
+  };
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
+
+
 
   return (
     <>
-      <Navbar />
       <Router>
+      <Navbar 
+         searchQuery={searchQuery}
+         setSearchQuery={setSearchQuery} />
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
@@ -61,6 +100,7 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
+<<<<<<< HEAD
             element={<ProductList products={products} />}
           ></Route>
           <Route
@@ -73,6 +113,22 @@ function App() {
               return <ProductCard productDetails={productDetails} />;
             }}
           />
+=======
+            element={<ProductList onProductClick={handleProductClick} products={products}/>}
+          />
+          <Route
+            path="/productOverview/:id"
+            element={<ProductOverview selectedProduct={selectedProduct} products={products} setSearchQuery={setSearchQuery} />}
+          />
+
+          {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
+          <Route path="/searchResult/:query" element={
+            <SearchResult 
+               products={products} 
+               searchQuery={searchQuery} 
+               onProductClick={handleProductClick}/>} 
+            />
+>>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
         </Routes>
         {/* </div> */}
       </Router>
