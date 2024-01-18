@@ -16,46 +16,43 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
-import SearchResult from './components/SearchResult'
+import SearchResult from "./components/SearchResult";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState([])
-  const [searchQuery, setSearchQuery] = useState("")
+  const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-   const fetchData = async () => {
-     try {
-       const response = await fetch('https://teatimeapi-production.up.railway.app/api/data');
-       
-       if (!response.ok) {
-         throw new Error('Network response was not ok');
-       }
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://teatimeapi-production.up.railway.app/api/data"
+        );
 
-       const data = await response.json();
-       setProducts(data);
-     } catch (error) {
-       console.error('Error fetching data:', error);
-     }
-   };
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-   fetchData();
- }, []);
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
     window.scrollTo(0, 0);
-  
   };
-
-
 
   return (
     <>
       <Router>
-      <Navbar 
-         searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery} />
+        <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
@@ -70,20 +67,35 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} products={products}/>}
+            element={
+              <ProductList
+                onProductClick={handleProductClick}
+                products={products}
+              />
+            }
           />
           <Route
             path="/productOverview/:id"
-            element={<ProductOverview selectedProduct={selectedProduct} products={products} setSearchQuery={setSearchQuery} />}
+            element={
+              <ProductOverview
+                selectedProduct={selectedProduct}
+                products={products}
+                setSearchQuery={setSearchQuery}
+              />
+            }
           />
 
           {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
-          <Route path="/searchResult/:query" element={
-            <SearchResult 
-               products={products} 
-               searchQuery={searchQuery} 
-               onProductClick={handleProductClick}/>} 
-            />
+          <Route
+            path="/searchResult/:query"
+            element={
+              <SearchResult
+                products={products}
+                searchQuery={searchQuery}
+                onProductClick={handleProductClick}
+              />
+            }
+          />
         </Routes>
         {/* </div> */}
       </Router>
