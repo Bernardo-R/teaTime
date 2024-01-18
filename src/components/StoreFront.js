@@ -142,20 +142,13 @@ const perks = [
   },
 ];
 
-<<<<<<< HEAD
-const StoreFront = (props) => {
-  const data = props.products;
-  // const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  // const { data, loading, error } = useApi(apiUrl);
-=======
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(" ");
 // }
 
-const StoreFront = ({products}) => {
-//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-//   const { data, loading, error } = useApi(apiUrl);
->>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
+const StoreFront = ({ products }) => {
+  //   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
+  //   const { data, loading, error } = useApi(apiUrl);
   const [trendingProducts, setTrendingProducts] = useState([]);
   // const [open, setOpen] = useState(false);
 
@@ -165,15 +158,10 @@ const StoreFront = ({products}) => {
     }
   }, [products]);
 
-<<<<<<< HEAD
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Something went wrong: {error.message}</p>;
-=======
-//   if (loading) return <p>Loading...</p>;
-//   if (error) return <p>Something went wrong: {error.message}</p>;
+  //   if (loading) return <p>Loading...</p>;
+  //   if (error) return <p>Something went wrong: {error.message}</p>;
 
-//   console.log(data);
->>>>>>> af552a67cd938b4602a3116778a9e0842beaf568
+  //   console.log(data);
 
   return (
     <main>
