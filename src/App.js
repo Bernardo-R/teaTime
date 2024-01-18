@@ -43,8 +43,6 @@ function App() {
   //   console.log(`Product clicked with ID: ${productId}`);
   // };
 
-  console.log(products);
-
   return (
     <>
       <Navbar />
@@ -52,7 +50,7 @@ function App() {
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/" element={<StoreFront />}></Route>
+          <Route path="/" element={<StoreFront products={products} />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>

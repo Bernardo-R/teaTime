@@ -4,76 +4,8 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
 
-// const product = {
-//   name: "Zip Tote Basket",
-//   price: "$140",
-//   rating: 4,
-//   images: [
-//     {
-//       id: 1,
-//       name: "Angled view",
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-//       alt: "Angled front view with bag zipped and handles upright.",
-//     },
-//     // More images...
-//   ],
-//   colors: [
-//     {
-//       name: "Washed Black",
-//       bgColor: "bg-gray-700",
-//       selectedColor: "ring-gray-700",
-//     },
-//     { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-//     {
-//       name: "Washed Gray",
-//       bgColor: "bg-gray-500",
-//       selectedColor: "ring-gray-500",
-//     },
-//   ],
-//   description: `
-//     <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-//   `,
-//   details: [
-//     {
-//       name: "Features",
-//       items: [
-//         "Multiple strap configurations",
-//         "Spacious interior with top zip",
-//         "Leather handle and tabs",
-//         "Interior dividers",
-//         "Stainless strap loops",
-//         "Double stitched construction",
-//         "Water-resistant",
-//       ],
-//     },
-//     // More sections...
-//   ],
-// };
-
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(" ");
-// }
-
-export default function ProductCard({ productDetails }) {
-  // const apiUrl = `https://boonakitea.cyclic.app/api/all`;
-  // const { id } = useParams();
-  // const [product, setProduct] = useState([null]);
-
-  // useEffect(() => {
-  //   const fetchProductDetails = async () => {
-  //     try {
-  //       const response = await fetch(`/api/teas/${id}`);
-  //       const data = await response.json();
-  //       setProduct(data);
-  //     } catch (error) {
-  //       console.error("Error fetching product details:", error);
-  //     }
-  //   };
-
-  //   fetchProductDetails();
-  // }, [id]);
-
-  // if (!product) return <p>Loading...</p>;
+export default function ProductCard(productDetails) {
+  console.log(productDetails);
 
   return (
     <div className="bg-white">
