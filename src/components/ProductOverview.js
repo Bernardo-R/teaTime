@@ -109,7 +109,7 @@ const goBack = () => {
                   <img
                     src={selectedProduct.image}
                     alt=""
-                    className="h-full w-full object-cover object-center sm:rounded-lg"
+                    className="h-full w-full object-cover object-center shadow-md sm:rounded-lg"
                   />
               
               
@@ -139,7 +139,7 @@ const goBack = () => {
                       key={rating}
                       className={classNames(
                         product.rating > rating
-                          ? "text-indigo-500"
+                          ? "text-lime-700"
                           : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
                       )}
@@ -212,10 +212,11 @@ const goBack = () => {
                 </button>
 
                       {/* Add the back button */}
-                      <div className="mt-10 flex absolute top-24 left-12">
+                      <div className="mt-10 flex absolute top-28 left-12">
   <button
     onClick={goBack}
-    className="flex items-center justify-center rounded-md bg-lime-700 px-6 py-2 text-base font-medium text-white active:ring-0 active:bg-lime-500 hover:bg-lime-800 focus:outline-none sm:w-full"
+    className="flex items-center justify-center rounded-md bg-lime-700 px-6 py-2 text-base font-medium 
+               text-white active:ring-0 active:bg-lime-500 hover:bg-lime-800 focus:outline-none  "
   >
     Back to Products
   </button>
@@ -238,31 +239,31 @@ const goBack = () => {
               <h2 id="details-heading" className="sr-only">
                 Additional details
               </h2>
-
+ {/* FEATURES SECTION */ }
               <div className="divide-y divide-gray-200 border-t">
-                {product.details.map((detail) => (
-                  <Disclosure as="div" key={detail.name}>
+                {/* {product.details.map((detail) => ( */}
+                  <Disclosure as="div" key={selectedProduct._id}>
                     {({ open }) => (
                       <>
                         <h3>
                           <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
                             <span
                               className={classNames(
-                                open ? "text-indigo-600" : "text-gray-900",
+                                open ? "text-lime-600" : "text-lime-700",
                                 "text-sm font-medium"
                               )}
                             >
-                              {detail.name}
+                              Taste
                             </span>
                             <span className="ml-6 flex items-center">
                               {open ? (
                                 <MinusIcon
-                                  className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
                                   aria-hidden="true"
                                 />
                               ) : (
                                 <PlusIcon
-                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
                                   aria-hidden="true"
                                 />
                               )}
@@ -274,15 +275,98 @@ const goBack = () => {
                           className="prose prose-sm pb-6"
                         >
                           <ul role="list">
-                            {detail.items.map((item) => (
-                              <li key={item}>{item}</li>
-                            ))}
+                            {/* {detail.items.map((item) => ( */}
+                              <li className="text-sm capitalize text-gray-600" key={selectedProduct.name}>{selectedProduct.tasteDescription}</li>
+                           {/* //  ))} */}
                           </ul>
                         </Disclosure.Panel>
                       </>
                     )}
                   </Disclosure>
-                ))}
+                  <Disclosure as="div" key={selectedProduct._id}>
+                    {({ open }) => (
+                      <>
+                        <h3>
+                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                            <span
+                              className={classNames(
+                                open ? "text-lime-600" : "text-lime-700",
+                                "text-sm font-medium"
+                              )}
+                            >
+                              Caffeine
+                            </span>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusIcon
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <PlusIcon
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </h3>
+                        <Disclosure.Panel
+                          as="div"
+                          className="prose prose-sm pb-6"
+                        >
+                          <ul role="list">
+                            {/* {detail.items.map((item) => ( */}
+                              <li className="text-sm text-gray-600 capitalize" key={selectedProduct.name}>{selectedProduct.caffeineLevel}, {selectedProduct.caffeine}</li>
+                           {/* //  ))} */}
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                  <Disclosure as="div" key={selectedProduct._id}>
+                    {({ open }) => (
+                      <>
+                        <h3>
+                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                            <span
+                              className={classNames(
+                                open ? "text-lime-600" : "text-lime-700",
+                                "text-sm font-medium"
+                              )}
+                            >
+                              Color
+                            </span>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusIcon
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <PlusIcon
+                                  className="block h-6 w-6 text-lime-600 group-hover:text-lime-700"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </h3>
+                        <Disclosure.Panel
+                          as="div"
+                          className="prose prose-sm pb-6"
+                        >
+                          <ul role="list">
+                            {/* {detail.items.map((item) => ( */}
+                              <li className="text-sm capitalize text-gray-600" key={selectedProduct.name}>{selectedProduct.colorDescription}</li>
+                           {/* //  ))} */}
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                 
+               {/* //  ))} */}
               </div>
             </section>
           </div>

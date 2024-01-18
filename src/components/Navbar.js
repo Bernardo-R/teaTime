@@ -15,6 +15,7 @@ import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unspl
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
+import { Link } from "react-router-dom"
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -442,7 +443,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                <input 
+                {/* <input 
                      type="text" 
                      placeholder="Search Our Selection" 
                      className="p-1 border border-gray-300 rounded-lg text-sm m-2
@@ -462,7 +463,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                     type="button"
                   >
                     Search
-                  </button>
+                  </button> */}
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
@@ -476,12 +477,12 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                         aria-hidden="true"
                       />
                     </a>
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/contact"
                       className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
                     >
                       Help
-                    </a>
+                    </Link>
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
