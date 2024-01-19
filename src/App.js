@@ -21,35 +21,34 @@ import SearchBar from "./components/SearchBar";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState([])
-  const [searchQuery, setSearchQuery] = useState("")
+  const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-   const fetchData = async () => {
-     try {
-       const response = await fetch('https://teatimeapi-production.up.railway.app/api/data');
-       
-       if (!response.ok) {
-         throw new Error('Network response was not ok');
-       }
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://teatimeapi-production.up.railway.app/api/data"
+        );
 
-       const data = await response.json();
-       setProducts(data);
-     } catch (error) {
-       console.error('Error fetching data:', error);
-     }
-   };
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-   fetchData();
- }, []);
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
     window.scrollTo(0, 0);
-  
   };
-
-
 
   return (
     <>
@@ -73,20 +72,35 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} products={products}/>}
+            element={
+              <ProductList
+                onProductClick={handleProductClick}
+                products={products}
+              />
+            }
           />
           <Route
             path="/productOverview/:id"
-            element={<ProductOverview selectedProduct={selectedProduct} products={products} setSearchQuery={setSearchQuery} />}
+            element={
+              <ProductOverview
+                selectedProduct={selectedProduct}
+                products={products}
+                setSearchQuery={setSearchQuery}
+              />
+            }
           />
 
           {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
-          <Route path="/searchResult/:query" element={
-            <SearchResult 
-               products={products} 
-               searchQuery={searchQuery} 
-               onProductClick={handleProductClick}/>} 
-            />
+          <Route
+            path="/searchResult/:query"
+            element={
+              <SearchResult
+                products={products}
+                searchQuery={searchQuery}
+                onProductClick={handleProductClick}
+              />
+            }
+          />
         </Routes>
         {/* </div> */}
       </Router>

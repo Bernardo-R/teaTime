@@ -111,19 +111,6 @@ const collections = [
       "Person sitting at a wooden desk with paper note organizer, pencil and tablet.",
   },
 ];
-const trendingProducts = [
-  // {
-  //   _id: "63092102a643c85c74b00e6e",
-  //   name: "Black Tea",
-  //   color: "Natural",
-  //   price: "$75",
-  //   href: "#",
-  //   imageSrc:
-  //     "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
-  //   imageAlt: "Hand stitched, orange leather long wallet.",
-  // },
-  // More products...
-];
 
 const perks = [
   {
@@ -154,32 +141,6 @@ const perks = [
       "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
   },
 ];
-// const footerNavigation = {
-//   products: [
-//     { name: "Bags", href: "#" },
-//     { name: "Tees", href: "#" },
-//     { name: "Objects", href: "#" },
-//     { name: "Home Goods", href: "#" },
-//     { name: "Accessories", href: "#" },
-//   ],
-//   company: [
-//     { name: "Who we are", href: "#" },
-//     { name: "Sustainability", href: "#" },
-//     { name: "Press", href: "#" },
-//     { name: "Careers", href: "#" },
-//     { name: "Terms & Conditions", href: "#" },
-//     { name: "Privacy", href: "#" },
-//   ],
-//   customerService: [
-//     { name: "Contact", href: "#" },
-//     { name: "Shipping", href: "#" },
-//     { name: "Returns", href: "#" },
-//     { name: "Warranty", href: "#" },
-//     { name: "Secure Payments", href: "#" },
-//     { name: "FAQ", href: "#" },
-//     { name: "Find a store", href: "#" },
-//   ],
-// };
 
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(" ");
@@ -197,10 +158,10 @@ const StoreFront = ({products, onProductClick}) => {
     }
   }, [products]);
 
-//   if (loading) return <p>Loading...</p>;
-//   if (error) return <p>Something went wrong: {error.message}</p>;
+  //   if (loading) return <p>Loading...</p>;
+  //   if (error) return <p>Something went wrong: {error.message}</p>;
 
-//   console.log(data);
+  //   console.log(data);
 
   return (
     <main>
