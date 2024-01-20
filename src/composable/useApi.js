@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 const useApi = (url) => {
-  const BASE_URL = "https://boonakitea.cyclic.app";
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +27,7 @@ const useApi = (url) => {
     fetchData();
   }, [url]);
 
-  return { data, loading, error, BASE_URL };
+  return { data, loading, error };
 };
 
 export default useApi;
