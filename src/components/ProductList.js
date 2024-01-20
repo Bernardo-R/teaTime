@@ -28,7 +28,7 @@ const ProductList = ({ onProductClick, products }) => {
               onClick={() => onProductClick(product)}
               className="group relative"
             >
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none shadow-md group-hover:opacity-75 lg:h-80">
                 <img
                   src={product.image || teaherbs}
                   alt={product.name}
