@@ -4,6 +4,7 @@ import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 
 const ProductList = ({ onProductClick, products }) => {
+  console.log(products);
   //   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   //   const { data, loading, error } = useApi(apiUrl);
 
@@ -38,7 +39,7 @@ const ProductList = ({ onProductClick, products }) => {
                 <div>
                   <h3 className="text-sm text-gray-700">
                     <Link
-                      to={`/product/${product._id}`}
+                      to={`/productOverview/${product._id}`}
                       rel="noopener noreferrer"
                     >
                       <span aria-hidden="true" className="absolute inset-0" />
