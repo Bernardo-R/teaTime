@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
+    "tailwindcss": "^3.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,5 +43,9 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "tailwindcss": "^3.3.6"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Bernardo-R/teaTime.git",
+  "author": "Michelle Okagbue <umbralcompendium@gmail.com>",
+  "license": "MIT"
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -9,180 +10,50 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import Logo from "../assets/imgs/herbs.png";
+import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unsplash.jpg";
+import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
+import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
+import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
+import { Link } from "react-router-dom"
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
-      name: "Women",
+      name: "Tea",
       featured: [
         {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
+          name: "Black Tea",
+          href: "/store",
+          imageSrc: BlackImg,
+          imageAlt: "Photo by Jocelyn Morales on Unsplash",
         },
         {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+          name: "Purple Tea",
+          href: "/store",
+          imageSrc: PurpleImg,
+          imageAlt: "Photo by freestocks on Unsplash",
         },
         {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
-          imageAlt:
-            "Model wearing minimalist watch with black wristband and white watch face.",
+          name: "Pu-erh Tea",
+          href: "/store",
+          imageSrc: PuerhImg,
+          imageAlt: "Photo by Nathan Dumlao on Unsplash",
         },
         {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
-          imageAlt:
-            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
-        },
-      ],
-    },
-    {
-      name: "Men",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg",
-          imageAlt:
-            "Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg",
-          imageAlt: "Model wearing light heather gray t-shirt.",
-        },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg",
-          imageAlt:
-            "Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg",
-          imageAlt:
-            "Model putting folded cash into slim card holder olive leather wallet with hand stitching.",
+          name: "Herbal Tea",
+          href: "/store",
+          imageSrc: HerbalImg,
+          imageAlt: "Photo by Nia Ramirez on Unsplash",
         },
       ],
     },
   ],
   pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
-  ],
-};
-const collections = [
-  {
-    name: "Women's",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg",
-    imageAlt: "Woman wearing a comfortable cotton t-shirt.",
-  },
-  {
-    name: "Men's",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg",
-    imageAlt: "Man wearing a comfortable and casual cotton t-shirt.",
-  },
-  {
-    name: "Desk Accessories",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg",
-    imageAlt:
-      "Person sitting at a wooden desk with paper note organizer, pencil and tablet.",
-  },
-];
-const trendingProducts = [
-  {
-    id: 1,
-    name: "Leather Long Wallet",
-    color: "Natural",
-    price: "$75",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg",
-    imageAlt: "Hand stitched, orange leather long wallet.",
-  },
-  // More products...
-];
-const perks = [
-  {
-    name: "Free returns",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
-    description:
-      "Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.",
-  },
-  {
-    name: "Same day delivery",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg",
-    description:
-      "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
-  },
-  {
-    name: "All year discount",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
-    description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
-  },
-  {
-    name: "For the planet",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg",
-    description:
-      "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
-  },
-];
-const footerNavigation = {
-  products: [
-    { name: "Bags", href: "#" },
-    { name: "Tees", href: "#" },
-    { name: "Objects", href: "#" },
-    { name: "Home Goods", href: "#" },
-    { name: "Accessories", href: "#" },
-  ],
-  company: [
-    { name: "Who we are", href: "#" },
-    { name: "Sustainability", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Privacy", href: "#" },
-  ],
-  customerService: [
-    { name: "Contact", href: "#" },
-    { name: "Shipping", href: "#" },
-    { name: "Returns", href: "#" },
-    { name: "Warranty", href: "#" },
-    { name: "Secure Payments", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Find a store", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "Store", href: "/store" },
+    { name: "About", href: "/about" },
   ],
 };
 
@@ -190,11 +61,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = () => {
+const Navbar = ({searchQuery, setSearchQuery}) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Navigate to the SearchResult page with the search query as a parameter
+    navigate(`/searchResult/${searchQuery}`);
+    
+  };
+
 
   return (
-    <div className="bg-white">
+    <div className="bg-white border-b border-gray-200">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -231,6 +110,19 @@ const Navbar = () => {
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
+                {/* PAGES */}
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-violet-600">
+                  {navigation.pages.map((page) => (
+                    <div key={page.name} className="flow-root">
+                      <a
+                        href={page.href}
+                        className=" flow-root -m-2 block p-2 font-medium text-gray-900 "
+                      >
+                        {page.name}
+                      </a>
+                    </div>
+                  ))}
+                </div>
 
                 {/* Links */}
                 <Tab.Group as="div" className="mt-2">
@@ -242,8 +134,8 @@ const Navbar = () => {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? "border-indigo-600 text-indigo-600"
-                                : "border-transparent text-gray-900",
+                                ? " text-indigo-600 focus:ring-0"
+                                : "border-transparent text-gray-900 focus:ring-0",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
                           }
@@ -293,23 +185,11 @@ const Navbar = () => {
                   </Tab.Panels>
                 </Tab.Group>
 
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-
+                {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Create an account
@@ -317,7 +197,7 @@ const Navbar = () => {
                   </div>
                   <div className="flow-root">
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Sign in
@@ -361,7 +241,7 @@ const Navbar = () => {
       <header className="relative">
         <nav aria-label="Top">
           {/* Top navigation */}
-          <div className="bg-gray-900">
+          <div className="bg-lime-800">
             <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
               {/* Currency selector */}
               <form>
@@ -373,7 +253,7 @@ const Navbar = () => {
                     <select
                       id="desktop-currency"
                       name="currency"
-                      className="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
+                      className="flex items-center rounded-md border-transparent bg-lime-950 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
                     >
                       {currencies.map((currency) => (
                         <option key={currency}>{currency}</option>
@@ -391,14 +271,14 @@ const Navbar = () => {
 
               <div className="flex items-center space-x-6">
                 <a
-                  href="#"
-                  className="text-sm font-medium text-white hover:text-gray-100"
+                  href="https://www.google.com/"
+                  className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Sign in
                 </a>
                 <a
-                  href="#"
-                  className="text-sm font-medium text-white hover:text-gray-100"
+                  href="https://www.google.com/"
+                  className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Create an account
                 </a>
@@ -412,13 +292,11 @@ const Navbar = () => {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
-                    <span className="sr-only">Your Company</span>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt=""
-                    />
+                  <a href="/">
+                    <span className="sr-only">Tea Time</span>
+                    <a href="/">
+                      <img className="h-8 w-auto" src={Logo} alt="" />
+                    </a>
                   </a>
                 </div>
 
@@ -426,6 +304,15 @@ const Navbar = () => {
                   {/* Flyout menus */}
                   <Popover.Group className="inset-x-0 bottom-0 px-4">
                     <div className="flex h-full justify-center space-x-8">
+                      {navigation.pages.map((page) => (
+                        <a
+                          key={page.name}
+                          href={page.href}
+                          className="hover:text-lime-600 flex items-center text-sm font-medium text-gray-700 "
+                        >
+                          {page.name}
+                        </a>
+                      ))}
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
                           {({ open }) => (
@@ -434,15 +321,15 @@ const Navbar = () => {
                                 <Popover.Button
                                   className={classNames(
                                     open
-                                      ? "text-indigo-600"
-                                      : "text-gray-700 hover:text-gray-800",
-                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out"
+                                      ? "text-lime-600"
+                                      : "text-gray-700 hover:text-lime-600",
+                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out focus:outline-none"
                                   )}
                                 >
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "bg-indigo-600" : "",
+                                      open ? "text-indigo-600" : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
@@ -520,16 +407,6 @@ const Navbar = () => {
                           )}
                         </Popover>
                       ))}
-
-                      {navigation.pages.map((page) => (
-                        <a
-                          key={page.name}
-                          href={page.href}
-                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                        >
-                          {page.name}
-                        </a>
-                      ))}
                     </div>
                   </Popover.Group>
                 </div>
@@ -547,7 +424,7 @@ const Navbar = () => {
 
                   {/* Search */}
                   <a
-                    href="#"
+                    href="https://www.google.com/"
                     className="ml-2 p-2 text-gray-400 hover:text-gray-500"
                   >
                     <span className="sr-only">Search</span>
@@ -559,27 +436,39 @@ const Navbar = () => {
                 </div>
 
                 {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                    className="h-8 w-auto"
-                  />
+
+                <span className="sr-only">Tea Time</span>
+                <a href="/" className="lg:hidden">
+                  <img src={Logo} alt="" className="h-8 w-auto" />
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                  <a
-                    href="#"
-                    className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                {/* <input 
+                     type="text" 
+                     placeholder="Search Our Selection" 
+                     className="p-1 border border-gray-300 rounded-lg text-sm m-2
+                    focus:border-lime-700 focus:border-2 focus:ring-0 font-semibold text-gray-600"
+                     name="search"
+                     value={searchQuery}
+                     onChange={e => setSearchQuery(e.target.value)}
+                     onKeyPress={e => {
+                        if (e.key === 'Enter') {
+                          handleSearch();
+                        }
+                      }}
+                  />
+                  <button
+                     onClick={handleSearch}
+                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block border-lime-700"
+                    type="button"
                   >
                     Search
-                  </a>
+                  </button> */}
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
                     <a
-                      href="#"
+                      href="https://www.google.com/"
                       className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
                     >
                       <span className="sr-only">Help</span>
@@ -588,18 +477,21 @@ const Navbar = () => {
                         aria-hidden="true"
                       />
                     </a>
-                    <a
-                      href="#"
-                      className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                    <Link
+                      to="/contact"
+                      className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
                     >
                       Help
-                    </a>
+                    </Link>
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a href="#" className="group -m-2 flex items-center p-2">
+                      <a
+                        href="https://www.google.com/"
+                        className="group -m-2 flex items-center p-2"
+                      >
                         <ShoppingBagIcon
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
                           aria-hidden="true"
                         />
                         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
