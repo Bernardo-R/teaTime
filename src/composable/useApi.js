@@ -9,8 +9,14 @@ const useApi = (url) => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
-        const result = await response.json();
-        setData(result);
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+          const result = await response.json();
+          setData(result);
+        } else {
+          throw new Error("Response is not in JSON format");
+        }
       } catch (error) {
         setError(error);
       } finally {

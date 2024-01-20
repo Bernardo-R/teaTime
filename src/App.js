@@ -16,42 +16,52 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
+import SearchResult from './components/SearchResult'
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://teatimeapi-production.up.railway.app/api/data"
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
+    window.scrollTo(0, 0);
   };
-  //  const API_URL = "https://boonakitea.cyclic.app/api/all"
-
-  //  const [teaList, setTeaList] = useState([])
-
-  //  const getTeaList = async () => {
-  //     try {
-  //       const resp = await fetch(API_URL); // response from the api
-  //       const data = await resp.json(); //extracting json from response object
-
-  //       setTeaList(data);
-  //     } catch (error) {
-  //       console.error("Something went wrong", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getTeaList();
-  //   }, []);
-
-  //   console.log(teaList)
 
   return (
     <>
-      <Navbar />
       <Router>
+      <Navbar />
+      <SearchBar
+         searchQuery={searchQuery}
+         setSearchQuery={setSearchQuery} />
+         
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/" element={<StoreFront />}></Route>
+          <Route path="/" element={<StoreFront products={products} onProductClick={handleProductClick} />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -62,14 +72,35 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route
             path="/store"
-            element={<ProductList onProductClick={handleProductClick} />}
+            element={
+              <ProductList
+                onProductClick={handleProductClick}
+                products={products}
+              />
+            }
           />
           <Route
-            path="/productOverview"
-            element={<ProductOverview selectedProduct={selectedProduct} />}
+            path="/productOverview/:id"
+            element={
+              <ProductOverview
+                selectedProduct={selectedProduct}
+                products={products}
+                setSearchQuery={setSearchQuery}
+              />
+            }
           />
 
-          <Route path="/productOverview/:id" element={<ProductOverview />} />
+          {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
+          <Route
+            path="/searchResult/:query"
+            element={
+              <SearchResult
+                products={products}
+                searchQuery={searchQuery}
+                onProductClick={handleProductClick}
+              />
+            }
+          />
         </Routes>
         {/* </div> */}
       </Router>

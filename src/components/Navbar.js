@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -14,6 +15,7 @@ import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unspl
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
+import { Link } from "react-router-dom"
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -59,8 +61,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = () => {
+const Navbar = ({searchQuery, setSearchQuery}) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Navigate to the SearchResult page with the search query as a parameter
+    navigate(`/searchResult/${searchQuery}`);
+    
+  };
+
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -311,15 +321,15 @@ const Navbar = () => {
                                 <Popover.Button
                                   className={classNames(
                                     open
-                                      ? "text-indigo-600"
+                                      ? "text-lime-600"
                                       : "text-gray-700 hover:text-lime-600",
-                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out"
+                                    "relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out focus:outline-none"
                                   )}
                                 >
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "bg-indigo-600" : "",
+                                      open ? "text-indigo-600" : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
@@ -433,12 +443,27 @@ const Navbar = () => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                  <a
-                    href="https://www.google.com/"
-                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
+                {/* <input 
+                     type="text" 
+                     placeholder="Search Our Selection" 
+                     className="p-1 border border-gray-300 rounded-lg text-sm m-2
+                    focus:border-lime-700 focus:border-2 focus:ring-0 font-semibold text-gray-600"
+                     name="search"
+                     value={searchQuery}
+                     onChange={e => setSearchQuery(e.target.value)}
+                     onKeyPress={e => {
+                        if (e.key === 'Enter') {
+                          handleSearch();
+                        }
+                      }}
+                  />
+                  <button
+                     onClick={handleSearch}
+                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block border-lime-700"
+                    type="button"
                   >
                     Search
-                  </a>
+                  </button> */}
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
@@ -452,12 +477,12 @@ const Navbar = () => {
                         aria-hidden="true"
                       />
                     </a>
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/contact"
                       className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
                     >
                       Help
-                    </a>
+                    </Link>
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
