@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 // import useApi from "../composable/useApi";
 import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
+import Filter from "./Filter"
 
 const ProductList = ({ onProductClick, products }) => {
-  console.log(products);
   //   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
   //   const { data, loading, error } = useApi(apiUrl);
 
@@ -14,9 +14,32 @@ const ProductList = ({ onProductClick, products }) => {
   // const navigate = useNavigate;
   // const [scrollPosition, setScrollPosition] = useState(0)
 
+  const [selectedFilters, setSelectedFilters] = useState({
+   price: [],
+   color: [],
+   size: [],
+   category: [],
+ });
+
+ 
+const filteredProducts = products.filter((product) => {
+   // Your filtering logic based on selectedFilters
+   return (
+     (selectedFilters.price.length === 0 || selectedFilters.price.includes(product.price)) &&
+     (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.color)) &&
+     (selectedFilters.size.length === 0 || selectedFilters.size.includes(product.size)) &&
+     (selectedFilters.category.length === 0 || selectedFilters.category.includes(product.category))
+   );
+ });
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+       <Filter 
+         selectedFilters={selectedFilters} 
+         updateFilters={setSelectedFilters}
+         products={products}
+       />
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Recently added
         </h2>

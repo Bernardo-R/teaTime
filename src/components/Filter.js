@@ -43,10 +43,26 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Filter({ selectedFilters, updateFilters, products }) {
+
+   const handleFilterChange = (category, value) => {
+      // Create a new object to avoid mutating the state directly
+      const newFilters = { ...selectedFilters };
+  
+      // Toggle the value in the selectedFilters array for the given category
+      if (newFilters[category].includes(value)) {
+        newFilters[category] = newFilters[category].filter((filter) => filter !== value);
+      } else {
+        newFilters[category] = [...newFilters[category], value];
+      }
+  
+      // Update the state
+      updateFilters(newFilters);
+    };
+
   return (
     <div className="bg-white">
-      <div className="px-4 py-16 text-center sm:px-6 lg:px-8">
+      {/* <div className="px-4 py-16 text-center sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900">
           Workspace
         </h1>
@@ -54,7 +70,7 @@ export default function Example() {
           The secret to a tidy desk? Don't get rid of anything, just put it in
           really really nice looking containers.
         </p>
-      </div>
+      </div> */}
 
       {/* Filters */}
       <Disclosure
@@ -77,7 +93,10 @@ export default function Example() {
               </Disclosure.Button>
             </div>
             <div className="pl-6">
-              <button type="button" className="text-gray-500">
+              <button 
+               type="button" 
+               className="text-gray-500"
+               onClick={() => updateFilters(products)} >
                 Clear all
               </button>
             </div>

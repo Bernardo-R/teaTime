@@ -87,30 +87,7 @@ const navigation = {
     { name: "Stores", href: "#" },
   ],
 };
-const collections = [
-  {
-    name: "Green & White",
-    href: "#",
-    imageSrc:
-      "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt: "Woman wearing a comfortable cotton t-shirt.",
-  },
-  {
-    name: "Black & Pu-erh",
-    href: "#",
-    imageSrc:
-      "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt: "Man wearing a comfortable and casual cotton t-shirt.",
-  },
-  {
-    name: "Rooibos & Herbal",
-    href: "#",
-    imageSrc:
-      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt:
-      "Person sitting at a wooden desk with paper note organizer, pencil and tablet.",
-  },
-];
+
 
 const perks = [
   {
@@ -146,7 +123,7 @@ const perks = [
 //   return classes.filter(Boolean).join(" ");
 // }
 
-const StoreFront = ({products, onProductClick}) => {
+const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => {
 //   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
 //   const { data, loading, error } = useApi(apiUrl);
   const [trendingProducts, setTrendingProducts] = useState([]);
@@ -162,6 +139,31 @@ const StoreFront = ({products, onProductClick}) => {
   //   if (error) return <p>Something went wrong: {error.message}</p>;
 
   //   console.log(data);
+
+  const collections = [
+   {
+     name: "Green",
+     type: "green",
+     imageSrc:
+       "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+     imageAlt: "Teabag in clear teacup with books and candles in the background",
+   },
+   {
+     name: "Black",
+     type: "black",
+     imageSrc:
+       "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+     imageAlt: "Spoons with herbs on them",
+   },
+   {
+     name: "Oolong",
+     type: "oolong",
+     imageSrc:
+       "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+     imageAlt:
+       "Clear teacup with tea, surrounded by teabags.",
+   },
+ ];
 
   return (
     <main>
@@ -252,11 +254,11 @@ const StoreFront = ({products, onProductClick}) => {
                       <p aria-hidden="true" className="text-sm text-white">
                         Shop the collection
                       </p>
-                      <h3 className="mt-1 font-semibold text-white">
-                        <a href={collection.href}>
+                      <h3 className="mt-1 font-semibold text-white" onClick={() => {setSearchInput(collection.type); window.scrollTo(0, 0)}}>
+                        <Link to={`/searchResult/${collection.type}`}>
                           <span className="absolute inset-0" />
                           {collection.name}
-                        </a>
+                        </Link>
                       </h3>
                     </div>
                   </div>

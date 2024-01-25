@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import StoreFront from "./components/StoreFront";
 import AboutPage from "./components/Pages/AboutPage";
-import Home from "./components/Pages/Home";
+// import Home from "./components/Pages/Home";
 import Contact from "./components/Footer/Contact";
 import FAQ from "./components/Footer/FAQ";
 import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
@@ -18,11 +18,13 @@ import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
 import SearchResult from './components/SearchResult'
 import SearchBar from "./components/SearchBar";
+import SearchPO from "./components/SearchPO";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [ searchInput, setSearchInput ] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,12 +58,23 @@ function App() {
       <Navbar />
       <SearchBar
          searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery} />
+         setSearchQuery={setSearchQuery}
+         searchInput={searchInput}
+         setSearchInput={setSearchInput}  
+      />
          
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/" element={<StoreFront products={products} onProductClick={handleProductClick} />}></Route>
+          {/* <Route path="/home" element={<Home />}></Route> */}
+          <Route 
+            path="/" 
+            element={
+               <StoreFront 
+                  products={products} 
+                  onProductClick={handleProductClick}
+                  searchInput={searchInput}
+                  setSearchInput={setSearchInput}
+                  />}></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -86,6 +99,18 @@ function App() {
                 selectedProduct={selectedProduct}
                 products={products}
                 setSearchQuery={setSearchQuery}
+                searchInput={searchInput}
+              />
+            }
+          />
+          <Route
+            path="/searchPO/:id"
+            element={
+              <SearchPO
+                selectedProduct={selectedProduct}
+                products={products}
+                setSearchQuery={setSearchQuery}
+                searchInput={searchInput}
               />
             }
           />
@@ -98,6 +123,8 @@ function App() {
                 products={products}
                 searchQuery={searchQuery}
                 onProductClick={handleProductClick}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
               />
             }
           />

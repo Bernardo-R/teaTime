@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-export default function SearchBar({ searchQuery, setSearchQuery }) {
+export default function SearchBar({ searchQuery, setSearchQuery, searchInput, setSearchInput }) {
   const navigate = useNavigate();
+  
 
   const handleSearch = () => {
     // Navigate to the SearchResult page with the search query as a parameter
     navigate(`/searchResult/${searchQuery}`);
+    setSearchInput(searchQuery)
   };
 
   return (
