@@ -142,22 +142,22 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
 
   const collections = [
    {
-     name: "Green",
-     type: "green",
+     name: "Green & White",
+     type: "green white",
      imageSrc:
        "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
      imageAlt: "Teabag in clear teacup with books and candles in the background",
    },
    {
-     name: "Black",
-     type: "black",
+     name: "Black & Assam",
+     type: "black assam",
      imageSrc:
        "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
      imageAlt: "Spoons with herbs on them",
    },
    {
-     name: "Oolong",
-     type: "oolong",
+     name: "Oolong & Blends",
+     type: "oolong blend",
      imageSrc:
        "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
      imageAlt:

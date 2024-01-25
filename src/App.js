@@ -55,7 +55,9 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar />
+      <Navbar
+         setSearchInput={setSearchInput}
+      />
       <SearchBar
          searchQuery={searchQuery}
          setSearchQuery={setSearchQuery}
