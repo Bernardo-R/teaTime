@@ -48,16 +48,22 @@ const team = [
   {
     name: "Bernardo Rosario",
     role: "Co-Founder / CTO",
-    imageUrl: Bernardo  },
+    imageUrl: Bernardo,
+    url: "https://www.linkedin.com/in/brosario12/"
+  },
   {
     name: "Christopher Mendence",
     role: "Co-Founder / CTO",
-    imageUrl: Chris  },
+    imageUrl: Chris,
+    url: "https://www.linkedin.com/in/cmendence/"
+  },
   {
     name: "Michelle Okagbue",
     role: "Co-Founder / CTO",
-    imageUrl: Michelle  },
-  // More people...
+    imageUrl: Michelle,
+    url: "https://www.linkedin.com/in/michelle-okagbue/"
+  },
+   // More people...
 ];
 const blogPosts = [
   {
@@ -336,48 +342,6 @@ export default function About() {
               />
             </svg>
           </div>
-          {/* <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
-              Trusted by the world’s most innovative teams
-            </h2>
-            <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-              <img
-                className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg"
-                alt="Transistor"
-                width={158}
-                height={48}
-              />
-              <img
-                className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg"
-                alt="Reform"
-                width={158}
-                height={48}
-              />
-              <img
-                className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg"
-                alt="Tuple"
-                width={158}
-                height={48}
-              />
-              <img
-                className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg"
-                alt="SavvyCal"
-                width={158}
-                height={48}
-              />
-              <img
-                className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
-                src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg"
-                alt="Statamic"
-                width={158}
-                height={48}
-              />
-            </div>
-          </div> */}
         </div>
 
         {/* Team section */}
@@ -395,6 +359,7 @@ export default function About() {
             className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
           >
             {team.map((person) => (
+              <a href={person.url} target="_blank">
               <li key={person.name}>
                 <img
                   className="mx-auto h-24 w-24 rounded-full"
@@ -406,6 +371,7 @@ export default function About() {
                 </h3>
                 <p className="text-sm leading-6 text-gray-600">{person.role}</p>
               </li>
+              </a>
             ))}
           </ul>
         </div>
