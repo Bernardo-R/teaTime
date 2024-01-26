@@ -15,7 +15,7 @@ import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unspl
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -61,16 +61,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({searchQuery, setSearchQuery}) => {
+const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = () => {
     // Navigate to the SearchResult page with the search query as a parameter
     navigate(`/searchResult/${searchQuery}`);
-    
   };
-
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -329,7 +327,9 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "text-indigo-600" : " hover:text-lime-600",
+                                      open
+                                        ? "text-indigo-600"
+                                        : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
@@ -443,7 +443,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                {/* <input 
+                  {/* <input 
                      type="text" 
                      placeholder="Search Our Selection" 
                      className="p-1 border border-gray-300 rounded-lg text-sm m-2

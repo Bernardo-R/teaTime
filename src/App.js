@@ -16,8 +16,10 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
-import SearchResult from './components/SearchResult'
+import SearchResult from "./components/SearchResult";
 import SearchBar from "./components/SearchBar";
+import Login from "./components/auth/Login";
+import CreateAccount from "./components/auth/CreateAccount";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -53,15 +55,21 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar />
-      <SearchBar
-         searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery} />
-         
+        <Navbar />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
         {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/" element={<StoreFront products={products} onProductClick={handleProductClick} />}></Route>
+          <Route
+            path="/"
+            element={
+              <StoreFront
+                products={products}
+                onProductClick={handleProductClick}
+              />
+            }
+          ></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -70,6 +78,8 @@ function App() {
           <Route path="/shipping" element={<Shipping />}></Route>
           <Route path="/terms" element={<Terms />}></Route>
           <Route path="/warranty" element={<Warranty />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/CreateAccount" element={<CreateAccount />}></Route>
           <Route
             path="/store"
             element={
