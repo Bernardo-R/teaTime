@@ -78,8 +78,8 @@ function App() {
           <Route path="/shipping" element={<Shipping />}></Route>
           <Route path="/terms" element={<Terms />}></Route>
           <Route path="/warranty" element={<Warranty />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/CreateAccount" element={<CreateAccount />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<CreateAccount />}></Route>
           <Route
             path="/store"
             element={

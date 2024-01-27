@@ -186,20 +186,20 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                 {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/register"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Create an account
-                    </a>
+                    </Link>
                   </div>
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/login"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Sign in
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -268,18 +268,18 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
               </form>
 
               <div className="flex items-center space-x-6">
-                <a
-                  href="https://www.google.com/"
+                <Link
+                  to="/login"
                   className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Sign in
-                </a>
-                <a
-                  href="https://www.google.com/"
+                </Link>
+                <Link
+                  to="/register"
                   className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Create an account
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -292,9 +292,13 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="/">
                     <span className="sr-only">Tea Time</span>
-                    <a href="/">
-                      <img className="h-8 w-auto" src={Logo} alt="" />
-                    </a>
+                    <Link to="/">
+                      <img
+                        className="h-8 w-auto"
+                        src={Logo}
+                        alt="company logo"
+                      />
+                    </Link>
                   </a>
                 </div>
 
@@ -423,7 +427,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                   </button>
 
                   {/* Search */}
-                  <a
+                  {/* <a
                     href="https://www.google.com/"
                     className="ml-2 p-2 text-gray-400 hover:text-gray-500"
                   >
@@ -432,7 +436,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                       className="h-6 w-6"
                       aria-hidden="true"
                     />
-                  </a>
+                  </a> */}
                 </div>
 
                 {/* Logo (lg-) */}
@@ -467,7 +471,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
-                    <a
+                    {/* <a
                       href="https://www.google.com/"
                       className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
                     >
@@ -476,7 +480,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                         className="h-6 w-6"
                         aria-hidden="true"
                       />
-                    </a>
+                    </a> */}
                     <Link
                       to="/contact"
                       className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
@@ -486,8 +490,8 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a
-                        href="https://www.google.com/"
+                      <Link
+                        to="/login"
                         className="group -m-2 flex items-center p-2"
                       >
                         <ShoppingBagIcon
@@ -498,7 +502,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                           0
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

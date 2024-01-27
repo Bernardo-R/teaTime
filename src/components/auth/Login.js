@@ -1,7 +1,6 @@
 import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
 import { useState } from "react";
 import Alert from "../Alert";
-import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const { logIn } = useFirebaseAuth();
@@ -58,7 +57,7 @@ export default function Login() {
                   autoComplete="email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-700 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -71,14 +70,14 @@ export default function Login() {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
+                <div className="text-sm">
                   <a
                     href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    className="font-semibold text-gray-600 hover:text-gray-900"
                   >
                     Forgot password?
                   </a>
-                </div> */}
+                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -88,7 +87,7 @@ export default function Login() {
                   autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-700 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
