@@ -20,6 +20,7 @@ import SearchResult from "./components/SearchResult";
 import SearchBar from "./components/SearchBar";
 import Login from "./components/auth/Login";
 import CreateAccount from "./components/auth/CreateAccount";
+import SearchPO from "./components/SearchPO"
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
