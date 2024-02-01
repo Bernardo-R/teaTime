@@ -54,9 +54,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductOverview({
+export default function SearchPO({
   selectedProduct,
+  scrollposition,
   setSearchQuery,
+  searchInput,
 }) {
   //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
@@ -64,24 +66,25 @@ export default function ProductOverview({
 
   // Function to handle going back to the previous page
   const goBack = () => {
-    navigate(`/store`);
-    window.scrollTo(0, 0);
+    navigate(`/searchResult/${searchInput}`);
+    window.scrollTo(0, scrollposition);
     setSearchQuery("");
   };
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                    <div className=" m-7 -mt-16">
+      <div className=" m-7 -mt-16">
                   <button
                     onClick={goBack}
                     className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
-                    text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
+               text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
                   >
-                    Back to Products
+                    Back to Results
                   </button>
                 </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+         
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
@@ -221,6 +224,7 @@ export default function ProductOverview({
                 >
                   Add to bag
                 </button>
+            
 
                 {/* <button
                   type="button"
