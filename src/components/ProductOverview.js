@@ -72,6 +72,15 @@ export default function ProductOverview({
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                    <div className=" m-7 -mt-16">
+                  <button
+                    onClick={goBack}
+                    className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
+                    text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
+                  >
+                    Back to Products
+                  </button>
+                </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
@@ -111,7 +120,7 @@ export default function ProductOverview({
               <img
                 src={selectedProduct.image}
                 alt=""
-                className="h-full w-full object-cover object-center shadow-md sm:rounded-lg"
+                className="h-full w-full object-cover object-center shadow-md rounded-lg"
               />
             </Tab.Panels>
           </Tab.Group>
@@ -212,17 +221,6 @@ export default function ProductOverview({
                 >
                   Add to bag
                 </button>
-
-                {/* Add the back button */}
-                <div className="mt-10 flex absolute top-28 left-12">
-                  <button
-                    onClick={goBack}
-                    className="flex items-center justify-center rounded-md  px-6 py-2 text-base font-medium 
-               text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none  "
-                  >
-                    Back to Products
-                  </button>
-                </div>
 
                 {/* <button
                   type="button"

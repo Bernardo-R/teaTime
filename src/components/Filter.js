@@ -2,48 +2,55 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
 
-const filters = {
-  price: [
-    { value: "0", label: "$0 - $25", checked: false },
-    { value: "25", label: "$25 - $50", checked: false },
-    { value: "50", label: "$50 - $75", checked: false },
-    { value: "75", label: "$75+", checked: false },
-  ],
-  color: [
-    { value: "white", label: "White", checked: false },
-    { value: "beige", label: "Beige", checked: false },
-    { value: "blue", label: "Blue", checked: true },
-    { value: "brown", label: "Brown", checked: false },
-    { value: "green", label: "Green", checked: false },
-    { value: "purple", label: "Purple", checked: false },
-  ],
-  size: [
-    { value: "xs", label: "XS", checked: false },
-    { value: "s", label: "S", checked: true },
-    { value: "m", label: "M", checked: false },
-    { value: "l", label: "L", checked: false },
-    { value: "xl", label: "XL", checked: false },
-    { value: "2xl", label: "2XL", checked: false },
-  ],
-  category: [
-    { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
-    { value: "tees", label: "Tees", checked: false },
-    { value: "objects", label: "Objects", checked: false },
-    { value: "sweatshirts", label: "Sweatshirts", checked: false },
-    { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
-  ],
-};
-const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Filter({ selectedFilters, updateFilters, products }) {
+   const filters = {
+     type: [
+       { value: "black", label: "Black", checked: false },
+       { value: "white", label: "White", checked: false },
+       { value: "green", label: "Green", checked: false },
+       { value: "oolong", label: "Oolong", checked: false },
+       { value: "blend", label: "Blend", checked: false },
+     ],
+     caffeineLevel: [
+       { value: "none", label: "None", checked: false },
+       { value: "very low", label: "Very Low", checked: false },
+       { value: "low", label: "Low", checked: false },
+       { value: "moderate", label: "Moderate", checked: false },
+       { value: "high", label: "High", checked: false },
+       { value: "very high", label: "Very High", checked: false },
+     ],
+     taste: [
+       { value: "sweet", label: "Sweet", checked: false },
+       { value: "floral", label: "Floral", checked: false },
+       { value: "grassy", label: "Grassy", checked: false },
+       { value: "bitter", label: "Bitter", checked: false },
+       { value: "mild", label: "Mild", checked: false },
+       { value: "dry", label: "Dry", checked: false },
+       { value: "toasty", label: "Toasty", checked: false },
+       { value: "nut", label: "Nutty", checked: false },
+       { value: "smoky", label: "Smoky", checked: false },
+       { value: "fruit", label: "Fruity", checked: false },
+       { value: "buttery", label: "Buttery", checked: false },
+       { value: "honey", label: "Honey", checked: false },
+     ],
+     category: [
+       { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
+       { value: "tees", label: "Tees", checked: false },
+       { value: "objects", label: "Objects", checked: false },
+       { value: "sweatshirts", label: "Sweatshirts", checked: false },
+       { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
+     ],
+   };
+   const sortOptions = [
+     { name: "Most Popular", href: "#", current: true },
+     { name: "Best Rating", href: "#", current: false },
+     { name: "Newest", href: "#", current: false },
+   ];
+   
+   function classNames(...classes) {
+     return classes.filter(Boolean).join(" ");
+   }
 
    const handleFilterChange = (category, value) => {
       // Create a new object to avoid mutating the state directly
@@ -58,6 +65,29 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
   
       // Update the state
       updateFilters(newFilters);
+
+      localStorage.setItem('selectedFilters', JSON.stringify(newFilters));
+    };
+
+    const clearFilters = () => {
+      localStorage.removeItem('selectedFilters');
+
+      updateFilters({
+         type: [],
+         caffeineLevel: [],
+         taste: [],
+         category: [],
+      })
+    }
+
+    const countSelectedFilters = () => {
+      let totalCount = 0;
+    
+      for (const category in selectedFilters) {
+        totalCount += selectedFilters[category].length;
+      }
+    
+      return totalCount;
     };
 
   return (
@@ -89,14 +119,14 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                   className="mr-2 h-5 w-5 flex-none text-gray-400 group-hover:text-gray-500"
                   aria-hidden="true"
                 />
-                2 Filters
+                {countSelectedFilters()} Filters
               </Disclosure.Button>
             </div>
             <div className="pl-6">
               <button 
                type="button" 
                className="text-gray-500"
-               onClick={() => updateFilters(products)} >
+               onClick={() => clearFilters()} >
                 Clear all
               </button>
             </div>
@@ -106,23 +136,24 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 px-4 text-sm sm:px-6 md:gap-x-6 lg:px-8">
             <div className="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
               <fieldset>
-                <legend className="block font-medium">Price</legend>
+                <legend className="block font-medium">Type</legend>
                 <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-                  {filters.price.map((option, optionIdx) => (
+                  {filters.type.map((option, optionIdx) => (
                     <div
                       key={option.value}
                       className="flex items-center text-base sm:text-sm"
                     >
                       <input
-                        id={`price-${optionIdx}`}
-                        name="price[]"
+                        id={`type-${optionIdx}`}
+                        name="type[]"
                         defaultValue={option.value}
                         type="checkbox"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                        defaultChecked={option.checked}
+                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
+                        checked={selectedFilters.type.includes(option.value)}
+                        onChange={() => handleFilterChange('type', option.value)}
                       />
                       <label
-                        htmlFor={`price-${optionIdx}`}
+                        htmlFor={`type-${optionIdx}`}
                         className="ml-3 min-w-0 flex-1 text-gray-600"
                       >
                         {option.label}
@@ -132,23 +163,24 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                 </div>
               </fieldset>
               <fieldset>
-                <legend className="block font-medium">Color</legend>
+                <legend className="block font-medium">Caffeine Level</legend>
                 <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-                  {filters.color.map((option, optionIdx) => (
+                  {filters.caffeineLevel.map((option, optionIdx) => (
                     <div
                       key={option.value}
                       className="flex items-center text-base sm:text-sm"
                     >
                       <input
-                        id={`color-${optionIdx}`}
-                        name="color[]"
+                        id={`caffeineLevel-${optionIdx}`}
+                        name="caffeineLevel[]"
                         defaultValue={option.value}
                         type="checkbox"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                        defaultChecked={option.checked}
+                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
+                        checked={selectedFilters.caffeineLevel.includes(option.value)}
+                        onChange={() => handleFilterChange('caffeineLevel', option.value)}
                       />
                       <label
-                        htmlFor={`color-${optionIdx}`}
+                        htmlFor={`caffeineLevel-${optionIdx}`}
                         className="ml-3 min-w-0 flex-1 text-gray-600"
                       >
                         {option.label}
@@ -160,23 +192,24 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
             </div>
             <div className="grid auto-rows-min grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-6">
               <fieldset>
-                <legend className="block font-medium">Size</legend>
+                <legend className="block font-medium">Taste</legend>
                 <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-                  {filters.size.map((option, optionIdx) => (
+                  {filters.taste.map((option, optionIdx) => (
                     <div
                       key={option.value}
                       className="flex items-center text-base sm:text-sm"
                     >
                       <input
-                        id={`size-${optionIdx}`}
-                        name="size[]"
+                        id={`taste-${optionIdx}`}
+                        name="taste[]"
                         defaultValue={option.value}
                         type="checkbox"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                        defaultChecked={option.checked}
+                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
+                        checked={selectedFilters.taste.includes(option.value)}
+                        onChange={() => handleFilterChange('taste', option.value)}
                       />
                       <label
-                        htmlFor={`size-${optionIdx}`}
+                        htmlFor={`taste-${optionIdx}`}
                         className="ml-3 min-w-0 flex-1 text-gray-600"
                       >
                         {option.label}
@@ -186,7 +219,7 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                 </div>
               </fieldset>
               <fieldset>
-                <legend className="block font-medium">Category</legend>
+                <legend className="block font-medium">Placeholder</legend>
                 <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
                   {filters.category.map((option, optionIdx) => (
                     <div
@@ -198,8 +231,9 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                         name="category[]"
                         defaultValue={option.value}
                         type="checkbox"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                        defaultChecked={option.checked}
+                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
+                        checked={selectedFilters.category.includes(option.value)}
+                        onChange={() => handleFilterChange('category', option.value)}
                       />
                       <label
                         htmlFor={`category-${optionIdx}`}

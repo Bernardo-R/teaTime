@@ -16,9 +16,10 @@ import Terms from "./components/Footer/Terms";
 import Warranty from "./components/Footer/Warranty";
 import ProductList from "./components/ProductList";
 import ProductOverview from "./components/ProductOverview";
-import SearchResult from './components/SearchResult'
+import SearchResult from "./components/SearchResult";
 import SearchBar from "./components/SearchBar";
-import SearchPO from "./components/SearchPO";
+import Login from "./components/auth/Login";
+import CreateAccount from "./components/auth/CreateAccount";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -85,6 +86,8 @@ function App() {
           <Route path="/shipping" element={<Shipping />}></Route>
           <Route path="/terms" element={<Terms />}></Route>
           <Route path="/warranty" element={<Warranty />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<CreateAccount />}></Route>
           <Route
             path="/store"
             element={

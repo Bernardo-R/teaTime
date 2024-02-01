@@ -11,41 +11,37 @@ const ProductList = ({ onProductClick, products }) => {
   //   if (loading) return <p>Loading...</p>;
   //   if (error) return <p>Something went wrong: {error.message}</p>;
 
-  // const navigate = useNavigate;
-  // const [scrollPosition, setScrollPosition] = useState(0)
-
-  const [selectedFilters, setSelectedFilters] = useState({
-   price: [],
-   color: [],
-   size: [],
-   category: [],
+  const [selectedFilters, setSelectedFilters] = useState(() => {
+   // Retrieve selected filters from localStorage
+   const storedFilters = localStorage.getItem('selectedFilters');
+   return storedFilters ? JSON.parse(storedFilters) : { type: [], caffeineLevel: [], taste: [], category: [] };
  });
 
+const matchesFilters = (product) => {
+   const typeMatches = selectedFilters.type.length === 0 || selectedFilters.type.some(filter => product.type.includes(filter));
+   const caffeineMatches = selectedFilters.caffeineLevel.length === 0 || selectedFilters.caffeineLevel.includes(product.caffeineLevel);
+   const tasteMatches = selectedFilters.taste.length === 0 || selectedFilters.taste.some(filter => product.tasteDescription.includes(filter));
+   // const categoryMatches = selectedFilters.category.length === 0 || selectedFilters.category.includes(product.category);
  
-const filteredProducts = products.filter((product) => {
-   // Your filtering logic based on selectedFilters
-   return (
-     (selectedFilters.price.length === 0 || selectedFilters.price.includes(product.price)) &&
-     (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.color)) &&
-     (selectedFilters.size.length === 0 || selectedFilters.size.includes(product.size)) &&
-     (selectedFilters.category.length === 0 || selectedFilters.category.includes(product.category))
-   );
- });
+   return typeMatches && caffeineMatches && tasteMatches;
+ };
+
+const filteredProducts = products.filter(matchesFilters);
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 -mt-14">
        <Filter 
          selectedFilters={selectedFilters} 
          updateFilters={setSelectedFilters}
          products={products}
        />
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-          Recently added
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900 mt-6">
+          Recently added ({filteredProducts.length})
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product._id}
               onClick={() => onProductClick(product)}

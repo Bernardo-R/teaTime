@@ -7,10 +7,19 @@ export default function SearchBar({ searchQuery, setSearchQuery, searchInput, se
   
 
   const handleSearch = () => {
-    // Navigate to the SearchResult page with the search query as a parameter
-    navigate(`/searchResult/${searchQuery}`);
-    setSearchInput(searchQuery)
-  };
+   const trimmedQuery = searchQuery.trim();
+ 
+   // Check if the trimmed search query is empty
+   if (trimmedQuery === "") {
+     // If the search query is empty, you can choose to show all products or do nothing
+     // For example, navigate(`/allProducts`) to show all products
+     return; // Do nothing or navigate to a default page for empty search
+   }
+ 
+   // Navigate to the SearchResult page with the trimmed search query as a parameter
+   navigate(`/searchResult/${trimmedQuery}`);
+   setSearchInput(trimmedQuery);
+};
 
   return (
     <div className="flex h-12 justify-center ">

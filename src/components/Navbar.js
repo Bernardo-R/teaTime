@@ -15,7 +15,7 @@ import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unspl
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -61,16 +61,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({searchQuery, setSearchQuery}) => {
+const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = () => {
     // Navigate to the SearchResult page with the search query as a parameter
     navigate(`/searchResult/${searchQuery}`);
-    
   };
-
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -188,20 +186,20 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/register"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Create an account
-                    </a>
+                    </Link>
                   </div>
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
+                    <Link
+                      to="/login"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Sign in
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -270,18 +268,18 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
               </form>
 
               <div className="flex items-center space-x-6">
-                <a
-                  href="https://www.google.com/"
+                <Link
+                  to="/login"
                   className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Sign in
-                </a>
-                <a
-                  href="https://www.google.com/"
+                </Link>
+                <Link
+                  to="/register"
                   className="text-sm font-medium text-white hover:text-lime-200"
                 >
                   Create an account
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -294,9 +292,13 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="/">
                     <span className="sr-only">Tea Time</span>
-                    <a href="/">
-                      <img className="h-8 w-auto" src={Logo} alt="" />
-                    </a>
+                    <Link to="/">
+                      <img
+                        className="h-8 w-auto"
+                        src={Logo}
+                        alt="company logo"
+                      />
+                    </Link>
                   </a>
                 </div>
 
@@ -329,7 +331,9 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "text-indigo-600" : " hover:text-lime-600",
+                                      open
+                                        ? "text-indigo-600"
+                                        : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
@@ -423,7 +427,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                   </button>
 
                   {/* Search */}
-                  <a
+                  {/* <a
                     href="https://www.google.com/"
                     className="ml-2 p-2 text-gray-400 hover:text-gray-500"
                   >
@@ -432,7 +436,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                       className="h-6 w-6"
                       aria-hidden="true"
                     />
-                  </a>
+                  </a> */}
                 </div>
 
                 {/* Logo (lg-) */}
@@ -443,7 +447,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                {/* <input 
+                  {/* <input 
                      type="text" 
                      placeholder="Search Our Selection" 
                      className="p-1 border border-gray-300 rounded-lg text-sm m-2
@@ -467,7 +471,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
 
                   <div className="flex items-center lg:ml-8">
                     {/* Help */}
-                    <a
+                    {/* <a
                       href="https://www.google.com/"
                       className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
                     >
@@ -476,7 +480,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                         className="h-6 w-6"
                         aria-hidden="true"
                       />
-                    </a>
+                    </a> */}
                     <Link
                       to="/contact"
                       className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
@@ -486,8 +490,8 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a
-                        href="https://www.google.com/"
+                      <Link
+                        to="/login"
                         className="group -m-2 flex items-center p-2"
                       >
                         <ShoppingBagIcon
@@ -498,7 +502,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                           0
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
