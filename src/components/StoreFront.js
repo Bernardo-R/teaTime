@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
@@ -167,6 +168,7 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
 
   return (
     <main>
+      <Header />
       {/* Hero section */}
       <div className="relative">
         {/* Background image and overlap */}

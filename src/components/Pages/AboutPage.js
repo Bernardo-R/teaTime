@@ -11,7 +11,6 @@ import Bernardo from "../../assets/imgs/aboutImages/OurPics/BernardoPic.jpg";
 import Chris from "../../assets/imgs/aboutImages/OurPics/ChrisPic.jpg";
 import Michelle from "../../assets/imgs/aboutImages/OurPics/MichPic.jpg";
 
-
 const stats = [
   { label: "Transactions every 24 hours", value: "100,000" },
   { label: "Assets under holding", value: "$119 billion" },
@@ -49,21 +48,21 @@ const team = [
     name: "Bernardo Rosario",
     role: "Co-Founder / CTO",
     imageUrl: Bernardo,
-    url: "https://www.linkedin.com/in/brosario12/"
+    url: "https://www.linkedin.com/in/brosario12/",
   },
   {
     name: "Christopher Mendence",
     role: "Co-Founder / CTO",
     imageUrl: Chris,
-    url: "https://www.linkedin.com/in/cmendence/"
+    url: "https://www.linkedin.com/in/cmendence/",
   },
   {
     name: "Michelle Okagbue",
     role: "Co-Founder / CTO",
     imageUrl: Michelle,
-    url: "https://www.linkedin.com/in/michelle-okagbue/"
+    url: "https://www.linkedin.com/in/michelle-okagbue/",
   },
-   // More people...
+  // More people...
 ];
 const blogPosts = [
   {
@@ -110,7 +109,7 @@ const blogPosts = [
       imageUrl:
         "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
-  }
+  },
   // More posts...
 ];
 
@@ -167,6 +166,13 @@ export default function About() {
             <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-3">
+                    <div className="mx-auto max-w-2xl lg:mx-0">
+                      <h2 className="font-bold tracking-tight text-gray-900 title text-7xl md:text-9xl ">
+                        Tea Time
+                      </h2>
+                    </div>
+                  </div>
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl hover:text-lime-600">
                     We’re changing the way people drink tea.
                   </h1>
@@ -360,17 +366,19 @@ export default function About() {
           >
             {team.map((person) => (
               <a href={person.url} target="_blank">
-              <li key={person.name}>
-                <img
-                  className="mx-auto h-24 w-24 rounded-full"
-                  src={person.imageUrl}
-                  alt=""
-                />
-                <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
-                  {person.name}
-                </h3>
-                <p className="text-sm leading-6 text-gray-600">{person.role}</p>
-              </li>
+                <li key={person.name}>
+                  <img
+                    className="mx-auto h-24 w-24 rounded-full"
+                    src={person.imageUrl}
+                    alt=""
+                  />
+                  <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    {person.name}
+                  </h3>
+                  <p className="text-sm leading-6 text-gray-600">
+                    {person.role}
+                  </p>
+                </li>
               </a>
             ))}
           </ul>
