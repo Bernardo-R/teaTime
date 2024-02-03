@@ -8,6 +8,10 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
+  const { currentUserPomise } = useFirebaseAuth();
+
+  const user = currentUserPomise();
+
   async function onSubmit(e) {
     e.preventDefault();
     try {
