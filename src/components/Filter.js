@@ -6,41 +6,41 @@ import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
 export default function Filter({ selectedFilters, updateFilters, products }) {
    const filters = {
      type: [
-       { value: "black", label: "Black", checked: false },
-       { value: "white", label: "White", checked: false },
-       { value: "green", label: "Green", checked: false },
-       { value: "oolong", label: "Oolong", checked: false },
-       { value: "blend", label: "Blend", checked: false },
+       { value: "black", label: "Black"},
+       { value: "white", label: "White"  },
+       { value: "green", label: "Green"  },
+       { value: "oolong", label: "Oolong"  },
+       { value: "blend", label: "Blend" },
      ],
      caffeineLevel: [
-       { value: "none", label: "None", checked: false },
-       { value: "very low", label: "Very Low", checked: false },
-       { value: "low", label: "Low", checked: false },
-       { value: "moderate", label: "Moderate", checked: false },
-       { value: "high", label: "High", checked: false },
-       { value: "very high", label: "Very High", checked: false },
+       { value: "none", label: "None" },
+       { value: "very low", label: "Very Low" },
+       { value: "low", label: "Low" },
+       { value: "moderate", label: "Moderate" },
+       { value: "high", label: "High" },
+       { value: "very high", label: "Very High" },
      ],
      taste: [
-       { value: "sweet", label: "Sweet", checked: false },
-       { value: "floral", label: "Floral", checked: false },
-       { value: "grassy", label: "Grassy", checked: false },
-       { value: "bitter", label: "Bitter", checked: false },
-       { value: "mild", label: "Mild", checked: false },
-       { value: "dry", label: "Dry", checked: false },
-       { value: "toasty", label: "Toasty", checked: false },
-       { value: "nut", label: "Nutty", checked: false },
-       { value: "smoky", label: "Smoky", checked: false },
-       { value: "fruit", label: "Fruity", checked: false },
-       { value: "buttery", label: "Buttery", checked: false },
-       { value: "honey", label: "Honey", checked: false },
+       { value: "sweet", label: "Sweet" },
+       { value: "floral", label: "Floral" },
+       { value: "grassy", label: "Grassy" },
+       { value: "bitter", label: "Bitter"},
+       { value: "mild", label: "Mild" },
+       { value: "dry", label: "Dry" },
+       { value: "toasty", label: "Toasty" },
+       { value: "nut", label: "Nutty"},
+       { value: "smoky", label: "Smoky" },
+       { value: "fruit", label: "Fruity" },
+       { value: "buttery", label: "Buttery" },
+       { value: "honey", label: "Honey" },
      ],
-     category: [
-       { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
-       { value: "tees", label: "Tees", checked: false },
-       { value: "objects", label: "Objects", checked: false },
-       { value: "sweatshirts", label: "Sweatshirts", checked: false },
-       { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
-     ],
+   //   category: [
+   //     { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
+   //     { value: "tees", label: "Tees", checked: false },
+   //     { value: "objects", label: "Objects", checked: false },
+   //     { value: "sweatshirts", label: "Sweatshirts", checked: false },
+   //     { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
+   //   ],
    };
    const sortOptions = [
      { name: "Most Popular", href: "#", current: true },
@@ -218,7 +218,7 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                   ))}
                 </div>
               </fieldset>
-              <fieldset>
+              {/* <fieldset>
                 <legend className="block font-medium">Placeholder</legend>
                 <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
                   {filters.category.map((option, optionIdx) => (
@@ -244,7 +244,7 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                     </div>
                   ))}
                 </div>
-              </fieldset>
+              </fieldset> */}
             </div>
           </div>
         </Disclosure.Panel>
