@@ -56,7 +56,7 @@ const filteredProducts = products.filter(matchesFilters);
               </div>
               <div className="mt-4 flex justify-between">
                 <div>
-                  <h3 className="text-sm text-gray-700">
+                  <h3 className="text-sm font-medium text-gray-700">
                     <Link
                       to={`/productOverview/${product._id}`}
                       rel="noopener noreferrer"
@@ -65,10 +65,10 @@ const filteredProducts = products.filter(matchesFilters);
                       {product.name}
                     </Link>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.price}</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.price}/<span className="text-xs">8oz</span></p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">
-                  {product.caffeine}
+                <p className="text-sm font-medium text-gray-700">
+                  <span className="text-gray-700 text-xs font-normal">Caffeine: </span>{product.caffeine}
                 </p>
               </div>
             </div>

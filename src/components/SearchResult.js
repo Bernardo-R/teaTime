@@ -66,11 +66,11 @@ const SearchResult = ({ onProductClick, products, searchInput }) => {
                        {product.name}
                      </Link>
                    </h3>
-                   <p className="mt-1 text-sm text-gray-500">{product.price}</p>
-                 </div>
-                 <p className="text-sm font-medium text-gray-900">
-                   {product.caffeine}
-                 </p>
+                   <p className="mt-1 text-sm text-gray-500">{product.price}/<span className="text-xs">8oz</span></p>
+                </div>
+                <p className="text-sm font-medium text-gray-700">
+                  <span className="text-gray-700 text-xs font-normal">Caffeine: </span>{product.caffeine}
+                </p>
                </div>
              </div>
            ))}
