@@ -134,8 +134,9 @@ export default function ProductOverview({
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {selectedProduct.price}
+                {selectedProduct.price}/ <span className="text-xl text-gray-700">8oz</span>
               </p>
+              <p className="mt-2 text-md text-gray-600">12 bags per box</p>
             </div>
 
             {/* Reviews */}

@@ -159,6 +159,7 @@ const Footer = () => {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
+      <div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 py-20">
           <div className="grid grid-cols-1 md:grid-flow-col md:auto-rows-min md:grid-cols-12 md:gap-x-8 md:gap-y-16">
@@ -258,8 +259,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-100 py-10 text-center">
-          <p className="text-sm text-gray-500">
+      </div>
+        <div className="border-t border-gray-100 py-10 px-14 flex justify-end bg-lime-800 w-full">
+          <p className="text-sm text-gray-100 tracking-wide ">
 
           &copy; { new Date().getFullYear() } Okagbue, Rosario, Mendence
 
