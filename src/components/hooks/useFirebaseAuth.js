@@ -41,7 +41,7 @@ export const useFirebaseAuth = () => {
     }
   };
 
-  const currentPomise = () => {
+  const currentUserPomise = () => {
     return new Promise((resolve, reject) => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
         unsubscribe();
@@ -50,5 +50,5 @@ export const useFirebaseAuth = () => {
     });
   };
 
-  return { logIn, createAccount, auth, currentPomise, logOut };
+  return { logIn, createAccount, auth, currentUserPomise, logOut };
 };
