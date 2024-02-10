@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -16,6 +16,7 @@ import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
 import { Link } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -64,6 +65,7 @@ function classNames(...classes) {
 const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth();
 
   const handleSearch = () => {
     // Navigate to the SearchResult page with the search query as a parameter
@@ -186,20 +188,37 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                 {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <Link
-                      to="/register"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create an account
-                    </Link>
+                    {isLoggedIn ? (
+                      <img
+                        className="inline-block h-10 w-10 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    ) : (
+                      <Link
+                        to="/register"
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
+                        Create an account
+                      </Link>
+                    )}
                   </div>
                   <div className="flow-root">
-                    <Link
-                      to="/login"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Sign in
-                    </Link>
+                    {isLoggedIn ? (
+                      <button
+                        onClick={logout}
+                        className="-m-2 block p-2 font-medium text-gray-200"
+                      >
+                        Log out
+                      </button>
+                    ) : (
+                      <Link
+                        to="/login"
+                        className="-m-2 block p-2 font-medium text-gray-200"
+                      >
+                        Sign in
+                      </Link>
+                    )}
                   </div>
                 </div>
 
@@ -268,18 +287,36 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
               </form>
 
               <div className="flex items-center space-x-6">
-                <Link
-                  to="/login"
-                  className="text-sm font-medium text-white hover:text-lime-200"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  to="/register"
-                  className="text-sm font-medium text-white hover:text-lime-200"
-                >
-                  Create an account
-                </Link>
+                {isLoggedIn ? (
+                  <>
+                    <button
+                      onClick={logout}
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Log out
+                    </button>
+                    <img
+                      className="inline-block h-10 w-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Create an account
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -445,19 +482,30 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <Link
-                        to="/login"
-                        className="group -m-2 flex items-center p-2"
-                      >
-                        <ShoppingBagIcon
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
-                          aria-hidden="true"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          0
-                        </span>
-                        <span className="sr-only">items in cart, view bag</span>
-                      </Link>
+                      {isLoggedIn ? (
+                        <Link to="/shoppingCart">
+                          <ShoppingBagIcon
+                            className="h-6 w-6 text-gray-400 group-hover:text-lime-600"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      ) : (
+                        <Link
+                          to="/login"
+                          className="group -m-2 flex items-center p-2"
+                        >
+                          <ShoppingBagIcon
+                            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
+                            aria-hidden="true"
+                          />
+                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                            0
+                          </span>
+                          <span className="sr-only">
+                            items in cart, view bag
+                          </span>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
