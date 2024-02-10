@@ -19,6 +19,7 @@ import ProductOverview from "./components/ProductOverview";
 import SearchResult from "./components/SearchResult";
 import SearchBar from "./components/SearchBar";
 import Login from "./components/auth/Login";
+import ShoppingCart from "./components/ShoppingCart";
 import CreateAccount from "./components/auth/CreateAccount";
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<CreateAccount />}></Route>
+          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
           <Route
             path="/store"
             element={

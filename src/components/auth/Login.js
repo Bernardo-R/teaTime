@@ -1,33 +1,45 @@
-import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
-import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useState, useEffect } from "react";
 import Alert from "../Alert";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { logIn } = useFirebaseAuth();
+  const { login, isLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
-  const { currentUserPomise } = useFirebaseAuth();
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
-  const user = currentUserPomise();
-
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await logIn(email, password);
+      await login(email, password);
       setShowAlert(true);
+
+      setTimeout(() => {
+        setShowAlert(false);
+        // Redirect to home page after successful login
+        navigate("/");
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
+      setShowAlert(false); // Hide the alert if login fails
     }
-  }
+  };
 
   return (
     <>
       <div>
         {showAlert && (
           <Alert
-            setShowAlert={setShowAlert}
+            // setShowAlert={setShowAlert}
             message="You have successfully logged in!"
           />
         )}
@@ -103,6 +115,13 @@ export default function Login() {
               >
                 Sign in
               </button>
+              {/* <button
+                type="submit"
+                onClick={onLogOut}
+                className="flex w-full justify-center mt-4 rounded-md bg-yellow-800 hover:bg-yellow-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign out
+              </button> */}
             </div>
           </form>
         </div>
