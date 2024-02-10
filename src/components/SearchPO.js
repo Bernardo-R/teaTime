@@ -247,7 +247,7 @@ export default function SearchPO({
               {/* FEATURES SECTION */}
               <div className="divide-y divide-gray-200 border-t">
                 {/* {product.details.map((detail) => ( */}
-                <Disclosure as="div" key={selectedProduct._id}>
+                <Disclosure as="div" key={`taste-${selectedProduct._id}`}>
                   {({ open }) => (
                     <>
                       <h3>
@@ -293,7 +293,7 @@ export default function SearchPO({
                     </>
                   )}
                 </Disclosure>
-                <Disclosure as="div" key={selectedProduct._id}>
+                <Disclosure as="div" key={`caffeine-${selectedProduct._id}`}>
                   {({ open }) => (
                     <>
                       <h3>
@@ -340,7 +340,7 @@ export default function SearchPO({
                     </>
                   )}
                 </Disclosure>
-                <Disclosure as="div" key={selectedProduct._id}>
+                <Disclosure as="div" key={`color-${selectedProduct._id}`}>
                   {({ open }) => (
                     <>
                       <h3>
