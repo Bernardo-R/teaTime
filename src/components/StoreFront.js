@@ -315,7 +315,7 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
                   {product.caffeine}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
-                  {product.price}
+                  ${product.price}
                 </p>
               </div>
             ))}

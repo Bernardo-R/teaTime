@@ -50,8 +50,11 @@ const sortProducts = (products) => {
      case "za":
        sortedArray.sort((a, b) => b.name.localeCompare(a.name));
        break;
-       case "price":
+       case "priceLow":
          sortedArray.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+         break;
+       case "priceHigh":
+         sortedArray.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
          break;
      default:
        break;
@@ -107,7 +110,7 @@ const sortedAndFilteredProducts = sortProducts(
                     </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">
-                    {product.price}/<span className="text-xs">8oz</span>
+                    ${product.price}/<span className="text-xs">8oz</span>
                   </p>
                 </div>
                 <p className="text-sm font-medium text-gray-700">

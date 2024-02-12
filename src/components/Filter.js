@@ -1,94 +1,103 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
+
+export default function Filter({
+  selectedFilters,
+  updateFilters,
+  handleSortChange,
+}) {
 
 
-export default function Filter({ selectedFilters, updateFilters, handleSortChange }) {
-   const filters = {
-     type: [
-       { value: "black", label: "Black"},
-       { value: "white", label: "White"  },
-       { value: "green", label: "Green"  },
-       { value: "oolong", label: "Oolong"  },
-       { value: "blend", label: "Blend" },
-     ],
-     caffeineLevel: [
-       { value: "none", label: "None" },
-       { value: "very low", label: "Very Low" },
-       { value: "low", label: "Low" },
-       { value: "moderate", label: "Moderate" },
-       { value: "high", label: "High" },
-       { value: "very high", label: "Very High" },
-     ],
-     taste: [
-       { value: "sweet", label: "Sweet" },
-       { value: "floral", label: "Floral" },
-       { value: "grassy", label: "Grassy" },
-       { value: "bitter", label: "Bitter"},
-       { value: "mild", label: "Mild" },
-       { value: "dry", label: "Dry" },
-       { value: "toasty", label: "Toasty" },
-       { value: "nut", label: "Nutty"},
-       { value: "smoky", label: "Smoky" },
-       { value: "fruit", label: "Fruity" },
-       { value: "buttery", label: "Buttery" },
-       { value: "honey", label: "Honey" },
-     ],
-   //   category: [
-   //     { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
-   //     { value: "tees", label: "Tees", checked: false },
-   //     { value: "objects", label: "Objects", checked: false },
-   //     { value: "sweatshirts", label: "Sweatshirts", checked: false },
-   //     { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
-   //   ],
-   };
-   const sortOptions = [
-      { name: "A-Z", key: "az" },
-      { name: "Z-A", key: "za" },
-      { name: "Price", key: "price" },
-    ];
-   
-   function classNames(...classes) {
-     return classes.filter(Boolean).join(" ");
-   }
+  const filters = {
+    type: [
+      { value: "black", label: "Black" },
+      { value: "white", label: "White" },
+      { value: "green", label: "Green" },
+      { value: "oolong", label: "Oolong" },
+      { value: "blend", label: "Blend" },
+    ],
+    caffeineLevel: [
+      { value: "none", label: "None" },
+      { value: "very low", label: "Very Low" },
+      { value: "low", label: "Low" },
+      { value: "moderate", label: "Moderate" },
+      { value: "high", label: "High" },
+      { value: "very high", label: "Very High" },
+    ],
+    taste: [
+      { value: "sweet", label: "Sweet" },
+      { value: "floral", label: "Floral" },
+      { value: "grassy", label: "Grassy" },
+      { value: "bitter", label: "Bitter" },
+      { value: "mild", label: "Mild" },
+      { value: "dry", label: "Dry" },
+      { value: "toasty", label: "Toasty" },
+      { value: "nut", label: "Nutty" },
+      { value: "smoky", label: "Smoky" },
+      { value: "fruit", label: "Fruity" },
+      { value: "buttery", label: "Buttery" },
+      { value: "honey", label: "Honey" },
+    ],
+    //   category: [
+    //     { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
+    //     { value: "tees", label: "Tees", checked: false },
+    //     { value: "objects", label: "Objects", checked: false },
+    //     { value: "sweatshirts", label: "Sweatshirts", checked: false },
+    //     { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
+    //   ],
+  };
+  const sortOptions = [
+    { name: "A-Z", key: "az" },
+    { name: "Z-A", key: "za" },
+    { name: "Price Low to High", key: "priceLow" },
+    { name: "Price High to Low", key: "priceHigh" },
+  ];
 
-   const handleFilterChange = (category, value) => {
-      // Create a new object to avoid mutating the state directly
-      const newFilters = { ...selectedFilters };
-  
-      // Toggle the value in the selectedFilters array for the given category
-      if (newFilters[category].includes(value)) {
-        newFilters[category] = newFilters[category].filter((filter) => filter !== value);
-      } else {
-        newFilters[category] = [...newFilters[category], value];
-      }
-  
-      // Update the state
-      updateFilters(newFilters);
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
-      localStorage.setItem('selectedFilters', JSON.stringify(newFilters));
-    };
+  const handleFilterChange = (category, value) => {
+    // Create a new object to avoid mutating the state directly
+    const newFilters = { ...selectedFilters };
 
-    const clearFilters = () => {
-      localStorage.removeItem('selectedFilters');
-
-      updateFilters({
-         type: [],
-         caffeineLevel: [],
-         taste: [],
-         category: [],
-      })
+    // Toggle the value in the selectedFilters array for the given category
+    if (newFilters[category].includes(value)) {
+      newFilters[category] = newFilters[category].filter(
+        (filter) => filter !== value
+      );
+    } else {
+      newFilters[category] = [...newFilters[category], value];
     }
 
-    const countSelectedFilters = () => {
-      let totalCount = 0;
-    
-      for (const category in selectedFilters) {
-        totalCount += selectedFilters[category].length;
-      }
-    
-      return totalCount;
-    };
+    // Update the state
+    updateFilters(newFilters);
+
+    localStorage.setItem("selectedFilters", JSON.stringify(newFilters));
+  };
+
+  const clearFilters = () => {
+    localStorage.removeItem("selectedFilters");
+
+    updateFilters({
+      type: [],
+      caffeineLevel: [],
+      taste: [],
+      category: [],
+    });
+  };
+
+  const countSelectedFilters = () => {
+    let totalCount = 0;
+
+    for (const category in selectedFilters) {
+      totalCount += selectedFilters[category].length;
+    }
+
+    return totalCount;
+  };
 
   return (
     <div className="bg-white">
@@ -123,10 +132,11 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
               </Disclosure.Button>
             </div>
             <div className="pl-6">
-              <button 
-               type="button" 
-               className="text-gray-500"
-               onClick={() => clearFilters()} >
+              <button
+                type="button"
+                className="text-gray-500"
+                onClick={() => clearFilters()}
+              >
                 Clear all
               </button>
             </div>
@@ -150,7 +160,9 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
                         type="checkbox"
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
                         checked={selectedFilters.type.includes(option.value)}
-                        onChange={() => handleFilterChange('type', option.value)}
+                        onChange={() =>
+                          handleFilterChange("type", option.value)
+                        }
                       />
                       <label
                         htmlFor={`type-${optionIdx}`}
@@ -176,8 +188,12 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
                         defaultValue={option.value}
                         type="checkbox"
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
-                        checked={selectedFilters.caffeineLevel.includes(option.value)}
-                        onChange={() => handleFilterChange('caffeineLevel', option.value)}
+                        checked={selectedFilters.caffeineLevel.includes(
+                          option.value
+                        )}
+                        onChange={() =>
+                          handleFilterChange("caffeineLevel", option.value)
+                        }
                       />
                       <label
                         htmlFor={`caffeineLevel-${optionIdx}`}
@@ -206,7 +222,9 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
                         type="checkbox"
                         className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
                         checked={selectedFilters.taste.includes(option.value)}
-                        onChange={() => handleFilterChange('taste', option.value)}
+                        onChange={() =>
+                          handleFilterChange("taste", option.value)
+                        }
                       />
                       <label
                         htmlFor={`taste-${optionIdx}`}
@@ -275,7 +293,7 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
                     {sortOptions.map((option) => (
                       <Menu.Item key={option.name}>
                         {({ active }) => (
-                          <a
+                          <Link
                             href={option.href}
                             onClick={() => handleSortChange(option.key)}
                             className={classNames(
@@ -283,11 +301,11 @@ export default function Filter({ selectedFilters, updateFilters, handleSortChang
                                 ? "font-medium text-gray-900"
                                 : "text-gray-500",
                               active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm"
+                              "flex items-center px-4 py-2 text-sm"
                             )}
                           >
                             {option.name}
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     ))}
