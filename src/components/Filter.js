@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/20/solid";
 
 
-export default function Filter({ selectedFilters, updateFilters, products }) {
+export default function Filter({ selectedFilters, updateFilters, handleSortChange }) {
    const filters = {
      type: [
        { value: "black", label: "Black"},
@@ -43,10 +43,10 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
    //   ],
    };
    const sortOptions = [
-     { name: "Most Popular", href: "#", current: true },
-     { name: "Best Rating", href: "#", current: false },
-     { name: "Newest", href: "#", current: false },
-   ];
+      { name: "A-Z", key: "az" },
+      { name: "Z-A", key: "za" },
+      { name: "Price", key: "price" },
+    ];
    
    function classNames(...classes) {
      return classes.filter(Boolean).join(" ");
@@ -277,6 +277,7 @@ export default function Filter({ selectedFilters, updateFilters, products }) {
                         {({ active }) => (
                           <a
                             href={option.href}
+                            onClick={() => handleSortChange(option.key)}
                             className={classNames(
                               option.current
                                 ? "font-medium text-gray-900"
