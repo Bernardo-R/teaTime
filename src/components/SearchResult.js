@@ -6,17 +6,19 @@ import { Link } from "react-router-dom";
 
 const SearchResult = ({ onProductClick, products, searchInput }) => {
 
+   //Creates new array of products that match the criteria, but checks if it's already in the array before adding
    const filteredProducts = useMemo(() => {
+      //Take all words and split into array
       const keywords = searchInput.toLowerCase().split(" ");
-    
+      
       const uniqueProducts = [];
-    
+      // Array of filtered products. If the search input matches any value from the "type" or "name" keys
       const filtered = products.filter((product) => {
         const typeString = String(product.type);
-    
+         
         const matchesType = keywords.some((keyword) => typeString.toLowerCase().includes(keyword));
         const matchesName = product.name.toLowerCase().includes(searchInput.toLowerCase());
-    
+    //If the searchInput matches a value in the type or the name keys, it's then checked to see if it's in uniqueProducts. If not, push it.
         if ((matchesType || matchesName) && !uniqueProducts.includes(product)) {
           uniqueProducts.push(product);
           return true;

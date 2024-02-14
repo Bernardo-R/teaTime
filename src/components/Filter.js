@@ -40,13 +40,6 @@ export default function Filter({
       { value: "buttery", label: "Buttery" },
       { value: "honey", label: "Honey" },
     ],
-    //   category: [
-    //     { value: "all-new-arrivals", label: "All New Arrivals", checked: false },
-    //     { value: "tees", label: "Tees", checked: false },
-    //     { value: "objects", label: "Objects", checked: false },
-    //     { value: "sweatshirts", label: "Sweatshirts", checked: false },
-    //     { value: "pants-and-shorts", label: "Pants & Shorts", checked: false },
-    //   ],
   };
   const sortOptions = [
     { name: "A-Z", key: "az" },
@@ -75,12 +68,13 @@ export default function Filter({
     // Update the state
     updateFilters(newFilters);
 
+    //Set filters to local storage
     localStorage.setItem("selectedFilters", JSON.stringify(newFilters));
   };
 
+  //Reset filters and clear local storage
   const clearFilters = () => {
     localStorage.removeItem("selectedFilters");
-
     updateFilters({
       type: [],
       caffeineLevel: [],
@@ -89,27 +83,18 @@ export default function Filter({
     });
   };
 
+  //Variable for displaying the number of active filters
   const countSelectedFilters = () => {
     let totalCount = 0;
 
     for (const category in selectedFilters) {
       totalCount += selectedFilters[category].length;
     }
-
     return totalCount;
   };
 
   return (
     <div className="bg-white">
-      {/* <div className="px-4 py-16 text-center sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-          Workspace
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
-          The secret to a tidy desk? Don't get rid of anything, just put it in
-          really really nice looking containers.
-        </p>
-      </div> */}
 
       {/* Filters */}
       <Disclosure
@@ -236,33 +221,6 @@ export default function Filter({
                   ))}
                 </div>
               </fieldset>
-              {/* <fieldset>
-                <legend className="block font-medium">Placeholder</legend>
-                <div className="space-y-6 pt-6 sm:space-y-4 sm:pt-4">
-                  {filters.category.map((option, optionIdx) => (
-                    <div
-                      key={option.value}
-                      className="flex items-center text-base sm:text-sm"
-                    >
-                      <input
-                        id={`category-${optionIdx}`}
-                        name="category[]"
-                        defaultValue={option.value}
-                        type="checkbox"
-                        className="h-4 w-4 flex-shrink-0 rounded border-gray-300 text-lime-600 focus:ring-lime-200"
-                        checked={selectedFilters.category.includes(option.value)}
-                        onChange={() => handleFilterChange('category', option.value)}
-                      />
-                      <label
-                        htmlFor={`category-${optionIdx}`}
-                        className="ml-3 min-w-0 flex-1 text-gray-600"
-                      >
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </fieldset> */}
             </div>
           </div>
         </Disclosure.Panel>
@@ -288,6 +246,7 @@ export default function Filter({
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
+               {/* Sort rendering */}
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
                     {sortOptions.map((option) => (
