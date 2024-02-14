@@ -60,11 +60,10 @@ export default function SearchPO({
   setSearchQuery,
   searchInput,
 }) {
-  //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
   const navigate = useNavigate();
 
-  // Function to handle going back to the previous page
+  // Function to handle going back to the previous page and reset the searchbar
   const goBack = () => {
     navigate(`/searchResult/${searchInput}`);
     window.scrollTo(0, scrollposition);
@@ -87,38 +86,6 @@ export default function SearchPO({
          
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
-            {/* Image selector */}
-            {/* <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-              <Tab.List className="grid grid-cols-4 gap-6">
-                {product.images.map((image) => (
-                  <Tab
-                    key={image.id}
-                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
-                  >
-                    {({ selected }) => (
-                      <>
-                        <span className="sr-only">{image.name}</span>
-                        <span className="absolute inset-0 overflow-hidden rounded-md">
-                          <img
-                            src={image.src}
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </span>
-                        <span
-                          className={classNames(
-                            selected ? "ring-indigo-500" : "ring-transparent",
-                            "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
-                          )}
-                          aria-hidden="true"
-                        />
-                      </>
-                    )}
-                  </Tab>
-                ))}
-              </Tab.List>
-            </div> */}
-
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
               <img
                 src={selectedProduct.image}
@@ -151,7 +118,7 @@ export default function SearchPO({
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        product.rating > rating
+                        selectedProduct.rating > rating
                           ? "text-lime-700"
                           : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
@@ -160,7 +127,7 @@ export default function SearchPO({
                     />
                   ))}
                 </div>
-                <p className="sr-only">{product.rating} out of 5 stars</p>
+                <p className="sr-only">{selectedProduct.rating} out of 5 stars</p>
               </div>
             </div>
 
@@ -176,48 +143,6 @@ export default function SearchPO({
             </div>
 
             <form className="mt-6">
-              {/* Colors */}
-              {/* <div>
-                <h3 className="text-sm text-gray-600">Color</h3>
-
-                <RadioGroup
-                  value={selectedColor}
-                  onChange={setSelectedColor}
-                  className="mt-2"
-                >
-                  <RadioGroup.Label className="sr-only">
-                    Choose a color
-                  </RadioGroup.Label>
-                  <span className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedColor,
-                            active && checked ? "ring ring-offset-1" : "",
-                            !active && checked ? "ring-2" : "",
-                            "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.bgColor,
-                            "h-8 w-8 rounded-full border border-black border-opacity-10"
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
-                  </span>
-                </RadioGroup>
-              </div> */}
-
               <div className="mt-10 flex">
                 <button
                   type="submit"
@@ -225,18 +150,6 @@ export default function SearchPO({
                 >
                   Add to bag
                 </button>
-            
-
-                {/* <button
-                  type="button"
-                  className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                >
-                  <HeartIcon
-                    className="h-6 w-6 flex-shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">Add to favorites</span>
-                </button> */}
               </div>
             </form>
 
@@ -246,7 +159,6 @@ export default function SearchPO({
               </h2>
               {/* FEATURES SECTION */}
               <div className="divide-y divide-gray-200 border-t">
-                {/* {product.details.map((detail) => ( */}
                 <Disclosure as="div" key={`taste-${selectedProduct._id}`}>
                   {({ open }) => (
                     <>
@@ -280,14 +192,12 @@ export default function SearchPO({
                         className="prose prose-sm pb-6"
                       >
                         <ul role="list">
-                          {/* {detail.items.map((item) => ( */}
                           <li
                             className="text-sm capitalize text-gray-700"
                             key={selectedProduct.name}
                           >
                             {selectedProduct.tasteDescription}
                           </li>
-                          {/* //  ))} */}
                         </ul>
                       </Disclosure.Panel>
                     </>
@@ -326,7 +236,6 @@ export default function SearchPO({
                         className="prose prose-sm pb-6"
                       >
                         <ul role="list">
-                          {/* {detail.items.map((item) => ( */}
                           <li
                             className="text-sm text-gray-700 capitalize"
                             key={selectedProduct.name}
@@ -334,7 +243,6 @@ export default function SearchPO({
                             {selectedProduct.caffeineLevel},{" "}
                             {selectedProduct.caffeine}
                           </li>
-                          {/* //  ))} */}
                         </ul>
                       </Disclosure.Panel>
                     </>
@@ -373,21 +281,17 @@ export default function SearchPO({
                         className="prose prose-sm pb-6"
                       >
                         <ul role="list">
-                          {/* {detail.items.map((item) => ( */}
                           <li
                             className="text-sm capitalize text-gray-700"
                             key={selectedProduct.name}
                           >
                             {selectedProduct.colorDescription}
                           </li>
-                          {/* //  ))} */}
                         </ul>
                       </Disclosure.Panel>
                     </>
                   )}
                 </Disclosure>
-
-                {/* //  ))} */}
               </div>
             </section>
           </div>

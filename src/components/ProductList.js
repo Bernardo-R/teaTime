@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import Filter from "./Filter";
 
 const ProductList = ({ onProductClick, products }) => {
-  //   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-  //   const { data, loading, error } = useApi(apiUrl);
-
-  //   if (loading) return <p>Loading...</p>;
-  //   if (error) return <p>Something went wrong: {error.message}</p>;
-
+  const [sortOption, setSortOption] = useState("");
   const [selectedFilters, setSelectedFilters] = useState(() => {
     // Retrieve selected filters from localStorage
     const storedFilters = localStorage.getItem("selectedFilters");
@@ -19,6 +14,7 @@ const ProductList = ({ onProductClick, products }) => {
       : { type: [], caffeineLevel: [], taste: [], category: [] };
   });
 
+  //Runs products through filters and returns the ones that match the selected filters for each category
   const matchesFilters = (product) => {
     const typeMatches =
       selectedFilters.type.length === 0 ||
@@ -31,46 +27,42 @@ const ProductList = ({ onProductClick, products }) => {
       selectedFilters.taste.some((filter) =>
         product.tasteDescription.includes(filter)
       );
-    // const categoryMatches = selectedFilters.category.length === 0 || selectedFilters.category.includes(product.category);
 
     return typeMatches && caffeineMatches && tasteMatches;
   };
 
-//   const filteredProducts = products.filter(matchesFilters);
-const [sortOption, setSortOption] = useState("");
+  //Switch to handle which sort option is selected
+  const sortProducts = (products) => {
+    let sortedArray = [...products];
 
+    switch (sortOption) {
+      case "az":
+        sortedArray.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "za":
+        sortedArray.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "priceLow":
+        sortedArray.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        break;
+      case "priceHigh":
+        sortedArray.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        break;
+      default:
+        break;
+    }
 
-const sortProducts = (products) => {
-   let sortedArray = [...products];
+    return sortedArray;
+  };
 
-   switch (sortOption) {
-     case "az":
-       sortedArray.sort((a, b) => a.name.localeCompare(b.name));
-       break;
-     case "za":
-       sortedArray.sort((a, b) => b.name.localeCompare(a.name));
-       break;
-       case "priceLow":
-         sortedArray.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-         break;
-       case "priceHigh":
-         sortedArray.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-         break;
-     default:
-       break;
-   }
+  const handleSortChange = (key) => {
+    setSortOption(key);
+  };
 
-   return sortedArray;
- };
-
-
-const handleSortChange = (key) => {
-   setSortOption(key);
- };
-
-const sortedAndFilteredProducts = sortProducts(
-   products.filter(matchesFilters)
- );
+  // Final array of products to be rendered, which can be filtered and sorted
+  const sortedAndFilteredProducts = sortProducts(
+    products.filter(matchesFilters)
+  );
 
   return (
     <div className="bg-white">

@@ -1,12 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import StoreFront from "./components/StoreFront";
 import AboutPage from "./components/Pages/AboutPage";
-// import Home from "./components/Pages/Home";
 import Contact from "./components/Footer/Contact";
 import FAQ from "./components/Footer/FAQ";
 import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
@@ -26,7 +24,12 @@ import SearchPO from "./components/SearchPO"
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
+
+  //SearchQuery is the value being typed into the controlled SearchBar input
   const [searchQuery, setSearchQuery] = useState("");
+
+  // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around 
+  // without causing issues with the change of the value in searchQuery
   const [ searchInput, setSearchInput ] = useState('')
 
   useEffect(() => {
@@ -50,6 +53,7 @@ function App() {
     fetchData();
   }, []);
 
+  //Grabbing the product ID for navigating to PO
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
     window.scrollTo(0, 0);
@@ -64,7 +68,6 @@ function App() {
       <SearchBar
          searchQuery={searchQuery}
          setSearchQuery={setSearchQuery}
-         searchInput={searchInput}
          setSearchInput={setSearchInput}  
       />
          
