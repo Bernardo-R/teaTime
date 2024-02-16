@@ -4,52 +4,6 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      alt: "Angled front view with bag zipped and handles upright.",
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: "Washed Black",
-      bgColor: "bg-gray-700",
-      selectedColor: "ring-gray-700",
-    },
-    { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-    {
-      name: "Washed Gray",
-      bgColor: "bg-gray-500",
-      selectedColor: "ring-gray-500",
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-  details: [
-    {
-      name: "Features",
-      items: [
-        "Multiple strap configurations",
-        "Spacious interior with top zip",
-        "Leather handle and tabs",
-        "Interior dividers",
-        "Stainless strap loops",
-        "Double stitched construction",
-        "Water-resistant",
-      ],
-    },
-    // More sections...
-  ],
-};
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -60,7 +14,6 @@ export default function SearchPO({
   setSearchQuery,
   searchInput,
 }) {
-
   const navigate = useNavigate();
 
   // Function to handle going back to the previous page and reset the searchbar
@@ -73,17 +26,16 @@ export default function SearchPO({
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-      <div className=" m-7 -mt-16">
-                  <button
-                    onClick={goBack}
-                    className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
+        <div className=" m-7 -mt-16">
+          <button
+            onClick={goBack}
+            className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
                text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
-                  >
-                    Back to Results
-                  </button>
-                </div>
+          >
+            Back to Results
+          </button>
+        </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-         
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
@@ -103,8 +55,9 @@ export default function SearchPO({
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
-          <p className="text-3xl tracking-tight text-gray-900">
-                ${selectedProduct.price}/ <span className="text-xl text-gray-700">8oz</span>
+              <p className="text-3xl tracking-tight text-gray-900">
+                ${selectedProduct.price}/{" "}
+                <span className="text-xl text-gray-700">8oz</span>
               </p>
               <p className="mt-2 text-md text-gray-600">12 bags per box</p>
             </div>
@@ -127,7 +80,9 @@ export default function SearchPO({
                     />
                   ))}
                 </div>
-                <p className="sr-only">{selectedProduct.rating} out of 5 stars</p>
+                <p className="sr-only">
+                  {selectedProduct.rating} out of 5 stars
+                </p>
               </div>
             </div>
 
