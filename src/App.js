@@ -19,7 +19,7 @@ import SearchBar from "./components/SearchBar";
 import Login from "./components/auth/Login";
 import ShoppingCart from "./components/ShoppingCart";
 import CreateAccount from "./components/auth/CreateAccount";
-import SearchPO from "./components/SearchPO"
+import SearchPO from "./components/SearchPO";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -28,9 +28,9 @@ function App() {
   //SearchQuery is the value being typed into the controlled SearchBar input
   const [searchQuery, setSearchQuery] = useState("");
 
-  // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around 
+  // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around
   // without causing issues with the change of the value in searchQuery
-  const [ searchInput, setSearchInput ] = useState('')
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,27 +62,25 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar
-         setSearchInput={setSearchInput}
-      />
-      <SearchBar
-         searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery}
-         setSearchInput={setSearchInput}  
-      />
-         
-        {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
+        <Navbar setSearchInput={setSearchInput} />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setSearchInput={setSearchInput}
+        />
+
         <Routes>
-          {/* <Route path="/home" element={<Home />}></Route> */}
-          <Route 
-            path="/" 
+          <Route
+            path="/"
             element={
-               <StoreFront 
-                  products={products} 
-                  onProductClick={handleProductClick}
-                  searchInput={searchInput}
-                  setSearchInput={setSearchInput}
-                  />}></Route>
+              <StoreFront
+                products={products}
+                onProductClick={handleProductClick}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+            }
+          ></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -126,7 +124,6 @@ function App() {
             }
           />
 
-          {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
           <Route
             path="/searchResult/:query"
             element={
@@ -140,7 +137,6 @@ function App() {
             }
           />
         </Routes>
-        {/* </div> */}
       </Router>
       <Footer
         routes={[

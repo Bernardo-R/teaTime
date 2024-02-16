@@ -3,8 +3,6 @@ import Header from "./Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
-// import useApi from "../composable/useApi";
-
 
 const perks = [
   {
@@ -36,15 +34,13 @@ const perks = [
   },
 ];
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(" ");
-// }
-
-const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => {
-//   const apiUrl = "https://teatimeapi-production.up.railway.app/api/data";
-//   const { data, loading, error } = useApi(apiUrl);
+const StoreFront = ({
+  products,
+  onProductClick,
+  searchInput,
+  setSearchInput,
+}) => {
   const [trendingProducts, setTrendingProducts] = useState([]);
-  // const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (products) {
@@ -52,35 +48,30 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
     }
   }, [products]);
 
-  //   if (loading) return <p>Loading...</p>;
-  //   if (error) return <p>Something went wrong: {error.message}</p>;
-
-  //   console.log(data);
-
   const collections = [
-   {
-     name: "Green & White",
-     type: "green white",
-     imageSrc:
-       "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-     imageAlt: "Teabag in clear teacup with books and candles in the background",
-   },
-   {
-     name: "Black & Assam",
-     type: "black assam",
-     imageSrc:
-       "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-     imageAlt: "Spoons with herbs on them",
-   },
-   {
-     name: "Oolong & Blends",
-     type: "oolong blend",
-     imageSrc:
-       "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-     imageAlt:
-       "Clear teacup with tea, surrounded by teabags.",
-   },
- ];
+    {
+      name: "Green & White",
+      type: "green white",
+      imageSrc:
+        "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageAlt:
+        "Teabag in clear teacup with books and candles in the background",
+    },
+    {
+      name: "Black & Assam",
+      type: "black assam",
+      imageSrc:
+        "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageAlt: "Spoons with herbs on them",
+    },
+    {
+      name: "Oolong & Blends",
+      type: "oolong blend",
+      imageSrc:
+        "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageAlt: "Clear teacup with tea, surrounded by teabags.",
+    },
+  ];
 
   return (
     <main>
@@ -172,7 +163,13 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
                       <p aria-hidden="true" className="text-sm text-white">
                         Shop the collection
                       </p>
-                      <h3 className="mt-1 font-semibold text-white" onClick={() => {setSearchInput(collection.type); window.scrollTo(0, 0)}}>
+                      <h3
+                        className="mt-1 font-semibold text-white"
+                        onClick={() => {
+                          setSearchInput(collection.type);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
                         <Link to={`/searchResult/${collection.type}`}>
                           <span className="absolute inset-0" />
                           {collection.name}
@@ -198,7 +195,7 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
             </h2>
             <Link
               to="/store"
-              onClick={()=>window.scrollTo(0, 0)}
+              onClick={() => window.scrollTo(0, 0)}
               className="hidden text-sm font-medium text-yellow-700 hover:text-yellow-900 md:block"
             >
               Shop the collection
@@ -208,9 +205,10 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
             {trendingProducts.map((product) => (
-              <div key={product._id} 
-                   className="group relative"
-                   onClick={() => onProductClick(product)}
+              <div
+                key={product._id}
+                className="group relative"
+                onClick={() => onProductClick(product)}
               >
                 <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
@@ -220,17 +218,15 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
                   />
                 </div>
                 <h3 className="text-sm text-gray-700">
-                    <Link
-                      to={`/productOverview/${product._id}`}
-                      rel="noopener noreferrer"
-                    >
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.name}
-                    </Link>
-                  </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  {product.caffeine}
-                </p>
+                  <Link
+                    to={`/productOverview/${product._id}`}
+                    rel="noopener noreferrer"
+                  >
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {product.name}
+                  </Link>
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">{product.caffeine}</p>
                 <p className="mt-1 text-sm font-medium text-gray-900">
                   ${product.price}
                 </p>
@@ -292,48 +288,3 @@ const StoreFront = ({products, onProductClick, searchInput, setSearchInput}) => 
 };
 
 export default StoreFront;
-
-// export default function Example() {
-//   return (
-//     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-//       <img
-//         src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
-//         alt=""
-//         className="absolute inset-0 -z-10 h-full w-full object-cover"
-//       />
-//       <div
-//         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
-//         aria-hidden="true"
-//       >
-//         <div
-//           className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
-//           style={{
-//             clipPath:
-//               'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-//           }}
-//         />
-//       </div>
-//       <div
-//         className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
-//         aria-hidden="true"
-//       >
-//         <div
-//           className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
-//           style={{
-//             clipPath:
-//               'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-//           }}
-//         />
-//       </div>
-//       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-//         <div className="mx-auto max-w-2xl lg:mx-0">
-//           <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Support center</h2>
-//           <p className="mt-6 text-lg leading-8 text-gray-300">
-//             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-//             fugiat veniam occaecat fugiat aliqua.
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
