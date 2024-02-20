@@ -72,9 +72,7 @@ function App() {
          setSearchInput={setSearchInput}  
       />
          
-        {/* <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 border py-4"> */}
         <Routes>
-          {/* <Route path="/home" element={<Home />}></Route> */}
           <Route 
             path="/" 
             element={
@@ -83,7 +81,9 @@ function App() {
                   onProductClick={handleProductClick}
                   searchInput={searchInput}
                   setSearchInput={setSearchInput}
-                  />}></Route>
+                  />
+                  }
+                  ></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
@@ -127,7 +127,6 @@ function App() {
             }
           />
 
-          {/* <Route path="/productOverview/:id" element={<ProductOverview />} /> */}
           <Route
             path="/searchResult/:query"
             element={
@@ -141,7 +140,6 @@ function App() {
             }
           />
         </Routes>
-        {/* </div> */}
       </Router>
       <Footer
         routes={[
