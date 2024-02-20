@@ -28,7 +28,7 @@ function App() {
   //SearchQuery is the value being typed into the controlled SearchBar input
   const [searchQuery, setSearchQuery] = useState("");
 
-  // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around 
+  // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around
   // without causing issues with the change of the value in searchQuery
   const [searchInput, setSearchInput] = useState("");
 
@@ -62,28 +62,25 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar
-         searchInput={searchInput}
-         setSearchInput={setSearchInput}
-      />
-      <SearchBar
-         searchQuery={searchQuery}
-         setSearchQuery={setSearchQuery}
-         setSearchInput={setSearchInput}  
-      />
+        <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setSearchInput={setSearchInput}
+        />
 
         <Routes>
-          <Route 
-            path="/" 
+          <Route
+            path="/"
             element={
-               <StoreFront 
-                  products={products} 
-                  onProductClick={handleProductClick}
-                  searchInput={searchInput}
-                  setSearchInput={setSearchInput}
-                  />
-                  }
-                  ></Route>
+              <StoreFront
+                products={products}
+                onProductClick={handleProductClick}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+            }
+          ></Route>
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/faq" element={<FAQ />}></Route>
