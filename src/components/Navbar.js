@@ -31,19 +31,19 @@ const navigation = {
           imageAlt: "Photo by Jocelyn Morales on Unsplash",
         },
         {
-          name: "Purple Tea",
+          name: "Oolong Tea",
           href: "/store",
           imageSrc: PurpleImg,
           imageAlt: "Photo by freestocks on Unsplash",
         },
         {
-          name: "Pu-erh Tea",
+          name: "Green Tea",
           href: "/store",
           imageSrc: PuerhImg,
           imageAlt: "Photo by Nathan Dumlao on Unsplash",
         },
         {
-          name: "Herbal Tea",
+          name: "Tea Blend",
           href: "/store",
           imageSrc: HerbalImg,
           imageAlt: "Photo by Nia Ramirez on Unsplash",
@@ -62,14 +62,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({ searchQuery, setSearchQuery }) => {
+const Navbar = ({ searchInput, setSearchInput }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
 
-  const handleSearch = () => {
+  const handleSearch = (name) => {
     // Navigate to the SearchResult page with the search query as a parameter
-    navigate(`/searchResult/${searchQuery}`);
+    setSearchInput(name);
+    navigate(`/searchResult/${searchInput}`);
+    setOpen(false);
   };
 
   return (
@@ -134,7 +136,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? " text-indigo-600 focus:ring-0"
+                                ? " text-lime-600 focus:ring-0"
                                 : "border-transparent text-gray-900 focus:ring-0",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
@@ -161,16 +163,19 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                                   className="object-cover object-center"
                                 />
                               </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block text-sm font-medium text-gray-900"
+                              <Link
+                                to={`/searchResult/${item.name}`}
+                                className="mt-4 block font-medium text-gray-900"
+                                onClick={() => {
+                                  handleSearch(item.name);
+                                }}
                               >
                                 <span
                                   className="absolute inset-0 z-10"
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </Link>
                               <p
                                 aria-hidden="true"
                                 className="mt-1 text-sm text-gray-500"
@@ -354,7 +359,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                       ))}
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
-                          {({ open }) => (
+                          {({ open, close }) => (
                             <>
                               <div className="relative flex">
                                 <Popover.Button
@@ -421,16 +426,20 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
                                                 className="object-cover object-center"
                                               />
                                             </div>
-                                            <a
-                                              href={item.href}
+                                            <Link
+                                              to={`/searchResult/${item.name}`}
                                               className="mt-4 block font-medium text-gray-900"
+                                              onClick={() => {
+                                                handleSearch(item.name);
+                                                close();
+                                              }}
                                             >
                                               <span
                                                 className="absolute inset-0 z-10"
                                                 aria-hidden="true"
                                               />
                                               {item.name}
-                                            </a>
+                                            </Link>
                                             <p
                                               aria-hidden="true"
                                               className="mt-1"

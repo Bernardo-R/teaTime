@@ -63,6 +63,7 @@ function App() {
     <>
       <Router>
       <Navbar
+         searchInput={searchInput}
          setSearchInput={setSearchInput}
       />
       <SearchBar
