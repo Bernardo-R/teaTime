@@ -19,7 +19,7 @@ import SearchBar from "./components/SearchBar";
 import Login from "./components/auth/Login";
 import ShoppingCart from "./components/ShoppingCart";
 import CreateAccount from "./components/auth/CreateAccount";
-import SearchPO from "./components/SearchPO"
+import SearchPO from "./components/SearchPO";
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -30,7 +30,7 @@ function App() {
 
   // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around 
   // without causing issues with the change of the value in searchQuery
-  const [ searchInput, setSearchInput ] = useState('')
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +71,7 @@ function App() {
          setSearchQuery={setSearchQuery}
          setSearchInput={setSearchInput}  
       />
-         
+
         <Routes>
           <Route 
             path="/" 
