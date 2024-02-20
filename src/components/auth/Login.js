@@ -13,6 +13,7 @@ export default function Login() {
   useEffect(() => {
     // If user is already logged in, redirect to home page
     if (isLoggedIn) {
+      // Redirect to home page after successful login
       navigate("/");
     }
   }, [isLoggedIn, navigate]);
@@ -25,8 +26,6 @@ export default function Login() {
 
       setTimeout(() => {
         setShowAlert(false);
-        // Redirect to home page after successful login
-        navigate("/");
       }, 2000);
     } catch (error) {
       console.error(error.message);
@@ -38,19 +37,11 @@ export default function Login() {
     <>
       <div>
         {showAlert && (
-          <Alert
-            // setShowAlert={setShowAlert}
-            message="You have successfully logged in!"
-          />
+          <Alert message="Wrong email or password. Please try again." />
         )}
       </div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
@@ -115,13 +106,6 @@ export default function Login() {
               >
                 Sign in
               </button>
-              {/* <button
-                type="submit"
-                onClick={onLogOut}
-                className="flex w-full justify-center mt-4 rounded-md bg-yellow-800 hover:bg-yellow-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign out
-              </button> */}
             </div>
           </form>
         </div>
