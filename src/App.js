@@ -62,7 +62,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar setSearchInput={setSearchInput} />
+        <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
