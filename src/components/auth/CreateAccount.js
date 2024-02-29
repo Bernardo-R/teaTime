@@ -1,35 +1,42 @@
 import { useAuth } from "../hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "../Alert";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
+  const { isLoggedIn } = useAuth();
   const { createAccount } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (isLoggedIn) {
+      // Redirect to home page after successful login
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   async function onSubmit(e) {
     e.preventDefault();
     try {
       await createAccount(email, password);
       setShowAlert(true);
-      setEmail("");
-      setPassword("");
+
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
+      setShowAlert(false); // Hide the alert if login fails
     }
   }
 
   return (
     <>
-      <div>
-        {showAlert && (
-          <Alert
-            setShowAlert={setShowAlert}
-            message="You have successfully Registered!"
-          />
-        )}
-      </div>
+      <div>{showAlert && <Alert message="Enter a Valid Email Address." />}</div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -76,6 +83,7 @@ export default function CreateAccount() {
                   autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  minLength="6"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-700 sm:text-sm sm:leading-6"
                 />
               </div>
