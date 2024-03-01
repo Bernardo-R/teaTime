@@ -361,12 +361,11 @@ export default function About() {
             </p>
           </div>
           <ul
-            role="list"
             className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
           >
             {team.map((person) => (
-              <a href={person.url} target="_blank">
-                <li key={person.name}>
+              <li key={person.name}>
+                <a href={person.url} target="_blank" rel="noreferrer">
                   <img
                     className="mx-auto h-24 w-24 rounded-full"
                     src={person.imageUrl}
@@ -378,8 +377,8 @@ export default function About() {
                   <p className="text-sm leading-6 text-gray-600">
                     {person.role}
                   </p>
-                </li>
-              </a>
+                </a>
+              </li>
             ))}
           </ul>
         </div>

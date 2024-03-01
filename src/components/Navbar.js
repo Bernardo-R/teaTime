@@ -1,11 +1,9 @@
 import React from "react";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -72,6 +70,20 @@ const Navbar = ({ searchInput, setSearchInput }) => {
     setSearchInput(name);
     navigate(`/searchResult/${searchInput}`);
     setOpen(false);
+  };
+
+  const viewItemCount = () => {
+    let counter = 0;
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    console.log("Getting cart??", cart);
+    if (cart === null) {
+      return counter;
+    }else {
+      for (let i = 0; i < cart.length; i++) {
+        counter = cart.length;
+      }
+    }
+    return counter;
   };
 
   return (
@@ -334,13 +346,9 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="/">
                     <span className="sr-only">Tea Time</span>
-                    <Link to="/">
-                      <img
-                        className="h-8 w-auto"
-                        src={Logo}
-                        alt="company logo"
-                      />
-                    </Link>
+                    {/* <Link to="/"> */}
+                    <img className="h-8 w-auto" src={Logo} alt="company logo" />
+                    {/* </Link> */}
                   </a>
                 </div>
 
@@ -492,11 +500,11 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
                       {isLoggedIn ? (
-                        <Link to="/shoppingCart">
-                          <ShoppingBagIcon
-                            className="h-6 w-6 text-gray-400 group-hover:text-lime-600"
-                            aria-hidden="true"
-                          />
+                        <Link to="/shoppingCart" className="flex flex-row">
+                          <ShoppingBagIcon className="h-6 w-6 text-gray-400 group-hover:text-lime-600" />
+                          <p className="mx-2 mt-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                            {viewItemCount()}
+                          </p>
                         </Link>
                       ) : (
                         <Link
@@ -507,9 +515,6 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                             className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
                             aria-hidden="true"
                           />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                            0
-                          </span>
                           <span className="sr-only">
                             items in cart, view bag
                           </span>

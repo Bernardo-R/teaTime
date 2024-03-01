@@ -56,6 +56,8 @@ function App() {
   //Grabbing the product ID for navigating to PO
   const handleProductClick = (productId) => {
     setSelectedProduct(productId);
+    localStorage.setItem('selectedProduct', JSON.stringify(productId));
+    JSON.parse(localStorage.getItem('selectedProduct'));
     window.scrollTo(0, 0);
   };
 
@@ -91,7 +93,7 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<CreateAccount />}></Route>
-          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
+          <Route path="/shoppingCart" element={<ShoppingCart  />}></Route>
           <Route
             path="/store"
             element={
