@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon as XMarkIconOutline } from "@heroicons/react/24/outline";
 import {
@@ -23,27 +23,86 @@ import {
 
 function ShoppingCart() {
   const [open, setOpen] = useState(false);
-  const [productsInCart, setProduct] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
+//   const [productsInCart, setProductsInCart] = useState(
+//     JSON.parse(localStorage.getItem("cart")) || []
+//   );
+
+// const [productsInCart, setProductsInCart] = useState(() => {
+//    const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+ 
+//    // Ensure each item has a quantity field
+//    const cartWithQuantity = cartFromLocalStorage.map(item =>
+//      item.quantity ? item : { ...item, quantity: 1 }
+//    );
+ 
+//    return cartWithQuantity;
+//  });
+
+const [productsInCart, setProductsInCart] = useState(() => {
+   const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+ 
+   // Ensure each item in the cart has a quantity field
+   const cartWithQuantity = storedCart.map(item => ({
+     ...item,
+     quantity: item.quantity || 1, // Set default quantity to 1 if not present
+   }));
+ 
+   return cartWithQuantity;
+ });
 
   //Retrieving Cart Items
   const localRetrieval = localStorage.getItem("cart");
   const cartItems = JSON.parse(localRetrieval);
 
+//useEffect hook will update the local storage whenever productsInCart changes
+  useEffect(() => {
+   localStorage.setItem("cart", JSON.stringify(productsInCart));
+ }, [productsInCart]);
+
+  console.log("cartItems", cartItems);
+  console.log("productsInCart", productsInCart.length);
+
   const onProductRemove = (product) => {
-    console.log("Getting Product obj for Removal", product);
-    //^we are successfully getting the product
+    // Filter out the product with the specified _id
+    const updatedCart = productsInCart.filter((item) => item._id !== product._id);
 
-    let cart = localStorage.getItem("cart");
-    //^we get the cart, which is an array of obj
-    const point = cart.filter((item) => item._id === product._id);
-    //^we create another array of objs, with the item that matches the selected product id filtered out...in theory
-    //This part is not working... sad face :(
+    // Update the state to re-render the component
+    setProductsInCart(updatedCart);
 
-    localStorage.setItem("cart", point);
-    //^reset the cart in  local storage
+    // Update the localStorage with the updated cart
+   //  localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
+
+  const onQuantityChange = (productId, newQuantity) => {
+   // Find the index of the product in the cart
+   const productIndex = productsInCart.findIndex(item => item._id === productId);
+ 
+   // If the product is found, update the quantity
+   if (productIndex !== -1) {
+     const updatedCart = [...productsInCart];
+     updatedCart[productIndex] = { ...updatedCart[productIndex], quantity: newQuantity };
+ 
+     // Update the state to re-render the component
+     setProductsInCart(updatedCart);
+ 
+     // Update the localStorage with the updated cart
+     localStorage.setItem("cart", JSON.stringify(updatedCart));
+   }
+ };
+
+  //   const onProductRemove = (product) => {
+  //     console.log("Getting Product obj for Removal", product);
+  //     //^we are successfully getting the product
+
+  //     let cart = localStorage.getItem("cart");
+  //     //^we get the cart, which is an array of obj
+  //     const point = cart.filter((item) => item._id === product._id);
+  //     //^we create another array of objs, with the item that matches the selected product id filtered out...in theory
+  //     //This part is not working... sad face :(
+
+  //     localStorage.setItem("cart", point);
+  //     //^reset the cart in  local storage
+  //   };
 
   //Old Attempts at Product Removal-----------------
   // if (productsIndex !== -1) {
@@ -60,16 +119,28 @@ function ShoppingCart() {
   // setProduct((oldProductList) => {
   //------------------------------------------------
 
-  const priceTotal = () => {
-    if (cartItems !== null) {
-      const numberfiyStrings = cartItems.map((x) => parseFloat(x.price));
-      //the prices are strings, not numbers, need to convert
-      const total = numberfiyStrings.reduce((sum, num) => sum + num).toFixed(2);
-      return total;
-    } else {
-      return 0;
-    }
-  };
+//   const priceTotal = () => {
+//     if (cartItems !== null && cartItems.length > 0) {
+//       const numberfiyStrings = cartItems.map((x) => parseFloat(x.price));
+//       //the prices are strings, not numbers, need to convert
+//       const total = numberfiyStrings.reduce((sum, num) => sum + num).toFixed(2);
+//       return total;
+//     } else {
+//       return "0.00";
+//     }
+//   };
+
+const priceTotal = () => {
+   // Calculate the total price
+   if (productsInCart !== null && productsInCart.length > 0) {
+     const totalPrice = productsInCart.reduce((sum, product) => {
+       return sum + parseFloat(product.price) * product.quantity;
+     }, 0);
+     return totalPrice.toFixed(2);
+   } else {
+     return "0.00";
+   }
+ };
 
   return (
     <div>
@@ -131,10 +202,13 @@ function ShoppingCart() {
                 role="list"
                 className="divide-y divide-gray-200 border-b border-t border-gray-200"
               >
-                {cartItems === null ? (
-                  <span>Your cart is empty...</span>
+                {productsInCart.length === 0 ? (
+                  <span className="font-semibold text-lg">
+                    Your cart is empty...
+                  </span>
                 ) : (
-                  cartItems.map((product) => (
+                        // Object.values used to transform grouped product data into an array for rendering
+              productsInCart.map((product) => (
                     <li key={product._id} className="flex py-6 sm:py-10">
                       {" "}
                       <div
@@ -151,16 +225,50 @@ function ShoppingCart() {
                           <h3 className="underline-offset-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl hover:text-lime-600">
                             {product.name}
                           </h3>
-                          <div className="flex flex-row ">
-                            <p className=" mr-3 font-bold tracking-tight text-gray-900  hover:text-lime-600">{product.price}</p>
-                            <button
-                              type="button"
-                              onClick={() => onProductRemove(product)}
-                              className="-m-2 inline-flex p-2 text-gray-400 hover:text-red-500"
-                            >
-                              <XMarkIconMini className="border h-5 w-5" />
-                            </button>
-                          </div>
+                          <div className="flex items-center">
+  <p className="mr-3 font-bold tracking-tight text-gray-900 hover:text-lime-600">
+    {product.price}
+  </p>
+  <div className="relative inline-block text-left">
+    <select
+      value={product.quantity}
+      onChange={(e) =>
+        onQuantityChange(product._id, parseInt(e.target.value, 10))
+      }
+      className=" bg-none pr-6 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-lime-300 text-sm"
+    >
+      {[1, 2, 3, 4, 5].map((quantity) => (
+        <option key={quantity} value={quantity}>
+          {quantity}
+        </option>
+      ))}
+    </select>
+    <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+      {/* Adjust the styling of the down chevron */}
+      <svg
+        className="w-5 h-5 text-gray-400"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 12l-5-5 1.5-1.5L10 9l3.5-3.5L15 7l-5 5z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </div>
+  </div>
+  <button
+    type="button"
+    onClick={() => onProductRemove(product)}
+    className=" inline-flex p-2 text-gray-400 hover:text-red-500"
+  >
+    <XMarkIconMini className="border h-7 w-7 rounded" />
+  </button>
+</div>
+
                         </div>
                       </div>
                     </li>
@@ -249,7 +357,7 @@ function ShoppingCart() {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                className="w-full rounded-md border border-transparent bg-yellow-800 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-yellow-900 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Checkout
               </button>

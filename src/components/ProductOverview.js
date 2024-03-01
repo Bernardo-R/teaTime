@@ -25,13 +25,33 @@ export default function ProductOverview({ setSearchQuery }) {
   const getProductFromLS = localStorage.getItem('selectedProduct')
   const selectedProduct = JSON.parse(getProductFromLS)
   
-  //Adding items to the cart, saving them in Local Storage, adjusting itemCount
-  const addProductToCart = (selectedProduct) => {
-    let array = [];
-    array = JSON.parse(localStorage.getItem('cart')) || [];
-    array.push(selectedProduct);
-    localStorage.setItem('cart', JSON.stringify(array));
-  };
+//   //Adding items to the cart, saving them in Local Storage, adjusting itemCount
+//   const addProductToCart = (selectedProduct) => {
+//     let array = [];
+//     array = JSON.parse(localStorage.getItem('cart')) || [];
+//     array.push(selectedProduct);
+//     localStorage.setItem('cart', JSON.stringify(array));
+//   };
+
+// Adding items to the cart, saving them in Local Storage, adjusting itemCount
+const addProductToCart = (selectedProduct) => {
+   // Retrieve existing cart from localStorage
+   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+ 
+   // Check if the selected product already exists in the cart
+   const existingProductIndex = cart.findIndex(item => item._id === selectedProduct._id);
+ 
+   if (existingProductIndex !== -1) {
+     // Product already exists, update the quantity
+     cart[existingProductIndex].quantity += 1;
+   } else {
+     // Product doesn't exist, add it to the cart
+     cart.push({ ...selectedProduct, quantity: 1 });
+   }
+ 
+   // Update localStorage with the modified cart
+   localStorage.setItem('cart', JSON.stringify(cart));
+ };
 
   return (
     <div className="bg-white">
@@ -81,7 +101,6 @@ export default function ProductOverview({ setSearchQuery }) {
                 <div className="flex items-center">
                   {[0, 1, 2, 3, 4].map((rating) => (
                     <StarIcon
-                      bag
                       key={rating}
                       className={classNames(
                         selectedProduct.rating > rating
