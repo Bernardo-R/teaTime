@@ -2,14 +2,16 @@
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import ShoppingCart from "./ShoppingCart";
+import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductOverview({ selectedProduct, setSearchQuery }) {
-
+export default function ProductOverview({ setSearchQuery }) {
   const navigate = useNavigate();
 
   // Function to handle going back to the previous page
@@ -19,23 +21,35 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
     setSearchQuery("");
   };
 
+  //Grabbing the selected product from Local Storage
+  const getProductFromLS = localStorage.getItem('selectedProduct')
+  const selectedProduct = JSON.parse(getProductFromLS)
+  
+  //Adding items to the cart, saving them in Local Storage, adjusting itemCount
+  const addProductToCart = (selectedProduct) => {
+    let array = [];
+    array = JSON.parse(localStorage.getItem('cart')) || [];
+    array.push(selectedProduct);
+    localStorage.setItem('cart', JSON.stringify(array));
+  };
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                    <div className=" m-7 -mt-16">
-                  <button
-                    onClick={goBack}
-                    className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
+        <div className=" m-7 -mt-16">
+         
+          <button
+            onClick={goBack}
+            className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
                     text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
-                  >
-                    Back to Products
-                  </button>
-                </div>
+          >
+            Back to Products
+          </button>
+          
+        </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
-            {/* Image selector */}
-
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
               <img
                 src={selectedProduct.image}
@@ -54,7 +68,8 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${selectedProduct.price}/ <span className="text-xl text-gray-700">8oz</span>
+                ${selectedProduct.price}/{" "}
+                <span className="text-xl text-gray-700">8oz</span>
               </p>
               <p className="mt-2 text-md text-gray-600">12 bags per box</p>
             </div>
@@ -66,6 +81,7 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
                 <div className="flex items-center">
                   {[0, 1, 2, 3, 4].map((rating) => (
                     <StarIcon
+                      bag
                       key={rating}
                       className={classNames(
                         selectedProduct.rating > rating
@@ -77,7 +93,9 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
                     />
                   ))}
                 </div>
-                <p className="sr-only">{selectedProduct.rating} out of 5 stars</p>
+                <p className="sr-only">
+                  {selectedProduct.rating} out of 5 stars
+                </p>
               </div>
             </div>
 
@@ -93,10 +111,9 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
             </div>
 
             <form className="mt-6">
-
               <div className="mt-10 flex">
                 <button
-                  type="submit"
+                  onClick={() => addProductToCart(selectedProduct)}
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md px-6 py-2 text-base font-medium text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none sm:w-full"
                 >
                   Add to bag
@@ -243,7 +260,6 @@ export default function ProductOverview({ selectedProduct, setSearchQuery }) {
                     </>
                   )}
                 </Disclosure>
-
               </div>
             </section>
           </div>

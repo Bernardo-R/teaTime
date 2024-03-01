@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import useApi from "../composable/useApi";
 import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 import Filter from "./Filter";
 
 const ProductList = ({ onProductClick, products }) => {
   const [sortOption, setSortOption] = useState("");
+
   const [selectedFilters, setSelectedFilters] = useState(() => {
     // Retrieve selected filters from localStorage
     const storedFilters = localStorage.getItem("selectedFilters");
