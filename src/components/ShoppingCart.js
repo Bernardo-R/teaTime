@@ -145,12 +145,21 @@ const priceTotal = () => {
 
   return (
     <div>
-      {isConfetti && 
-          <Confetti
+        {isConfetti && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="bg-white p-8 rounded-lg text-center">
+      <p className="text-2xl font-bold mb-4">Thanks for trying out our app!</p>
+      <button className="bg-yellow-800 rounded-md px-3 py-2 text-gray-50 font-semibold" type="button" onClick={makeItRain}>
+         Close
+      </button>
+      <Confetti
             width={window.innerWidth}
             numberOfPieces={400}
             gravity={0.1}
-        />}
+        />
+    </div>
+  </div>
+)}
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
