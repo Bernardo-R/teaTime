@@ -5,6 +5,7 @@ import {
   QuestionMarkCircleIcon,
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
+import Confetti from 'react-confetti'
 
 //Add in Featured products later....
 // const relatedProducts = [
@@ -23,6 +24,7 @@ import {
 
 function ShoppingCart() {
   const [open, setOpen] = useState(false);
+  const [isConfetti, setIsConfetti] = useState(false)
 //   const [productsInCart, setProductsInCart] = useState(
 //     JSON.parse(localStorage.getItem("cart")) || []
 //   );
@@ -50,6 +52,8 @@ const [productsInCart, setProductsInCart] = useState(() => {
    return cartWithQuantity;
  });
 
+ const makeItRain = () => setIsConfetti(!isConfetti);
+
   //Retrieving Cart Items
   const localRetrieval = localStorage.getItem("cart");
   const cartItems = JSON.parse(localRetrieval);
@@ -58,9 +62,6 @@ const [productsInCart, setProductsInCart] = useState(() => {
   useEffect(() => {
    localStorage.setItem("cart", JSON.stringify(productsInCart));
  }, [productsInCart]);
-
-  console.log("cartItems", cartItems);
-  console.log("productsInCart", productsInCart.length);
 
   const onProductRemove = (product) => {
     // Filter out the product with the specified _id
@@ -144,6 +145,12 @@ const priceTotal = () => {
 
   return (
     <div>
+      {isConfetti && 
+          <Confetti
+            width={window.innerWidth}
+            numberOfPieces={400}
+            gravity={0.1}
+        />}
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -356,9 +363,10 @@ const priceTotal = () => {
 
             <div className="mt-6">
               <button
-                type="submit"
+                type="button"
                 className="w-full rounded-md border border-transparent bg-yellow-800 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-yellow-900 focus:outline-none focus:ring-0 focus:ring-offset-2 focus:ring-offset-gray-50"
-              >
+                onClick={makeItRain}
+             >
                 Checkout
               </button>
             </div>
