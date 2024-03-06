@@ -1,39 +1,50 @@
-// import { useState } from "react";
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Disclosure, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import {  MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function SearchPO({
-  selectedProduct,
-  scrollposition,
-  setSearchQuery,
-  searchInput,
-}) {
-  const navigate = useNavigate();
+export default function SearchPO({ setSearchInput, setSearchQuery, addProductToCart, scrollposition }) {
 
-  // Function to handle going back to the previous page and reset the searchbar
-  const goBack = () => {
-    navigate(`/searchResult/${searchInput}`);
-    window.scrollTo(0, scrollposition);
-    setSearchQuery("");
-  };
+  const navigate = useNavigate();
+ 
+const goBack = () => {
+   const storedSearchInput = localStorage.getItem("searchInput");
+ 
+   // Check if storedSearchInput is not null before proceeding
+   if (storedSearchInput !== null) {
+     const parsedSearchInput = JSON.parse(storedSearchInput);
+     const trimmedQuery = parsedSearchInput.query; // Access the 'query' property
+ 
+     setSearchInput(trimmedQuery); // Set the searchInput from local storage
+     navigate(`/searchResult/${trimmedQuery}`);
+   }
+ 
+   window.scrollTo(0, scrollposition);
+   setSearchQuery("");
+ };
+
+  //Grabbing the selected product from Local Storage
+  const getProductFromLS = localStorage.getItem('selectedProduct')
+  const selectedProduct = JSON.parse(getProductFromLS)
+
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className=" m-7 -mt-16">
+         
           <button
             onClick={goBack}
             className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
-               text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
+                    text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
           >
             Back to Results
           </button>
+          
         </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
@@ -100,10 +111,10 @@ export default function SearchPO({
             <form className="mt-6">
               <div className="mt-10 flex">
                 <button
-                  type="submit"
+                  onClick={() => addProductToCart(selectedProduct)}
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md px-6 py-2 text-base font-medium text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none sm:w-full"
                 >
-                  Add to bag
+                  Add to cart
                 </button>
               </div>
             </form>
@@ -148,7 +159,7 @@ export default function SearchPO({
                       >
                         <ul role="list">
                           <li
-                            className="text-sm capitalize text-gray-700"
+                            className="text-sm capitalize text-gray-600"
                             key={selectedProduct.name}
                           >
                             {selectedProduct.tasteDescription}
@@ -192,7 +203,7 @@ export default function SearchPO({
                       >
                         <ul role="list">
                           <li
-                            className="text-sm text-gray-700 capitalize"
+                            className="text-sm text-gray-600 capitalize"
                             key={selectedProduct.name}
                           >
                             {selectedProduct.caffeineLevel},{" "}
@@ -237,7 +248,7 @@ export default function SearchPO({
                       >
                         <ul role="list">
                           <li
-                            className="text-sm capitalize text-gray-700"
+                            className="text-sm capitalize text-gray-600"
                             key={selectedProduct.name}
                           >
                             {selectedProduct.colorDescription}

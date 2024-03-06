@@ -31,6 +31,44 @@ function App() {
   // SearchInput is the value saved from searchQuery. SearchInput is used to pass the value around
   // without causing issues with the change of the value in searchQuery
   const [searchInput, setSearchInput] = useState("");
+  const [productsInCart, setProductsInCart] = useState(() => {
+   const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+   // Ensure each item in the cart has a quantity field
+   const cartWithQuantity = storedCart.map((item) => ({
+     ...item,
+     quantity: item.quantity || 1, // Set default quantity to 1 if not present
+   }));
+
+   return cartWithQuantity;
+ });
+
+ const addProductToCart = (selectedProduct) => {
+   // Retrieve existing cart from localStorage
+   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+ 
+   // Check if the selected product already exists in the cart
+   const existingProductIndex = cart.findIndex(item => item._id === selectedProduct._id);
+ 
+   if (existingProductIndex !== -1) {
+     // Product already exists, increment the quantity
+     cart[existingProductIndex].quantity += 1;
+   } else {
+     // Product doesn't exist, add it to the cart
+     cart.push({ ...selectedProduct, quantity: 1 });
+   }
+ 
+   // Update localStorage with the modified cart
+   localStorage.setItem('cart', JSON.stringify(cart));
+   console.log(localStorage.getItem('searchInput'))
+   setSearchInput(localStorage.getItem('searchInput'))
+ };
+
+  // Use useEffect to save searchInput to local storage when it changes. Fixes bug where addProductToCart causes page reload
+  useEffect(() => {
+   // localStorage.setItem("searchInput", JSON.stringify(searchInput));
+   console.log("search input :", searchInput)
+ }, [searchInput]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,7 +102,11 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
+        <Navbar 
+          searchInput={searchInput} 
+          setSearchInput={setSearchInput}
+          productsInCart={productsInCart}
+       />
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -93,7 +135,7 @@ function App() {
           <Route path="/warranty" element={<Warranty />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<CreateAccount />}></Route>
-          <Route path="/shoppingCart" element={<ShoppingCart  />}></Route>
+          <Route path="/shoppingCart" element={<ShoppingCart productsInCart={productsInCart} setProductsInCart={setProductsInCart} />}></Route>
           <Route
             path="/store"
             element={
@@ -111,6 +153,7 @@ function App() {
                 products={products}
                 setSearchQuery={setSearchQuery}
                 searchInput={searchInput}
+                addProductToCart={addProductToCart}
               />
             }
           />
@@ -122,12 +165,14 @@ function App() {
                 products={products}
                 setSearchQuery={setSearchQuery}
                 searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                addProductToCart={addProductToCart}
               />
             }
           />
 
           <Route
-            path="/searchResult/:query"
+            path={`/searchResult/${searchInput}`}
             element={
               <SearchResult
                 products={products}
