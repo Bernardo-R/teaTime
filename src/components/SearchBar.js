@@ -18,6 +18,10 @@ export default function SearchBar({ searchQuery, setSearchQuery, setSearchInput 
    // Navigate to the SearchResult page with the trimmed search query as a parameter
    navigate(`/searchResult/${trimmedQuery}`);
    setSearchInput(trimmedQuery);
+   // localStorage.setItem('searchInput', JSON.stringify({ trimmedQuery }));
+   localStorage.setItem('searchInput', JSON.stringify({ query: trimmedQuery }));
+
+   console.log(trimmedQuery)
 };
 
   return (
