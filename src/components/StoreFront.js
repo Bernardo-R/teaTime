@@ -236,8 +236,8 @@ const StoreFront = ({
 
           <div className="mt-8 text-sm md:hidden">
             <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              href="/store"
+              className="font-medium text-yellow-800 hover:text-lime-900"
             >
               Shop the collection
               <span aria-hidden="true"> &rarr;</span>

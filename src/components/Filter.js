@@ -8,8 +8,6 @@ export default function Filter({
   updateFilters,
   handleSortChange,
 }) {
-
-
   const filters = {
     type: [
       { value: "black", label: "Black" },
@@ -95,7 +93,6 @@ export default function Filter({
 
   return (
     <div className="bg-white">
-
       {/* Filters */}
       <Disclosure
         as="section"
@@ -246,7 +243,7 @@ export default function Filter({
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-               {/* Sort rendering */}
+                {/* Sort rendering */}
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
                     {sortOptions.map((option) => (

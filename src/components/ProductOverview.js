@@ -1,8 +1,7 @@
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Disclosure, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,14 +18,13 @@ export default function ProductOverview({ setSearchQuery, addProductToCart }) {
   };
 
   //Grabbing the selected product from Local Storage
-  const getProductFromLS = localStorage.getItem('selectedProduct')
-  const selectedProduct = JSON.parse(getProductFromLS)
+  const getProductFromLS = localStorage.getItem("selectedProduct");
+  const selectedProduct = JSON.parse(getProductFromLS);
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className=" m-7 -mt-16">
-         
           <button
             onClick={goBack}
             className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
@@ -34,7 +32,6 @@ export default function ProductOverview({ setSearchQuery, addProductToCart }) {
           >
             Back to Products
           </button>
-          
         </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
