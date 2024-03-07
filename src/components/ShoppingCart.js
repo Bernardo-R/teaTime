@@ -11,22 +11,11 @@ function ShoppingCart({ productsInCart, setProductsInCart }) {
   const [open, setOpen] = useState(false);
   const [isConfetti, setIsConfetti] = useState(false);
 
-//   const [productsInCart, setProductsInCart] = useState(() => {
-//     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-//     // Ensure each item in the cart has a quantity field
-//     const cartWithQuantity = storedCart.map((item) => ({
-//       ...item,
-//       quantity: item.quantity || 1, // Set default quantity to 1 if not present
-//     }));
-
-//     return cartWithQuantity;
-//   });
-
+  //Controls confetti and thank you message
   const makeItRain = () => {
-   setIsConfetti(!isConfetti);
-   emptyCart();
-  }
+    setIsConfetti(!isConfetti);
+    emptyCart();
+  };
 
   //useEffect hook will update the local storage whenever productsInCart changes
   useEffect(() => {
@@ -77,17 +66,17 @@ function ShoppingCart({ productsInCart, setProductsInCart }) {
     }
   };
 
-const emptyCart = () => {
-   setProductsInCart([]);
-}
+  const emptyCart = () => {
+    setProductsInCart([]);
+  };
 
   return (
     <div>
       {isConfetti && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded-lg text-center m-6">
-            <p className="text-2xl font-bold mb-4">
-              Thanks for trying out our app!
+            <p className="text-2xl font-bold mb-4 text-clip">
+              Thank you for trying our app!
             </p>
             <button
               className="bg-yellow-800 rounded-md px-3 py-2 text-gray-50 font-semibold"

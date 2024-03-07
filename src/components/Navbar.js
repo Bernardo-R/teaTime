@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Fragment, useState} from "react";
+import React from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
-  ShoppingCartIcon
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Logo from "../assets/imgs/herbs.png";
@@ -60,40 +60,36 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({ searchInput, setSearchInput, productsInCart, setProductsInCart }) => {
+const Navbar = ({
+  searchInput,
+  setSearchInput,
+  productsInCart,
+  setProductsInCart,
+}) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
 
-//   const handleSearch = (name) => {
-//     // Navigate to the SearchResult page with the search query as a parameter
-//     setSearchInput(name.toLocaleLowerCase());
-//     navigate(`/searchResult/${searchInput}`);
-//     localStorage.setItem('searchInput', name);
-//     setOpen(false);
-//   };
-
-const handleSearch = (name) => {
-   setSearchInput(name);
-   navigate(`/searchResult/${searchInput}`);
-   const searchInputObject = { query: name }; // Wrap the value in an object
-   localStorage.setItem('searchInput', JSON.stringify(searchInputObject));
-   setOpen(false);
- };
+  const handleSearch = (name) => {
+    setSearchInput(name);
+    navigate(`/searchResult/${searchInput}`);
+    const searchInputObject = { query: name }; // Wrap the value in an object
+    localStorage.setItem("searchInput", JSON.stringify(searchInputObject));
+    setOpen(false);
+  };
 
   const viewItemCount = (cart) => {
     let counter = 0;
     console.log("Getting cart??", cart);
     if (cart === null) {
       return counter;
-    }else {
+    } else {
       for (let i = 0; i < cart.length; i++) {
         counter += cart[i].quantity;
       }
     }
     return counter;
   };
-
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -134,12 +130,12 @@ const handleSearch = (name) => {
                   </button>
                 </div>
                 {/* PAGES */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-violet-600">
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-lime-600">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
                         href={page.href}
-                        className=" flow-root -m-2 block p-2 font-medium text-gray-900 "
+                        className=" -m-2 block p-2 font-medium text-gray-900 "
                       >
                         {page.name}
                       </a>

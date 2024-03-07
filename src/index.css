@@ -3,6 +3,5 @@
 @tailwind utilities;
 
 .title {
-    font-family: 'Dancing Script', cursive;
-    /* font-size: 8rem; */
+  font-family: "Dancing Script", cursive;
 }
