@@ -94,9 +94,9 @@ export default function Contact() {
             </h3>
             <p className="text-gray-500 leading-8">
               Should you find yourself in need of tea-surance guidance, call
-              upon our Tea-surance Wizards by dialing
-              <a className="text-yellow-700" href="tel:1800TEAWIZZ">
-                1-800-TEA-WIZZ
+              upon our Tea-surance Wizards by dialing: 
+              <a className="text-yellow-700 px-1" href="tel:1800TEAWIZZ">
+                 1-800-TEA-WIZZ
               </a>
               . They specialize in mending the mystical bonds between tea and
               tea drinker, ensuring your tea time is as smooth as a well-steeped
