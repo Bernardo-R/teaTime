@@ -1,37 +1,50 @@
 import { Disclosure, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import {  MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductOverview({ setSearchQuery, addProductToCart }) {
-  const navigate = useNavigate();
+export default function SearchPO({ setSearchInput, setSearchQuery, addProductToCart, scrollposition }) {
 
-  // Function to handle going back to the previous page
-  const goBack = () => {
-    navigate(`/store`);
-    window.scrollTo(0, 0);
-    setSearchQuery("");
-  };
+  const navigate = useNavigate();
+ 
+const goBack = () => {
+   const storedSearchInput = localStorage.getItem("searchInput");
+ 
+   // Check if storedSearchInput is not null before proceeding
+   if (storedSearchInput !== null) {
+     const parsedSearchInput = JSON.parse(storedSearchInput);
+     const trimmedQuery = parsedSearchInput.query; // Access the 'query' property
+ 
+     setSearchInput(trimmedQuery); // Set the searchInput from local storage
+     navigate(`/searchResult/${trimmedQuery}`);
+   }
+ 
+   window.scrollTo(0, scrollposition);
+   setSearchQuery("");
+ };
 
   //Grabbing the selected product from Local Storage
-  const getProductFromLS = localStorage.getItem("selectedProduct");
-  const selectedProduct = JSON.parse(getProductFromLS);
+  const getProductFromLS = localStorage.getItem('selectedProduct')
+  const selectedProduct = JSON.parse(getProductFromLS)
+
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className=" m-7 -mt-16">
+         
           <button
             onClick={goBack}
             className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
                     text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none lg:px-6 lg:py-2"
           >
-            Back to Products
+            Back to Results
           </button>
+          
         </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}

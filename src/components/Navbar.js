@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
-  ShoppingBagIcon,
   XMarkIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Logo from "../assets/imgs/herbs.png";
@@ -15,7 +13,8 @@ import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unspl
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
 import PuerhImg from "../assets/imgs/navImages/nathan-dumlao-zp72-rffT9g-unsplash.jpg";
 import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash.jpg";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 
 const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -30,19 +29,19 @@ const navigation = {
           imageAlt: "Photo by Jocelyn Morales on Unsplash",
         },
         {
-          name: "Purple Tea",
+          name: "Oolong Tea",
           href: "/store",
           imageSrc: PurpleImg,
           imageAlt: "Photo by freestocks on Unsplash",
         },
         {
-          name: "Pu-erh Tea",
+          name: "Green Tea",
           href: "/store",
           imageSrc: PuerhImg,
           imageAlt: "Photo by Nathan Dumlao on Unsplash",
         },
         {
-          name: "Herbal Tea",
+          name: "Tea Blend",
           href: "/store",
           imageSrc: HerbalImg,
           imageAlt: "Photo by Nia Ramirez on Unsplash",
@@ -61,16 +60,36 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({searchQuery, setSearchQuery}) => {
+const Navbar = ({
+  searchInput,
+  setSearchInput,
+  productsInCart,
+  setProductsInCart,
+}) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth();
 
-  const handleSearch = () => {
-    // Navigate to the SearchResult page with the search query as a parameter
-    navigate(`/searchResult/${searchQuery}`);
-    
+  const handleSearch = (name) => {
+    setSearchInput(name);
+    navigate(`/searchResult/${searchInput}`);
+    const searchInputObject = { query: name }; // Wrap the value in an object
+    localStorage.setItem("searchInput", JSON.stringify(searchInputObject));
+    setOpen(false);
   };
 
+  const viewItemCount = (cart) => {
+    let counter = 0;
+    console.log("Getting cart??", cart);
+    if (cart === null) {
+      return counter;
+    } else {
+      for (let i = 0; i < cart.length; i++) {
+        counter += cart[i].quantity;
+      }
+    }
+    return counter;
+  };
 
   return (
     <div className="bg-white border-b border-gray-200">
@@ -111,12 +130,12 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                   </button>
                 </div>
                 {/* PAGES */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-violet-600">
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-lime-600">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
                         href={page.href}
-                        className=" flow-root -m-2 block p-2 font-medium text-gray-900 "
+                        className=" -m-2 block p-2 font-medium text-gray-900 "
                       >
                         {page.name}
                       </a>
@@ -134,7 +153,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? " text-indigo-600 focus:ring-0"
+                                ? " text-lime-600 focus:ring-0"
                                 : "border-transparent text-gray-900 focus:ring-0",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
@@ -161,16 +180,19 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                                   className="object-cover object-center"
                                 />
                               </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block text-sm font-medium text-gray-900"
+                              <Link
+                                to={`/searchResult/${item.name}`}
+                                className="mt-4 block font-medium text-gray-900"
+                                onClick={() => {
+                                  handleSearch(item.name);
+                                }}
                               >
                                 <span
                                   className="absolute inset-0 z-10"
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </Link>
                               <p
                                 aria-hidden="true"
                                 className="mt-1 text-sm text-gray-500"
@@ -188,20 +210,37 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 {/* Sign In */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create an account
-                    </a>
+                    {isLoggedIn ? (
+                      <img
+                        className="inline-block h-10 w-10 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    ) : (
+                      <Link
+                        to="/register"
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
+                        Create an account
+                      </Link>
+                    )}
                   </div>
                   <div className="flow-root">
-                    <a
-                      href="https://www.google.com/"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Sign in
-                    </a>
+                    {isLoggedIn ? (
+                      <button
+                        onClick={logout}
+                        className="-m-2 block p-2 font-medium text-gray-200"
+                      >
+                        Log out
+                      </button>
+                    ) : (
+                      <Link
+                        to="/login"
+                        className="-m-2 block p-2 font-medium text-gray-200"
+                      >
+                        Sign in
+                      </Link>
+                    )}
                   </div>
                 </div>
 
@@ -270,18 +309,36 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
               </form>
 
               <div className="flex items-center space-x-6">
-                <a
-                  href="https://www.google.com/"
-                  className="text-sm font-medium text-white hover:text-lime-200"
-                >
-                  Sign in
-                </a>
-                <a
-                  href="https://www.google.com/"
-                  className="text-sm font-medium text-white hover:text-lime-200"
-                >
-                  Create an account
-                </a>
+                {isLoggedIn ? (
+                  <>
+                    <button
+                      onClick={logout}
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Log out
+                    </button>
+                    <img
+                      className="inline-block h-10 w-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="-m-2 block p-2 font-medium text-gray-200"
+                    >
+                      Create an account
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -294,9 +351,9 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="/">
                     <span className="sr-only">Tea Time</span>
-                    <a href="/">
-                      <img className="h-8 w-auto" src={Logo} alt="" />
-                    </a>
+                    {/* <Link to="/"> */}
+                    <img className="h-8 w-auto" src={Logo} alt="company logo" />
+                    {/* </Link> */}
                   </a>
                 </div>
 
@@ -315,7 +372,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                       ))}
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
-                          {({ open }) => (
+                          {({ open, close }) => (
                             <>
                               <div className="relative flex">
                                 <Popover.Button
@@ -329,7 +386,9 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                                   {category.name}
                                   <span
                                     className={classNames(
-                                      open ? "text-indigo-600" : " hover:text-lime-600",
+                                      open
+                                        ? "text-indigo-600"
+                                        : " hover:text-lime-600",
                                       "absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out"
                                     )}
                                     aria-hidden="true"
@@ -380,16 +439,20 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                                                 className="object-cover object-center"
                                               />
                                             </div>
-                                            <a
-                                              href={item.href}
+                                            <Link
+                                              to={`/searchResult/${item.name}`}
                                               className="mt-4 block font-medium text-gray-900"
+                                              onClick={() => {
+                                                handleSearch(item.name);
+                                                close();
+                                              }}
                                             >
                                               <span
                                                 className="absolute inset-0 z-10"
                                                 aria-hidden="true"
                                               />
                                               {item.name}
-                                            </a>
+                                            </Link>
                                             <p
                                               aria-hidden="true"
                                               className="mt-1"
@@ -421,18 +484,6 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                     <span className="sr-only">Open menu</span>
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                   </button>
-
-                  {/* Search */}
-                  <a
-                    href="https://www.google.com/"
-                    className="ml-2 p-2 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">Search</span>
-                    <MagnifyingGlassIcon
-                      className="h-6 w-6"
-                      aria-hidden="true"
-                    />
-                  </a>
                 </div>
 
                 {/* Logo (lg-) */}
@@ -443,40 +494,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                {/* <input 
-                     type="text" 
-                     placeholder="Search Our Selection" 
-                     className="p-1 border border-gray-300 rounded-lg text-sm m-2
-                    focus:border-lime-700 focus:border-2 focus:ring-0 font-semibold text-gray-600"
-                     name="search"
-                     value={searchQuery}
-                     onChange={e => setSearchQuery(e.target.value)}
-                     onKeyPress={e => {
-                        if (e.key === 'Enter') {
-                          handleSearch();
-                        }
-                      }}
-                  />
-                  <button
-                     onClick={handleSearch}
-                    className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block border-lime-700"
-                    type="button"
-                  >
-                    Search
-                  </button> */}
-
                   <div className="flex items-center lg:ml-8">
-                    {/* Help */}
-                    <a
-                      href="https://www.google.com/"
-                      className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
-                    >
-                      <span className="sr-only">Help</span>
-                      <QuestionMarkCircleIcon
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
-                    </a>
                     <Link
                       to="/contact"
                       className="hidden text-sm font-medium text-gray-700 hover:text-lime-600 lg:block"
@@ -486,19 +504,27 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
 
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a
-                        href="https://www.google.com/"
-                        className="group -m-2 flex items-center p-2"
-                      >
-                        <ShoppingBagIcon
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
-                          aria-hidden="true"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          0
-                        </span>
-                        <span className="sr-only">items in cart, view bag</span>
-                      </a>
+                      {isLoggedIn ? (
+                        <Link to="/shoppingCart" className="flex flex-row">
+                          <ShoppingCartIcon className="h-6 w-6 text-gray-400 group-hover:text-lime-600" />
+                          <p className="mx-2 mt-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                            {viewItemCount(productsInCart)}
+                          </p>
+                        </Link>
+                      ) : (
+                        <Link
+                          to="/login"
+                          className="group -m-2 flex items-center p-2"
+                        >
+                          <ShoppingCartIcon
+                            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
+                            aria-hidden="true"
+                          />
+                          <span className="sr-only">
+                            items in cart, view cart
+                          </span>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

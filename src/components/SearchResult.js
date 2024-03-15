@@ -4,50 +4,37 @@ import teaherbs from "../assets/imgs/teaherbs.jpg";
 import { Link } from "react-router-dom";
 
 
-const SearchResult = ({ onProductClick, products, searchQuery }) => {
-   // Use useMemo to compute search results only when products or searchQuery change
-   // const filteredProducts = useMemo(() => {
-   //    console.log("Products:", products);
-   //    console.log("Search Query:", searchQuery);
-    
-   //    const filtered = products.filter((product) =>
-   //      product.type.toLowerCase().includes(searchQuery.toLowerCase())
-   //    );
-    
-   //    console.log("Filtered Products Length:", filtered.length);
-    
-   //    return filtered;
-   //  }, [products, searchQuery]);
+const SearchResult = ({ onProductClick, products, searchInput }) => {
 
+   //Creates new array of products that match the criteria, but checks if it's already in the array before adding
    const filteredProducts = useMemo(() => {
-      console.log("Products:", products);
-      console.log("Search Query:", searchQuery);
-    
-      const uniqueProducts = []; // Array to store unique products
-    
+      //Take all words and split into array
+      const keywords = searchInput.toLowerCase().split(" ");
+      
+      const uniqueProducts = [];
+      // Array of filtered products. If the search input matches any value from the "type" or "name" keys
       const filtered = products.filter((product) => {
-        const matchesType = product.type.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesName = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-        // Add more conditions for other criteria (e.g., ingredients)
-    
-        // Check if the product matches any criteria and is not already in the uniqueProducts array
+        const typeString = String(product.type);
+         
+        const matchesType = keywords.some((keyword) => typeString.toLowerCase().includes(keyword));
+        const matchesName = product.name.toLowerCase().includes(searchInput.toLowerCase());
+    //If the searchInput matches a value in the type or the name keys, it's then checked to see if it's in uniqueProducts. If not, push it.
         if ((matchesType || matchesName) && !uniqueProducts.includes(product)) {
-          uniqueProducts.push(product); // Add the product to the uniqueProducts array
-          return true; // Include the product in the filtered list
+          uniqueProducts.push(product);
+          return true;
         }
     
-        return false; // Exclude the product from the filtered list
+        return false;
       });
     
-      console.log("Filtered Products Length:", filtered.length);
-    
       return filtered;
-    }, [products, searchQuery]);
+    }, [products, searchInput]);
+
    return (
      <div className="bg-white">
        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-           Search results for "{searchQuery}"
+           Showing {filteredProducts.length} results for "{searchInput}"
          </h2>
          
          {filteredProducts.length === 0 ? (
@@ -63,7 +50,7 @@ const SearchResult = ({ onProductClick, products, searchQuery }) => {
                onClick={() => onProductClick(product)}
                className="group relative"
              >
-               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+               <div className="aspect-h-1 shadow-md aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                  <img
                    src={product.image || teaherbs}
                    alt={product.name}
@@ -74,18 +61,18 @@ const SearchResult = ({ onProductClick, products, searchQuery }) => {
                  <div>
                    <h3 className="text-sm text-gray-700">
                      <Link
-                       to={`/productOverview/${product._id}`}
+                       to={`/searchPO/${product._id}`}
                        rel="noopener noreferrer"
                      >
                        <span aria-hidden="true" className="absolute inset-0" />
                        {product.name}
                      </Link>
                    </h3>
-                   <p className="mt-1 text-sm text-gray-500">{product.price}</p>
-                 </div>
-                 <p className="text-sm font-medium text-gray-900">
-                   {product.caffeine}
-                 </p>
+                   <p className="mt-1 text-sm text-gray-500">${product.price}/<span className="text-xs">8oz</span></p>
+                </div>
+                <p className="text-sm font-medium text-gray-700">
+                  <span className="text-gray-700 text-xs font-normal">Caffeine: </span>{product.caffeine}
+                </p>
                </div>
              </div>
            ))}
