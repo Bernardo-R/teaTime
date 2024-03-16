@@ -1,11 +1,11 @@
 import React from "react";
-import { Fragment, useState} from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  ShoppingBagIcon,
   XMarkIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Logo from "../assets/imgs/herbs.png";
@@ -60,27 +60,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = ({ searchInput, setSearchInput }) => {
+const Navbar = ({
+  searchInput,
+  setSearchInput,
+  productsInCart,
+  setProductsInCart,
+}) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
 
   const handleSearch = (name) => {
-    // Navigate to the SearchResult page with the search query as a parameter
     setSearchInput(name);
     navigate(`/searchResult/${searchInput}`);
+    const searchInputObject = { query: name }; // Wrap the value in an object
+    localStorage.setItem("searchInput", JSON.stringify(searchInputObject));
     setOpen(false);
   };
 
-  const viewItemCount = () => {
+  const viewItemCount = (cart) => {
     let counter = 0;
-    let cart = JSON.parse(localStorage.getItem("cart"));
     console.log("Getting cart??", cart);
     if (cart === null) {
       return counter;
-    }else {
+    } else {
       for (let i = 0; i < cart.length; i++) {
-        counter = cart.length;
+        counter += cart[i].quantity;
       }
     }
     return counter;
@@ -125,12 +130,12 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                   </button>
                 </div>
                 {/* PAGES */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-violet-600">
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6  hover:text-lime-600">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
                         href={page.href}
-                        className=" flow-root -m-2 block p-2 font-medium text-gray-900 "
+                        className=" -m-2 block p-2 font-medium text-gray-900 "
                       >
                         {page.name}
                       </a>
@@ -501,9 +506,9 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                     <div className="ml-4 flow-root lg:ml-8">
                       {isLoggedIn ? (
                         <Link to="/shoppingCart" className="flex flex-row">
-                          <ShoppingBagIcon className="h-6 w-6 text-gray-400 group-hover:text-lime-600" />
+                          <ShoppingCartIcon className="h-6 w-6 text-gray-400 group-hover:text-lime-600" />
                           <p className="mx-2 mt-1 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                            {viewItemCount()}
+                            {viewItemCount(productsInCart)}
                           </p>
                         </Link>
                       ) : (
@@ -511,12 +516,12 @@ const Navbar = ({ searchInput, setSearchInput }) => {
                           to="/login"
                           className="group -m-2 flex items-center p-2"
                         >
-                          <ShoppingBagIcon
+                          <ShoppingCartIcon
                             className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-lime-600"
                             aria-hidden="true"
                           />
                           <span className="sr-only">
-                            items in cart, view bag
+                            items in cart, view cart
                           </span>
                         </Link>
                       )}

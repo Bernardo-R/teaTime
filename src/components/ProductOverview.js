@@ -1,17 +1,13 @@
-// import { useState } from "react";
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Disclosure, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import ShoppingCart from "./ShoppingCart";
-import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductOverview({ setSearchQuery }) {
+export default function ProductOverview({ setSearchQuery, addProductToCart }) {
   const navigate = useNavigate();
 
   // Function to handle going back to the previous page
@@ -22,22 +18,13 @@ export default function ProductOverview({ setSearchQuery }) {
   };
 
   //Grabbing the selected product from Local Storage
-  const getProductFromLS = localStorage.getItem('selectedProduct')
-  const selectedProduct = JSON.parse(getProductFromLS)
-  
-  //Adding items to the cart, saving them in Local Storage, adjusting itemCount
-  const addProductToCart = (selectedProduct) => {
-    let array = [];
-    array = JSON.parse(localStorage.getItem('cart')) || [];
-    array.push(selectedProduct);
-    localStorage.setItem('cart', JSON.stringify(array));
-  };
+  const getProductFromLS = localStorage.getItem("selectedProduct");
+  const selectedProduct = JSON.parse(getProductFromLS);
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className=" m-7 -mt-16">
-         
           <button
             onClick={goBack}
             className="flex items-center justify-center rounded-md mt-3 -ml-7 px-4 py-1 text-base font-medium 
@@ -45,7 +32,6 @@ export default function ProductOverview({ setSearchQuery }) {
           >
             Back to Products
           </button>
-          
         </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
@@ -81,7 +67,6 @@ export default function ProductOverview({ setSearchQuery }) {
                 <div className="flex items-center">
                   {[0, 1, 2, 3, 4].map((rating) => (
                     <StarIcon
-                      bag
                       key={rating}
                       className={classNames(
                         selectedProduct.rating > rating
@@ -116,7 +101,7 @@ export default function ProductOverview({ setSearchQuery }) {
                   onClick={() => addProductToCart(selectedProduct)}
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md px-6 py-2 text-base font-medium text-white active:ring-0 bg-yellow-800 hover:bg-yellow-900 focus:outline-none sm:w-full"
                 >
-                  Add to bag
+                  Add to cart
                 </button>
               </div>
             </form>

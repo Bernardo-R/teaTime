@@ -3,7 +3,7 @@ import React from "react";
 export default function Contact() {
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-10 sm:py-10 lg:overflow-visible lg:px-0">
-          <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <svg
           className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
           aria-hidden="true"
@@ -94,9 +94,9 @@ export default function Contact() {
             </h3>
             <p className="text-gray-500 leading-8">
               Should you find yourself in need of tea-surance guidance, call
-              upon our Tea-surance Wizards by dialing
-              <a className="text-yellow-700" href="tel:1800TEAWIZZ">
-                1-800-TEA-WIZZ
+              upon our Tea-surance Wizards by dialing: 
+              <a className="text-yellow-700 px-1" href="tel:1800TEAWIZZ">
+                 1-800-TEA-WIZZ
               </a>
               . They specialize in mending the mystical bonds between tea and
               tea drinker, ensuring your tea time is as smooth as a well-steeped

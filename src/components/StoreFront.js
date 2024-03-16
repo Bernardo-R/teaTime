@@ -3,34 +3,44 @@ import Header from "./Header";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/imgs/heroSection.jpg";
+import Chat from "../assets/imgs/storefrontImages/chat.png"
+import Gift from "../assets/imgs/storefrontImages/gift-box.png"
+import World from "../assets/imgs/storefrontImages/world.png"
+import Delivery from "../assets/imgs/storefrontImages/delivery-status.png"
 
 const perks = [
   {
     name: "Free returns",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
+    image:
+      Delivery,
     description:
       "Not what you expected? Contact us to return your unused product.",
+    link: "https://www.flaticon.com/free-icons/return",
+    alt: "Return icons created by BomSymbols - Flaticon"
   },
   {
     name: "We're available 24/7",
-    imageUrl: "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
+    image: Chat,
     description:
       "We're always here for when you want to share the good, the bad, or the ugly.",
+      link: "https://www.flaticon.com/free-icons/comment",
+    alt: "Comment icons created by Smashicons - Flaticon"
   },
   {
     name: "First Purchase Discount",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
+    image: Gift,
     description:
       'Looking for a deal? You can use the code "TIME4TEA for 40% off your first order!.',
+      link: "https://www.flaticon.com/free-icons/gift-box",
+      alt: "Gift box icons created by Icongeek26 - Flaticon"
   },
   {
     name: "For the planet",
-    imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg",
+    image: World,
     description:
       "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
+      link: "https://www.flaticon.com/free-icons/save-the-planet",
+      alt: "Save the planet icons created by Freepik - Flaticon"
   },
 ];
 
@@ -236,8 +246,8 @@ const StoreFront = ({
 
           <div className="mt-8 text-sm md:hidden">
             <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              href="/store"
+              className="font-medium text-yellow-800 hover:text-lime-900"
             >
               Shop the collection
               <span aria-hidden="true"> &rarr;</span>
@@ -263,15 +273,18 @@ const StoreFront = ({
               >
                 <div className="md:flex-shrink-0">
                   <div className="flow-root">
+                    <a href={perk.link}  target="_blank" rel="noreferrer">
                     <img
                       className={`-my-1 mx-auto h-24 w-auto icon-color`}
-                      src={perk.imageUrl}
-                      alt=""
+                      src={perk.image}
+                      alt={perk.alt}
                     />
+                    </a>
+                    
                   </div>
                 </div>
                 <div className="mt-6 md:ml-4 md:mt-0 lg:ml-0 lg:mt-6">
-                  <h3 className="text-base font-medium text-gray-900">
+                  <h3 className="text-base font-medium text-gray-900 hover:text-lime-900">
                     {perk.name}
                   </h3>
                   <p className="mt-3 text-sm text-gray-500">
