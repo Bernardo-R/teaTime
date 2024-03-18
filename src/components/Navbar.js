@@ -7,7 +7,6 @@ import {
   XMarkIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Logo from "../assets/imgs/herbs.png";
 import BlackImg from "../assets/imgs/navImages/jocelyn-morales-5u4YGWpqfGw-unsplash.jpg";
 import PurpleImg from "../assets/imgs/navImages/freestocks-88hxLwf6UHE-unsplash.jpg";
@@ -16,7 +15,6 @@ import HerbalImg from "../assets/imgs/navImages/nia-ramirez-N0At97F_c0Y-unsplash
 import { Link } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 
-const currencies = ["USD", "CAD", "AUD", "EUR", "GBP"];
 const navigation = {
   categories: [
     {
@@ -229,7 +227,7 @@ const Navbar = ({
                     {isLoggedIn ? (
                       <button
                         onClick={logout}
-                        className="-m-2 block p-2 font-medium text-gray-200"
+                        className="-m-2 block p-2 font-medium text-lime-600"
                       >
                         Log out
                       </button>
@@ -244,33 +242,7 @@ const Navbar = ({
                   </div>
                 </div>
 
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {/* Currency selector */}
-                  <form>
-                    <div className="inline-block">
-                      <label htmlFor="mobile-currency" className="sr-only">
-                        Currency
-                      </label>
-                      <div className="group relative -ml-2 rounded-md border-transparent focus-within:ring-2 focus-within:ring-white">
-                        <select
-                          id="mobile-currency"
-                          name="currency"
-                          className="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-gray-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-800"
-                        >
-                          {currencies.map((currency) => (
-                            <option key={currency}>{currency}</option>
-                          ))}
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                          <ChevronDownIcon
-                            className="h-5 w-5 text-gray-500"
-                            aria-hidden="true"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                <div className="space-y-6 border-t border-gray-200 px-4 py-6"></div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -281,33 +253,7 @@ const Navbar = ({
         <nav aria-label="Top">
           {/* Top navigation */}
           <div className="bg-lime-800">
-            <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-              {/* Currency selector */}
-              <form>
-                <div>
-                  <label htmlFor="desktop-currency" className="sr-only">
-                    Currency
-                  </label>
-                  <div className="group relative -ml-2 rounded-md border-transparent bg-gray-900 focus-within:ring-2 focus-within:ring-white">
-                    <select
-                      id="desktop-currency"
-                      name="currency"
-                      className="flex items-center rounded-md border-transparent bg-lime-950 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100"
-                    >
-                      {currencies.map((currency) => (
-                        <option key={currency}>{currency}</option>
-                      ))}
-                    </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                      <ChevronDownIcon
-                        className="h-5 w-5 text-gray-300"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </form>
-
+            <div className="mx-auto flex h-10 max-w-7xl items-center justify-end px-4 sm:px-6 lg:px-8">
               <div className="flex items-center space-x-6">
                 {isLoggedIn ? (
                   <>
